@@ -573,28 +573,6 @@
  },
  {
   "id": 53,
-  "category": "SC",
-  "year": 2024,
-  "group": "",
-  "rule": "Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)",
-  "notes": "Later tightened (see 2025). Player KR/PR and D/ST INT/fumble returns are now 25 yd/pt (2025); blocked/missed FG returns remain 1 per 100 yd",
-  "source": "history",
-  "sub": "Return yards",
-  "ord": 4
- },
- {
-  "id": 54,
-  "category": "SC",
-  "year": 2024,
-  "group": "",
-  "rule": "Offense playing D: 0.5 per tackle, 1 per forced fumble",
-  "notes": "",
-  "source": "history",
-  "sub": "Defense & special teams",
-  "ord": 3
- },
- {
-  "id": 55,
   "category": "FUN",
   "year": 2024,
   "group": "",
@@ -605,7 +583,7 @@
   "ord": 900
  },
  {
-  "id": 56,
+  "id": 54,
   "category": "DR",
   "year": 2025,
   "group": "",
@@ -616,7 +594,7 @@
   "ord": 600
  },
  {
-  "id": 57,
+  "id": 55,
   "category": "DR",
   "year": 2025,
   "group": "",
@@ -627,7 +605,7 @@
   "ord": 600
  },
  {
-  "id": 58,
+  "id": 56,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -638,7 +616,7 @@
   "ord": 200
  },
  {
-  "id": 59,
+  "id": 57,
   "category": "RO",
   "year": 2025,
   "group": "",
@@ -649,7 +627,7 @@
   "ord": 101
  },
  {
-  "id": 60,
+  "id": 58,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -660,7 +638,7 @@
   "ord": 200
  },
  {
-  "id": 61,
+  "id": 59,
   "category": "FUN",
   "year": 2025,
   "group": "",
@@ -671,7 +649,7 @@
   "ord": 900
  },
  {
-  "id": 62,
+  "id": 60,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -682,7 +660,7 @@
   "ord": 201
  },
  {
-  "id": 63,
+  "id": 61,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -693,7 +671,7 @@
   "ord": 4
  },
  {
-  "id": 64,
+  "id": 62,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -704,7 +682,7 @@
   "ord": 4
  },
  {
-  "id": 65,
+  "id": 63,
   "category": "SC",
   "year": 2025,
   "group": "",

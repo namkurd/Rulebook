@@ -856,8 +856,8 @@ const INLINE={rules:[
   "nominator": "Ben",
   "impact": "Low/Medium",
   "vote": "7",
-  "notes": "Later tightened (see 2025). Player KR/PR and D/ST INT/fumble returns are now 25 yd/pt (2025); blocked/missed FG returns remain 1 per 100 yd",
-  "flag": "",
+  "notes": "Not reflected in Sleeper as written: player and INT/fumble returns are now 25 yd/pt (2025); only blocked/missed FG returns remain 1 per 100 yd",
+  "flag": "unv",
   "since": null,
   "link": "",
   "sub": "Return yards",
@@ -872,8 +872,8 @@ const INLINE={rules:[
   "nominator": "Ben",
   "impact": "Low",
   "vote": "7",
-  "notes": "",
-  "flag": "",
+  "notes": "Not reflected in Sleeper: no tackle scoring exists and player forced fumble is 0.5, not 1",
+  "flag": "unv",
   "since": null,
   "link": "",
   "sub": "Defense & special teams",
@@ -3150,28 +3150,6 @@ const INLINE={rules:[
  },
  {
   "id": 53,
-  "category": "SC",
-  "year": 2024,
-  "group": "",
-  "rule": "Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)",
-  "notes": "Later tightened (see 2025). Player KR/PR and D/ST INT/fumble returns are now 25 yd/pt (2025); blocked/missed FG returns remain 1 per 100 yd",
-  "source": "history",
-  "sub": "Return yards",
-  "ord": 4
- },
- {
-  "id": 54,
-  "category": "SC",
-  "year": 2024,
-  "group": "",
-  "rule": "Offense playing D: 0.5 per tackle, 1 per forced fumble",
-  "notes": "",
-  "source": "history",
-  "sub": "Defense & special teams",
-  "ord": 3
- },
- {
-  "id": 55,
   "category": "FUN",
   "year": 2024,
   "group": "",
@@ -3182,7 +3160,7 @@ const INLINE={rules:[
   "ord": 900
  },
  {
-  "id": 56,
+  "id": 54,
   "category": "DR",
   "year": 2025,
   "group": "",
@@ -3193,7 +3171,7 @@ const INLINE={rules:[
   "ord": 600
  },
  {
-  "id": 57,
+  "id": 55,
   "category": "DR",
   "year": 2025,
   "group": "",
@@ -3204,7 +3182,7 @@ const INLINE={rules:[
   "ord": 600
  },
  {
-  "id": 58,
+  "id": 56,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -3215,7 +3193,7 @@ const INLINE={rules:[
   "ord": 200
  },
  {
-  "id": 59,
+  "id": 57,
   "category": "RO",
   "year": 2025,
   "group": "",
@@ -3226,7 +3204,7 @@ const INLINE={rules:[
   "ord": 101
  },
  {
-  "id": 60,
+  "id": 58,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -3237,7 +3215,7 @@ const INLINE={rules:[
   "ord": 200
  },
  {
-  "id": 61,
+  "id": 59,
   "category": "FUN",
   "year": 2025,
   "group": "",
@@ -3248,7 +3226,7 @@ const INLINE={rules:[
   "ord": 900
  },
  {
-  "id": 62,
+  "id": 60,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -3259,7 +3237,7 @@ const INLINE={rules:[
   "ord": 201
  },
  {
-  "id": 63,
+  "id": 61,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -3270,7 +3248,7 @@ const INLINE={rules:[
   "ord": 4
  },
  {
-  "id": 64,
+  "id": 62,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -3281,7 +3259,7 @@ const INLINE={rules:[
   "ord": 4
  },
  {
-  "id": 65,
+  "id": 63,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -3354,7 +3332,7 @@ function renderRules(rules){
     m.sort((a,b)=>b.year-a.year||a.ord-b.ord||a.id-b.id).forEach(r=>{
       if(r.year!==last){out+=`<div class="yr">${r.year}${r.year===2026?" suggestions (open)":""}</div>`;last=r.year}
       out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.title)}</h3><div class="meta">
-        <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>${r.flag==="sup"?'<span class="tag s-FAIL">Superseded</span>':r.status==="PASS"&&r.flag==="once"?'<span class="tag">One-time</span>':r.status==="PASS"?'<span class="tag s-PASS">In force</span>':""}
+        <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>${r.flag==="sup"?'<span class="tag s-FAIL">Superseded</span>':r.flag==="unv"?'<span class="tag s-PENDING">Not in Sleeper scoring</span>':r.status==="PASS"&&r.flag==="once"?'<span class="tag">One-time</span>':r.status==="PASS"?'<span class="tag s-PASS">In force</span>':""}
         <span class="tag cat" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</span>
         ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}${link(r)}</div>
         ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
@@ -3369,9 +3347,9 @@ function renderRules(rules){
 /* ---- open suggestions (pending / tabled / exploring) ---- */
 function renderOpen(rules){
   const OPEN=["PENDING","TABLED","EXPLORE"];
-  const all=rules.filter(r=>OPEN.includes(r.status));
+  const all=rules.filter(r=>r.year===2026&&OPEN.includes(r.status));
   const cats=Object.keys(CATS).filter(k=>all.some(r=>r.category===k));
-  $("#open").innerHTML=`<div class="status">Suggestions awaiting a vote. 2026 comes from the League Suggestions sheet tab; new posts from #league-suggestions are added when Ben reacts to them with 📖. Items still open from earlier years are listed below.</div>
+  $("#open").innerHTML=`<div class="status">Suggestions awaiting a vote. These come from the 2026 tab of the League Suggestions sheet; new posts from #league-suggestions are added when Ben reacts to them with 📖.</div>
   <div id="ochips"></div>
   <div class="filters"><label>Search<input type="search" id="oq"></label></div>
   <div class="count" id="ocnt"></div><div id="olist"></div>`;
@@ -3379,16 +3357,14 @@ function renderOpen(rules){
   const apply=()=>{
     const q=$("#oq").value.toLowerCase(),c=sel();
     const m=all.filter(r=>(!c.size||c.has(r.category))&&(!q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(q)));
-    m.sort((a,b)=>(b.year===2026)-(a.year===2026)||b.year-a.year||a.ord-b.ord||a.id-b.id);
+    m.sort((a,b)=>a.ord-b.ord||a.id-b.id);
     $("#ocnt").textContent=`${m.length} open suggestion${m.length===1?"":"s"}`;
-    let out="",last=null;
+    let out="";
     m.forEach(r=>{
-      const g=r.year===2026?"2026 suggestions":"Carried over from earlier years";
-      if(g!==last){out+=`<div class="yr">${g}</div>`;last=g}
       out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.title)}</h3><div class="meta">
         <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>
         <span class="tag cat" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</span>
-        ${r.year!==2026?`<span class="tag">from ${r.year}</span>`:""}${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}${link(r)}</div>
+        ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}${link(r)}</div>
         ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
     });
     $("#olist").innerHTML=out||'<div class="note">Nothing open.</div>';
@@ -3410,7 +3386,7 @@ function renderCurrent(cur){
   const apply=()=>{
     const q=$("#cq").value.toLowerCase(),c=sel(),y=$("#cy").value;
     const m=cur.filter(r=>(!c.size||c.has(r.category))&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
-    m.sort((a,b)=>a.ord-b.ord||(a.source==="site"?0:1)-(b.source==="site"?0:1)||(a.source==="site"?0:(a.year||0)-(b.year||0))||a.id-b.id);
+    m.sort((a,b)=>a.ord-b.ord||(b.year||0)-(a.year||0)||a.id-b.id);
     $("#ccnt").textContent=`${m.length} of ${cur.length} rules in force`;
     let out="",last=null,lastSub=null;
     m.forEach(r=>{

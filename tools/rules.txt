@@ -1,4 +1,4 @@
-# year|cat|status|title|nominator|impact|vote|note|flag   (flag: blank=in force if PASS, dup=covered by a Site rule, once=one-time action, sup=superseded)  |since = year it actually took effect, if different  |link = Slack permalink of the #league-suggestions post (book-reacted)
+# year|cat|status|title|nominator|impact|vote|note|flag   (flag: blank=in force if PASS, dup=covered by a Site rule, once=one-time action, sup=superseded, unv=not reflected in Sleeper scoring)  |since = year it actually took effect, if different  |link = Slack permalink of the #league-suggestions post (book-reacted)
 2026|IR|PENDING|Make suspended players IR eligible|Joe|Low||Failed in 2022|||https://dtf-club.slack.com/archives/CCG47441Z/p1788271924979469
 2026|SC|PENDING|Points for recovering fumble (1 or 0.5)|Aidan|Low|||||https://dtf-club.slack.com/archives/CCG47441Z/p1789482593157049
 2026|GV|PENDING|Continental Congress: reset everything and revote everything, 2/3 majority needed|Christian|Yuge|||||https://dtf-club.slack.com/archives/CCG47441Z/p1789486327971949
@@ -47,8 +47,8 @@
 2024|TR|PASS|Autoprocess all trades|Joe|Medium|6||dup||
 2024|RO|PASS|TE eligible for WR spot (WR becomes WR/TE)|Ben|Low|6||||
 2024|SC|PASS|0.5 per first down for WR/RB/TE, 0.2 for QB first down|Ben|Medium|6||dup||
-2024|SC|PASS|Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)|Ben|Low/Medium|7|Later tightened (see 2025). Player KR/PR and D/ST INT/fumble returns are now 25 yd/pt (2025); blocked/missed FG returns remain 1 per 100 yd|||
-2024|SC|PASS|Offense playing D: 0.5 per tackle, 1 per forced fumble|Ben|Low|7||||
+2024|SC|PASS|Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)|Ben|Low/Medium|7|Not reflected in Sleeper as written: player and INT/fumble returns are now 25 yd/pt (2025); only blocked/missed FG returns remain 1 per 100 yd|unv||
+2024|SC|PASS|Offense playing D: 0.5 per tackle, 1 per forced fumble|Ben|Low|7|Not reflected in Sleeper: no tackle scoring exists and player forced fumble is 0.5, not 1|unv||
 2024|FUN|PASS|Shotgun a beverage of your choice for a 0 or less from a non-DST|||6||||
 2024|TR|FAIL|FAB for rumble trade or cash out|Ankit|High|0||||
 2024|TR|FAIL|Built-in Trash Considerations v2: FAB winning bid for a same-week re-claimed drop goes to previous owner|Ben|Medium|0||||
