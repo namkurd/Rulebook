@@ -14,14 +14,20 @@ def dump(obj, name):
 
 rules = []
 for l in lines('rules.txt'):
-    y, c, s, t, n, im, v, no = l.split('|')
-    rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no))
+    y, c, s, t, n, im, v, no, flag = l.split('|')
+    rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no, flag=flag))
 dump(rules, 'rules.json')
 
 cur = []
 for l in lines('current.txt'):
     c, y, g, t, n = l.split('|')
-    cur.append(dict(id=len(cur)+1, category=c, year=int(y) if y else None, group=g, rule=t, notes=n))
+    cur.append(dict(id=len(cur)+1, category=c, year=int(y) if y else None, group=g, rule=t, notes=n, source='site'))
+# every passed rule still in force (not superseded, not a duplicate of a Site rule, not a one-time action)
+for r in sorted(rules, key=lambda r: r['year']):
+    if r['status'] == 'PASS' and not r['flag']:
+        cur.append(dict(id=len(cur)+1, category=r['category'], year=r['year'], group='', rule=r['title'], notes=r['notes'], source='history'))
+for i, r in enumerate(cur):
+    r['id'] = i + 1
 dump(cur, 'current_rules.json')
 print(len(rules), 'history entries,', len(cur), 'current rules')
 

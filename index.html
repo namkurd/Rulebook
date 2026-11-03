@@ -70,6 +70,7 @@ const CONFIG = {
   snapshotUrl: "data/sleeper_snapshot.json"
 };
 const CATS = {SC:"Scoring",RO:"Roster & lineup",IR:"IR & injuries",TR:"Waivers, FAB & trades",PL:"Playoffs & standings",SA:"Sacko",DR:"Draft & auction",MN:"Money",GV:"Governance & conduct",FUN:"Shotgun & fun"};
+const FLAG={sup:"Superseded",dup:"In force (see Current rules)",once:"One-time action"};
 const STATUS = {PASS:"Passed",FAIL:"Failed",PENDING:"Pending",TABLED:"Tabled",EXPLORE:"Exploring",WITHDRAWN:"Withdrawn"};
 const $ = s => document.querySelector(s);
 const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -106,7 +107,7 @@ function renderRules(rules){
     m.sort((a,b)=>b.year-a.year||a.id-b.id).forEach(r=>{
       if(r.year!==last){out+=`<div class="yr">${r.year}${r.year===2026?" suggestions (open)":""}</div>`;last=r.year}
       out+=`<div class="rule"><h3>${esc(r.title)}</h3><div class="meta">
-        <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>
+        <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>${r.flag==="sup"?'<span class="tag s-FAIL">Superseded</span>':r.status==="PASS"&&r.flag==="once"?'<span class="tag">One-time</span>':r.status==="PASS"?'<span class="tag s-PASS">In force</span>':""}
         <span class="tag cat">${esc(CATS[r.category])}</span>
         ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}</div>
         ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
@@ -121,7 +122,7 @@ function renderRules(rules){
 function renderCurrent(cur){
   const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
   const cats=Object.entries(CATS).filter(([k])=>cur.some(r=>r.category===k));
-  $("#current").innerHTML=`<div class="status">The rules as written on the league site. "Since" is when the suggestions sheet shows it was instituted; rules without a year pre-date the sheet or aren't on it.</div>
+  $("#current").innerHTML=`<div class="status">Every rule in force: the league site rules plus each rule passed over the years (2019 on) that hasn't been replaced. "Since" is the year it passed on the suggestions sheet. Replaced rules are in Rule history, tagged Superseded.</div>
   <div class="filters">
    <label>Search<input type="search" id="cq"></label>
    <label>Type of rule<select id="cc"><option value="">All types</option>${cats.map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join("")}</select></label>
@@ -129,12 +130,14 @@ function renderCurrent(cur){
   <div class="count" id="ccnt"></div><div id="clist"></div>`;
   const apply=()=>{
     const q=$("#cq").value.toLowerCase(),c=$("#cc").value,y=$("#cy").value;
+    const order=Object.keys(CATS);
     const m=cur.filter(r=>(!c||r.category===c)&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
-    $("#ccnt").textContent=`${m.length} of ${cur.length} rules`;
+    m.sort((a,b)=>order.indexOf(a.category)-order.indexOf(b.category)||(a.source==="site"?0:1)-(b.source==="site"?0:1)||(a.year||0)-(b.year||0)||a.id-b.id);
+    $("#ccnt").textContent=`${m.length} of ${cur.length} rules in force`;
     let out="",last=null;
     m.forEach(r=>{
-      if(r.group!==last){out+=`<div class="yr">${esc(r.group||"General")}</div>`;last=r.group}
-      out+=`<div class="rule"><h3>${esc(r.rule)}</h3><div class="meta"><span class="tag cat">${esc(CATS[r.category])}</span>${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}</div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+      if(r.category!==last){out+=`<div class="yr">${esc(CATS[r.category])}</div>`;last=r.category}
+      out+=`<div class="rule"><h3>${esc(r.rule)}</h3><div class="meta">${r.group?`<span class="tag cat">${esc(r.group)}</span>`:""}${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${r.source==="site"?"league site":"suggestions sheet"}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };
