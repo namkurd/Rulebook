@@ -1,0 +1,157 @@
+# year|cat|status|title|nominator|impact|vote|note
+2026|IR|PENDING|Make suspended players IR eligible|Joe|Low||Failed in 2022
+2026|SC|PENDING|Points for recovering fumble (1 or 0.5)|Aidan|Low||
+2026|GV|PENDING|Continental Congress: reset everything and revote everything, 2/3 majority needed|Christian|Yuge||
+2026|GV|PENDING|For each rule added one must be taken away|Christian|Yuge||
+2026|MN|PENDING|Increase buy-in so the highest-scoring manager each week gets $20; no change to other payouts|Joe|Low/Medium||
+2026|DR|PENDING|Keeper: keep up to X drafted players (never traded for/added/dropped) at draft price +10%, min raise to $10 if drafted under $10|Joe|High||
+2026|RO|PENDING|Remove Kicker|Ankit?|||
+2026|RO|PENDING|Remove roster maximums|Mike|||
+2026|IR|PENDING|Allow direct to IR for traded players|Joe|Low/Medium||
+2026|MN|PENDING|$5 extra in auction per child|Jake|High||
+2026|FUN|PENDING|Extend Doubtful to count as OUT for shotgun purposes|Joe|Low||
+2026|RO|PENDING|Disallow illegal gameday roster; must drop or commissioner will (like illegal IR rule)|Joe|Low||
+2026|RO|PENDING|2 Defenses|Christian|High||
+2026|IR|PENDING|Remove the new IR-related rules|Joe|Low||
+2025|PL|PASS|Expand to 12 teams|People|High|8|Stephanie in; Kait pending interview
+2025|GV|PASS|Name change exploratory|Ben|Low|7|Decide new name before season
+2025|RO|FAIL|If 12 teams, reduce to 1 QB with 6pt TD|Aidan/Ben|High|3|
+2025|RO|PENDING|If 12 teams, make all QBs SFLEX|||5|Needs Ryan, Jake or Christian; Jake voted yes 7/15/26 on Slack. Sleeper currently shows 2 SUPER_FLEX slots
+2025|GV|FAIL|DTF Club annual suspension list (morality clause: vote players out of the league for a season)|Joe|Low|2|Ideas: max 1 new per year, supermajority
+2025|DR|PASS|Standard protocol for accidental/glitchy bids: shotgun for an accidental bid that is withdrawn|Ankit|Low/Medium|8|Explore further
+2025|DR|PASS|Get rid of drafting position minimums at auction|Joe|Low/Medium|8|
+2025|IR|PASS|Must own a player over a roster lock (weekend) before putting him on IR|Ben|Low/Medium|6|2 IR slots were being used outside the spirit of IR expansion
+2025|RO|WITHDRAWN|Add 1 Flex, remove 1 bench spot|Joe|Medium|Withdrawn|
+2025|RO|WITHDRAWN|Add WR/TE spot, remove bench|Ankit|Medium|Withdrawn|
+2025|RO|PASS|Remove a bench spot|Aidan|Medium|7|
+2025|RO|FAIL|Remove an additional bench spot|||3|
+2025|IR|PASS|Ban holding a player who is active in a game in an IR slot; must drop that player or another player yet to play|Joe|Low|8|
+2025|SA|FAIL|Sacko range: only teams within X rumbles of 10th are in Sacko Bowl|Steven|Medium|3|
+2025|SA|PASS|Sacko range updated from 36 to X (more teams, longer playoffs, 1 fewer regular season game)||||
+2025|PL|FAIL|NIT Bowl / DTF Cup for non-Sacko and eliminated teams|Ben|Low|3|
+2025|FUN|PASS|Amend shotgun rule to exclude any player ruled OUT who didn't play a play in the 2nd half|Ben|Low|7|
+2025|IR|PASS|QB injury rule: if QB1 is ruled out at any point, manager gets all QB points for that team (QB1 + QB2/QB3, not position players taking snaps)|Ben/Joe|Medium|Pass|Injury still a net negative, but more drama rooting for the backup and limits the downside
+2025|SC|FAIL|Individual points for picks, pick returns, tackles, sacks (rare two-way players)|Ben|Low|Fail|Failed on exploration
+2025|SC|FAIL|More negative points for shorter missed FGs|Steven|Low/Medium|2|Not voted on due to Knicks blowing it
+2025|SC|TABLED|Make D/ST more valuable generally (benchmark vs TE scoring?)|Chris|Medium|Tabled|Eli proposal: your defense scales down opponents' offensive scores
+2025|RO|FAIL|2 D/STs|Chris|High|2|
+2025|SC|PASS|25 yards per point on KR/PR|Aidan|Low/Medium|7|
+2025|SC|PASS|25 yards per point on defensive returns|Ben|Medium|6|
+2025|SC|FAIL|Turnover on downs worth 2 points|Steven|Medium|3|
+2025|SC|PASS|0.2 points for tackle for loss|Ben|Low/Medium|7|
+2025|SC|TABLED|6pt pass TD and 35 pass yards per point|Ben|Medium|Tabled|
+2025|SC|FAIL|5pt TD for all|Aidan|High|2|
+2024|PL|EXPLORE|Midseason tournament in some way (Alex: DFS hybrid vs custom scoring weeks)|Alex|Medium||
+2024|PL|EXPLORE|12 teams and associated playoff changes, smaller bench||||Led to the 2025 expansion
+2024|PL|PASS|Schedule based on last year's results (playoff rematch week, etc.)|Joe|Low|6|
+2024|TR|PASS|Autoprocess all trades|Joe|Medium|6|
+2024|RO|PASS|TE eligible for WR spot (WR becomes WR/TE)|Ben|Low|6|
+2024|SC|PASS|0.5 per first down for WR/RB/TE, 0.2 for QB first down|Ben|Medium|6|
+2024|SC|PASS|Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)|Ben|Low/Medium|7|Later tightened (see 2025)
+2024|SC|PASS|Offense playing D: 0.5 per tackle, 1 per forced fumble|Ben|Low|7|
+2024|FUN|PASS|Shotgun a beverage of your choice for a 0 or less from a non-DST|||6|
+2024|TR|FAIL|FAB for rumble trade or cash out|Ankit|High|0|
+2024|TR|FAIL|Built-in Trash Considerations v2: FAB winning bid for a same-week re-claimed drop goes to previous owner|Ben|Medium|0|
+2024|IR|FAIL|Require owning a player over a roster lock for IR eligibility|Ben|Low|4|Not Sleeperable; passed in 2025 as manual rule
+2024|IR|FAIL|Apply Kicker injury rule to QBs|Joe|Low/Medium|4|
+2024|IR|FAIL|Add to IR from waivers directly|Steven|Low|0|Not Sleeperable
+2024|FUN|FAIL|Designate weekly captain whose points are doubled|Alex|Huge|0|
+2024|SC|FAIL|6pt QB TD (mutually exclusive with other QB changes)|Joe|Medium|1|
+2024|SC|FAIL|Passing yards 1pt per 15 or 20 (mutually exclusive with other QB changes)|Ankit/Joe|Medium|1|
+2024|SA|FAIL|First round Sacko bracket: bottom 2 scorers advance|||1|
+2023|RO|FAIL|Extra FLEX spot (with or without bench removal)|Ankit|High|3-6|
+2023|IR|PASS|2 IR spots|Joe|Medium|6-3|
+2023|TR|FAIL|Built-in Trash Considerations: same-week drop and re-claim FAB goes to previous owner|Ben|Medium|2-7|
+2023|IR|FAIL|One injury sub in playoffs (pre-declared sub per position)|Alex/Aidan/Ben|Medium|2-7|
+2023|PL|FAIL|Schedule based on last season finish|Joe|Low|4-5|
+2023|GV|FAIL|Bully Pulpit: champ pre-announces one suggestion with 2 votes|Ben|Low|2-7|
+2023|SC|FAIL|6pt pass TD|Ben|High|4-5|
+2023|SC|FAIL|0.5 PPFD, 0.1 per passing first down|Ben|High|4-5|
+2023|SC|PASS|Reduce QB sack to -0.25|Joe|Medium|5-4|
+2023|SC|PASS|Points for defensive 3-and-out|Joe|Medium|5-4|
+2023|SC|PASS|Fumble -0.5, lost fumble -1.5|Ben|Low/Medium|5-4|
+2023|SC|FAIL|Scaled D/ST points for sacks|Ben|Low|4-5|
+2023|SC|FAIL|Points for kick/punt return yards (1 per 50)|Ben|Low|2-7|
+2023|SC|PASS|Defense returning a 2pt conversion worth 4 points|Ben|Low|5-4|
+2023|SC|PASS|Missed XP = -0.33|Joe|Low|7-2|
+2023|IR|PASS|Team kicker: if kicker is injured you get combined points from starter and replacements|Joe|Low|5-4|
+2022|DR|FAIL|Dynasty (keeper option)|Alex/Ben|Yuge|Fail|
+2022|PL|PASS|5 team playoff / 3 team final (1 seed gets bye and is guaranteed finals)|Jake/Steven|High|Pass|Bonus options discussed: homefield bonus, best ball, extra flex
+2022|TR|PASS|Auto-push FAAB trades of $10 or less|Jake|Medium/High|Pass|
+2022|TR|PASS|Reduce trade completion window to 24 hrs|Steven|Medium|Pass|
+2022|SA|FAIL|Reduce rumbles needed to avoid Sacko tourney from 37 to 29|Ben|Medium|Fail|
+2022|SA|FAIL|Always have a Sacko tournament|Joe|Medium|Fail|
+2022|TR|PASS|No transactions if not in contention for a league trophy or award (3rd place counts)|Steven/Joe|Medium|Pass|Steven vs Joe proposal decided by RCV. Sacko bracket can make moves until safe
+2022|SA|PASS|Sacko punishment deadline: lose membership if punishment not completed before fantasy draft|Joe/Steven|Medium|Pass|Soft deadline at the Super Bowl, 20% penalty, then final deadline
+2022|SA|PASS|In Sacko tournament, 7 seed chooses between 9th and 10th seed in 1st round|Steven|Low/Medium|Pass|
+2022|PL|FAIL|Scheduling system (rivalry week, top 5 vs bottom 5 twice)|Joe|Low|Fail|
+2022|PL|FAIL|Highest scoring team picks next week's opponent|Steven|Low|Fail|
+2022|GV|FAIL|Champions Endorsement (2 votes on one pre-announced suggestion)|Ben|Low|Fail|
+2022|PL|FAIL|Highest single-week score gets X rumbles|Steven|Low|Fail|
+2022|GV|PASS|Better anti-tanking definition and no collusion|Joe|Low|Pass|Tanking = intentionally setting up a team to lose to gain a later advantage
+2022|MN|FAIL|Everyone pays weekly top scorer|Joe|Low|Fail|
+2022|TR|PASS|Waivers move to 12pm; free agents open after Saturday 12pm|Ankit|High|Pass|
+2022|IR|FAIL|One injury sub in playoffs|Alex/Aidan/Ben|Medium|Fail|
+2022|RO|FAIL|Revert to two full flexes|Tommy|Medium|Fail|
+2022|RO|FAIL|Replace kicker with second D/ST|Ryan|Low|Fail|
+2022|RO|FAIL|Make all WR spots WR/TE|Ben|Low|Fail|
+2022|IR|FAIL|Make suspended players IR eligible|Joe|Low|Fail|
+2022|RO|PASS|Superflex replaces the 2nd flex (no other changes)|Joe|High|Pass|6pt TD and QB INT -4 discussed but not adopted
+2022|SC|FAIL|0.5 PFD (rec and rush) in addition to PPR|Ben|Medium/High|Fail|
+2022|SC|FAIL|Individual KR/PR yardage (50/pt KR, 25/pt PR)|Ben|Low/Medium|Fail|
+2022|SC|PASS|1 point for a 4th down stop|Rohaan|Low/Medium|Pass|
+2022|SC|PASS|Defensive scoring scaled per yard/point instead of cutoffs|Aidan|Low|Pass|
+2022|SC|FAIL|Fumble -0.5, lost fumble -1.5|Ben|Low|Fail|Passed in 2023
+2022|SC|FAIL|Scaled D/ST sack points|Ben|Low|Fail|
+2022|SC|FAIL|Defense returning 2pt conversion worth 4 (RCV 4/6/8)|Ben|Low|Fail|Passed in 2023
+2021|GV|PASS|Alex joins league|||Pass|
+2021|SC|PASS|Full PPR for 0+ yards|||Pass|
+2021|PL|PASS|Fractional Royal Rumble official standings (fractional win = 0.1, giving H2H more weight)|||Pass|
+2021|SA|PASS|Waffle House style Sacko punishment|||Pass|
+2021|RO|PASS|2nd flex is now WR/TE only|||Pass|
+2020|RO|PASS|Commissioner may manually edit lineups containing a player grandfathered into a position he is no longer eligible for|Aidan||9-0|Voted 11/24/2020
+2020|SA|PASS|Sacko volunteer / use buy-in for trophy: Joe 3D-prints the trophy|Aidan||-|
+2020|GV|PASS|Move to Sleeper|Ben/Haan||9-0|
+2020|TR|PASS|Tradeable FAB|Steven||6-4|
+2020|RO|FAIL|Superflex|Joe||4-6|Passed in 2022
+2020|DR|FAIL|1 player keeper league|Joe||3-7|
+2020|RO|FAIL|Remove D/ST|Tommy||4-6|
+2020|SC|PASS|PPR of some sort: full, 0.5, 0.5 with gradient|Joe/Steven/Ben||7-3|Became full PPR in 2021
+2020|SC|PASS|QB pick-6 additional -2 points|Ben/Haan||9-1|
+2020|SC|PASS|QB sack -0.5|Ben/Joe||7-3|Reduced to -0.25 in 2023
+2020|SC|FAIL|Sacks on defense scaled to yardage|Ben/Joe||3-6|
+2020|SC|FAIL|KR/PR yards for players (KR 50/pt, PR 25/pt)|Ben||4-6|
+2020|SC|PASS|Decimal scoring for kickers (2018 DTF, base of 3)|2018 DTF||Grandfathered|
+2020|PL|FAIL|New standings: combo of RR and H2H|Tommy/Ben||2-8|
+2020|PL|PASS|Royal Rumble as tiebreaker|Joe||8-1|
+2020|SA|PASS|Sacko bracket with lowest 4 seeds: 10 seed locks Sacko if 9th is 3+ games ahead; 5-6 play 2-week H2H|Joe||6-4|
+2020|PL|PASS|Add Lamp and Eli: 14 week RS, 6 teams make playoffs, wildcard weekend|Joe||6-3|Conflicts with 15-week/4-team entry below; sheet lists both as Pass
+2020|RO|PASS|Cut 2 bench spots|Ankit||6-3|
+2020|PL|PASS|15 week regular season, 4 teams advance, 1-week semis and finals|Aidan||6-1|
+2020|IR|PASS|Allow Doubtful players into IR (Sleeper allows)|Rohaan||8-1|
+2019|MN|PASS|Raise buy-in to $120|Jake/Ryan||Yes (8/19)|
+2019|SC|PASS|New defensive scoring|Ben||Yes (8/25)|
+2019|DR|FAIL|Use ESPN online system to draft|Steven||No (8/26)|
+2019|TR|FAIL|$1000 FAAB (more granular bids)|Ankit||5-4 for|Tommy voted No
+2019|GV|PASS|Announce all approved changes on draft day|Rohaan||Pass|
+2019|SC|PASS|Missed extra points count as -1|Rohaan||Pass|Changed to -0.33 in 2023
+2019|PL|PASS|Tiebreaker stays Point Wins (vote to go back to PF only failed)|Aidan||5-4|
+2019|SC|PASS|Forced fumble worth 1 point, fumble recovery worth 1 point|Aidan||Pass|
+2019|GV|PASS|9/10 support required for changing rules midseason|||Pass|
+2019|RO|PASS|2 FLEX, add one roster space|||Pass|
+2019|RO|PASS|WR/TE/RB roster cap increase by 1|||Pass|
+2019|SC|FAIL|Microdosing (0.1 PPR)|Haan||Fail|
+2019|GV|FAIL|Deadline for league rule changes of 7/31|Rohaan||Fail|Sheet: "??? (thought this passed)"
+2019|GV|FAIL|Leave ESPN|Everyone||Fail|Moved to Sleeper in 2020
+2019|RO|FAIL|If staying with ESPN, abolish kickers|Aidan||Fail|
+2019|TR|FAIL|Tradeable FAAB|Steven||Fail|Passed in 2020
+2019|GV|FAIL|Risk/Reward system for premature GG in thread|Ben||Fail|
+2019|PL|FAIL|12 teams (6 playoff teams or 4?)|Steven/Joe||Fail|Passed in 2025
+2019|SC|FAIL|0.5 PPR|Joe||Fail|
+2019|RO|FAIL|Superflex position (including QB)|Joe||Fail|
+2019|TR|FAIL|No playoff add/drops|Joe||Fail|
+2019|MN|FAIL|Weekly payout to top-scoring team|Joe||Fail|
+2019|SC|FAIL|Points for first down|Steven||Fail|Passed in 2024
+2019|PL|FAIL|Composite wins (H2H W + Point W) as official standings|Ben||Fail|
+2019|DR|FAIL|1 player keeper league|Ben||Fail|
+2019|SC|FAIL|QBs lose receiving yards (for sacks)|Joe||Fail|

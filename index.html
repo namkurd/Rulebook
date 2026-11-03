@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DTF Club Rulebook</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1b1f27;--mute:#6a7383;--line:#e2e5eb;--accent:#2457d6;--hi:#fff4d6;--hi-ink:#7a5200;
+--pass:#1f8a4c;--fail:#b4382f;--pend:#b7791f;--tab:#7b5cc4}
+@media(prefers-color-scheme:dark){:root{--bg:#12151b;--card:#1b2029;--ink:#e8ebf1;--mute:#98a1b3;--line:#2b3240;--accent:#7fa2ff;--hi:#3a2f0f;--hi-ink:#ffd27a;--pass:#4cc486;--fail:#ef7b72;--pend:#e3b25a;--tab:#b39cf0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:1000px;margin:auto}
+h1{margin:0;font-size:24px}.sub{color:var(--mute);font-size:13px}
+main{max-width:1000px;margin:auto;padding:0 16px 48px}
+nav{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+nav button,.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:999px;cursor:pointer;font:inherit}
+nav button.on,.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:10px}
+.filters label{font-size:12px;color:var(--mute);display:flex;flex-direction:column;gap:3px}
+select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;width:100%}
+.count{color:var(--mute);font-size:13px;margin:6px 0 10px}
+.yr{margin:18px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--mute);text-transform:uppercase}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:8px}
+.rule h3{margin:0 0 5px;font-size:15px;font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}
+.tag{padding:1px 8px;border-radius:999px;border:1px solid var(--line);font-size:11px;font-weight:600}
+.s-PASS{color:var(--pass);border-color:var(--pass)}.s-FAIL{color:var(--fail);border-color:var(--fail)}
+.s-PENDING,.s-TABLED,.s-EXPLORE,.s-WITHDRAWN{color:var(--pend);border-color:var(--pend)}
+.cat{color:var(--tab);border-color:var(--tab)}
+.note{margin-top:5px;font-size:13px;color:var(--mute)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:16px}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
+th{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hi{background:var(--hi)}tr.hi td:first-child{color:var(--hi-ink);font-weight:600}
+.badge{background:var(--hi);color:var(--hi-ink);border-radius:6px;padding:1px 6px;font-size:11px;font-weight:700;margin-left:6px}
+h2{font-size:17px;margin:20px 0 8px}
+.callout{background:var(--hi);color:var(--hi-ink);border-radius:10px;padding:10px 13px;margin-bottom:12px;font-size:14px}
+.callout ul{margin:6px 0 0;padding-left:18px}
+.status{font-size:12px;color:var(--mute);margin:4px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.kv{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px}.kv b{display:block;font-size:12px;color:var(--mute);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>DTF Club Rulebook</h1>
+  <div class="sub">Rule history from the League Suggestions sheet · scoring &amp; settings pulled live from Sleeper</div>
+</header>
+<main>
+  <nav id="tabs">
+    <button data-t="rules" class="on">Rulebook</button>
+    <button data-t="scoring">Scoring</button>
+    <button data-t="setup">League setup</button>
+  </nav>
+  <section id="rules"></section>
+  <section id="scoring" hidden></section>
+  <section id="setup" hidden></section>
+</main>
+<script>
+/* ---- config (swap these when integrating into the master tool) ---- */
+const CONFIG = {
+  leagueId: "1389416556617801728",
+  api: "https://api.sleeper.app/v1",
+  rulesUrl: "data/rules.json",
+  snapshotUrl: "data/sleeper_snapshot.json"
+};
+const CATS = {SC:"Scoring",RO:"Roster & lineup",IR:"IR & injuries",TR:"Waivers, FAB & trades",PL:"Playoffs & standings",SA:"Sacko",DR:"Draft & auction",MN:"Money",GV:"Governance & conduct",FUN:"Shotgun & fun"};
+const STATUS = {PASS:"Passed",FAIL:"Failed",PENDING:"Pending",TABLED:"Tabled",EXPLORE:"Exploring",WITHDRAWN:"Withdrawn"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const getJSON = u => fetch(u).then(r=>{if(!r.ok)throw new Error(u+" "+r.status);return r.json()});
+
+/* ---- tabs ---- */
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));
+  ["rules","scoring","setup"].forEach(id=>$("#"+id).hidden = id!==b.dataset.t);
+});
+
+/* ---- rulebook ---- */
+const F = {q:"",cat:"",year:"",status:"PASS",from:"",to:""};
+function renderRules(rules){
+  const years=[...new Set(rules.map(r=>r.year))].sort((a,b)=>b-a);
+  const opt=(o,sel)=>Object.entries(o).map(([k,v])=>`<option value="${k}"${sel===k?" selected":""}>${esc(v)}</option>`).join("");
+  $("#rules").innerHTML=`
+  <div class="filters">
+    <label>Search<input type="search" id="fq" placeholder="e.g. kicker, IR, sacko"></label>
+    <label>Type of rule<select id="fc"><option value="">All types</option>${opt(CATS,F.cat)}</select></label>
+    <label>Status<select id="fs"><option value="">Every proposal</option>${opt(STATUS,F.status)}</select></label>
+    <label>Instituted in<select id="fy"><option value="">Any year</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label>
+    <label>From year<select id="ff"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
+    <label>To year<select id="ft"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
+  </div>
+  <div class="count" id="cnt"></div><div id="list"></div>`;
+  const apply=()=>{
+    F.q=$("#fq").value.toLowerCase();F.cat=$("#fc").value;F.status=$("#fs").value;F.year=$("#fy").value;F.from=$("#ff").value;F.to=$("#ft").value;
+    const m=rules.filter(r=>(!F.cat||r.category===F.cat)&&(!F.status||r.status===F.status)&&(!F.year||r.year==F.year)
+      &&(!F.from||r.year>=+F.from)&&(!F.to||r.year<=+F.to)
+      &&(!F.q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(F.q)));
+    $("#cnt").textContent=`${m.length} of ${rules.length} entries`;
+    let out="",last=null;
+    m.sort((a,b)=>b.year-a.year||a.id-b.id).forEach(r=>{
+      if(r.year!==last){out+=`<div class="yr">${r.year}${r.year===2026?" suggestions (open)":""}</div>`;last=r.year}
+      out+=`<div class="rule"><h3>${esc(r.title)}</h3><div class="meta">
+        <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>
+        <span class="tag cat">${esc(CATS[r.category])}</span>
+        ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}</div>
+        ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+    });
+    $("#list").innerHTML=out||'<div class="note">No entries match.</div>';
+  };
+  ["fq","fc","fs","fy","ff","ft"].forEach(id=>$("#"+id).addEventListener(id==="fq"?"input":"change",apply));
+  apply();
+}
+
+/* ---- scoring (live from Sleeper) ---- */
+/* Baseline = Sleeper's stock PPR-style template; anything different is flagged as distinctive. */
+const BASE={pass_yd:.04,pass_td:4,pass_int:-1,pass_2pt:2,rush_yd:.1,rush_td:6,rush_2pt:2,rec:1,rec_yd:.1,rec_td:6,rec_2pt:2,fum_lost:-1,fum_rec_td:6,
+ xpm:1,fgm_0_19:3,fgm_20_29:3,fgm_30_39:3,fgm_40_49:4,fgm_50p:5,fgmiss:0,sack:1,int:2,fum_rec:2,safe:2,blk_kick:2,def_td:6,def_st_td:6,st_td:6,st_ff:1,st_fum_rec:1,def_st_ff:1,def_st_fum_rec:1,ff:0,
+ pts_allow_0:10,pts_allow_1_6:7,pts_allow_7_13:4,pts_allow_14_20:1,pts_allow_21_27:0,pts_allow_28_34:-1,pts_allow_35p:-4};
+const LABEL={pass_yd:"Passing yard",pass_td:"Passing TD",pass_int:"Interception thrown",pass_int_td:"Pick-six thrown (extra)",pass_sack:"QB sacked",pass_2pt:"Passing 2pt",pass_fd:"Passing first down",bonus_fd_qb:"QB first down",
+ rush_yd:"Rushing yard",rush_td:"Rushing TD",rush_2pt:"Rushing 2pt",rush_fd:"Rushing first down",bonus_fd_rb:"RB first down",bonus_fd_wr:"WR first down",bonus_fd_te:"TE first down",
+ rec:"Reception",rec_0_4:"Reception (0–4 yd)",rec_5_9:"Reception (5–9 yd)",rec_10_19:"Reception (10–19 yd)",rec_20_29:"Reception (20–29 yd)",rec_30_39:"Reception (30–39 yd)",rec_40p:"Reception (40+ yd)",
+ rec_yd:"Receiving yard",rec_td:"Receiving TD",rec_2pt:"Receiving 2pt",rec_fd:"Receiving first down",fum:"Fumble",fum_lost:"Fumble lost",fum_rec:"Fumble recovered",fum_rec_td:"Fumble recovery TD",fum_ret_yd:"Fumble return yard",
+ kr_yd:"Kick return yard",pr_yd:"Punt return yard",st_td:"Special teams TD",st_ff:"ST forced fumble",st_fum_rec:"ST fumble recovery",
+ ff:"Forced fumble (player)",tkl_loss:"Tackle for loss",
+ xpm:"Extra point made",xpmiss:"Extra point missed",fgm:"FG made (base)",fgm_yds_over_30:"FG bonus per yard over 30",fgmiss:"FG missed",
+ sack:"Sack",int:"Interception",int_ret_yd:"INT return yard",safe:"Safety",blk_kick:"Blocked kick",blk_kick_ret_yd:"Blocked kick return yard",fg_ret_yd:"Missed-FG return yard",
+ def_td:"Defensive TD",def_st_td:"D/ST special teams TD",def_st_ff:"D/ST forced fumble",def_st_fum_rec:"D/ST fumble recovery",def_2pt:"Defense returns 2pt",def_3_and_out:"3-and-out forced",def_4_and_stop:"4th down stop",
+ pts_allow:"Per point allowed",yds_allow:"Per yard allowed"};
+const GROUPS=[["Passing",/^(pass_|bonus_fd_qb)/],["Rushing",/^rush_|bonus_fd_rb/],["Receiving",/^(rec|bonus_fd_(wr|te))/],["Fumbles",/^fum(?!_ret)/],
+ ["Returns",/^(kr_|pr_|fum_ret_yd|int_ret_yd|blk_kick_ret|fg_ret_yd|st_td)/],["Kicking",/^(xp|fg)/],["Defense / ST",/^(sack|int$|safe|blk_kick$|def_|st_|ff$|tkl_loss|pts_allow$|yds_allow$)/]];
+function labelFor(k){
+  if(LABEL[k])return LABEL[k];
+  let m;
+  if(m=k.match(/^pts_allow_(\d+)(?:_(\d+))?(p)?$/))return "Points allowed: "+(m[3]?m[1]+"+":m[2]?m[1]+"–"+m[2]:m[1]);
+  if(m=k.match(/^yds_allow_(\d+)(?:_(\d+))?(p)?$/))return "Yards allowed: "+(m[3]?m[1]+"+":m[2]?m[1]+"–"+m[2]:m[1]);
+  if(m=k.match(/^fgm_(\d+)_?(\d+|p)$/))return "FG "+m[1]+(m[2]==="p"?"+":"–"+m[2])+" yd";
+  return k;
+}
+const fmt=v=>(v>0?"+":"")+(Math.round(v*10000)/10000);
+function distinct(sc){
+  const notes=[];const s=sc;
+  if(s.yds_allow!==undefined&&s.yds_allow_0_100!==undefined)notes.push(`<b>Scaled defense:</b> instead of cutoffs, D/ST gets a flat ${s.pts_allow_0} for points allowed ${fmt(s.pts_allow)} per point, and ${s.yds_allow_0_100} for yards allowed ${fmt(s.yds_allow)} per yard.`);
+  if(s.fgm!==undefined)notes.push(`<b>Decimal kickers:</b> FG = ${s.fgm} + ${+s.fgm_yds_over_30.toFixed(2)} per yard over 30 (a 50-yarder = ${(s.fgm+20*s.fgm_yds_over_30).toFixed(1)}), miss ${fmt(s.fgmiss)}, missed XP ${fmt(s.xpmiss)}.`);
+  if(s.bonus_fd_wr||s.bonus_fd_rb)notes.push(`<b>First downs:</b> ${s.bonus_fd_rb} for RB/WR/TE and ${s.bonus_fd_qb} for QB first downs.`);
+  if(s.kr_yd||s.pr_yd)notes.push(`<b>Return yards count</b> for players (${(1/s.kr_yd).toFixed(0)} yd/pt KR &amp; PR) and for D/ST (${(1/s.int_ret_yd).toFixed(0)} yd/pt INT/fumble returns, ${(1/s.fg_ret_yd).toFixed(0)} yd/pt on blocked/missed FG returns).`);
+  if(s.def_3_and_out||s.def_4_and_stop)notes.push(`<b>Defensive stops:</b> ${s.def_3_and_out} per 3-and-out, ${s.def_4_and_stop} per 4th-down stop; ${s.tkl_loss} per tackle for loss.`);
+  if(s.def_2pt)notes.push(`<b>Defense returns a 2pt conversion:</b> ${s.def_2pt} pts.`);
+  if(s.fum_rec>=1)notes.push(`<b>Fumble recovery</b> is worth ${s.fum_rec}; fumble ${fmt(s.fum)}, lost ${fmt(s.fum_lost)}; QB sack ${fmt(s.pass_sack)}; pick-six thrown ${fmt(s.pass_int+s.pass_int_td)} total.`);
+  if(s.rec===0&&s.rec_0_4===1)notes.push(`<b>Full PPR on every catch</b> via yardage buckets (0+ yds = 1 pt), not the flat PPR setting.`);
+  return notes;
+}
+function renderScoring(L,live){
+  const sc=L.scoring_settings;const used=new Set();
+  const nd=distinct(sc);
+  let h=`<div class="status">${live?"Live from Sleeper":"Offline snapshot (Sleeper unreachable)"} · ${esc(L.name)} ${esc(L.season)}. Highlighted rows differ from Sleeper's stock PPR template.</div>`;
+  if(nd.length)h+=`<div class="callout"><b>What's distinctive about our scoring</b><ul>${nd.map(n=>`<li>${n}</li>`).join("")}</ul></div>`;
+  const buckets=k=>/^(pts_allow_|yds_allow_|fgm_\d|rec_\d)/.test(k);
+  GROUPS.forEach(([name,re])=>{
+    const keys=Object.keys(sc).filter(k=>!used.has(k)&&re.test(k)&&sc[k]!==0).sort();
+    if(!keys.length)return;
+    keys.forEach(k=>used.add(k));
+    h+=`<h2>${name}</h2><table><tr><th>Stat</th><th class="num">Points</th></tr>`+keys.map(k=>{
+      const diff = k in BASE ? BASE[k]!==sc[k] : !buckets(k)||true;
+      return `<tr class="${diff?"hi":""}"><td>${esc(labelFor(k))}</td><td class="num">${fmt(sc[k])}</td></tr>`}).join("")+`</table>`;
+  });
+  $("#scoring").innerHTML=h;
+}
+
+/* ---- league setup ---- */
+function renderSetup(L){
+  const s=L.settings,pos={};L.roster_positions.forEach(p=>pos[p]=(pos[p]||0)+1);
+  const NAME={QB:"QB",RB:"RB",WR:"WR",TE:"TE",FLEX:"FLEX (RB/WR/TE)",REC_FLEX:"WR/TE flex",SUPER_FLEX:"SUPERFLEX (incl. QB)",K:"Kicker",DEF:"D/ST",BN:"Bench"};
+  const kv=(a,b)=>`<div class="kv"><b>${esc(a)}</b>${esc(b)}</div>`;
+  const wt={0:"Rolling",1:"Reverse standings",2:"FAAB"}[s.waiver_type]||s.waiver_type;
+  $("#setup").innerHTML=`<h2>Lineup (${L.total_rosters} teams)</h2><div class="grid">`+
+   Object.entries(pos).map(([p,n])=>kv(NAME[p]||p,n+" slot"+(n>1?"s":""))).join("")+kv("IR slots",s.reserve_slots)+`</div>
+   <h2>Roster limits</h2><div class="grid">${["qb","rb","wr","te","k","def"].map(p=>kv(p.toUpperCase()+" max",s["position_limit_"+p])).join("")}</div>
+   <h2>Transactions</h2><div class="grid">${kv("Waiver type",wt)}${kv("FAAB budget","$"+s.waiver_budget)}${kv("Trade deadline","Week "+s.trade_deadline)}
+    ${kv("Trade review days",s.trade_review_days)}${kv("Daily waivers",s.daily_waivers?"On":"Off")}${kv("Waivers clear (hour, league tz)",s.daily_waivers_hour+":00")}
+    ${kv("IR allows",["out"&&s.reserve_allow_out?"Out":null,s.reserve_allow_doubtful?"Doubtful":null,s.reserve_allow_sus?"Suspended":null,s.reserve_allow_cov?"COVID":null,s.reserve_allow_dnr?"DNR":null].filter(Boolean).join(", ")||"–")}
+    ${kv("Bench lock",s.bench_lock?"On":"Off")}</div>
+   <h2>Playoffs</h2><div class="grid">${kv("Playoff teams",s.playoff_teams)}${kv("Playoffs start","Week "+s.playoff_week_start)}${kv("Regular season weeks",s.playoff_week_start-1)}${kv("Max keepers",s.max_keepers)}</div>
+   <div class="note" style="margin-top:12px">Sacko bracket, Rumbles standings and the auction aren't Sleeper settings. See the Rulebook tab, Sacko and Playoffs categories.</div>`;
+}
+
+/* ---- boot ---- */
+Promise.all([
+  getJSON(CONFIG.rulesUrl),
+  getJSON(`${CONFIG.api}/league/${CONFIG.leagueId}`).then(d=>[d,true]).catch(()=>getJSON(CONFIG.snapshotUrl).then(d=>[d,false]))
+]).then(([rules,[L,live]])=>{renderRules(rules);renderScoring(L,live);renderSetup(L)})
+ .catch(e=>{$("#rules").innerHTML=`<div class="callout">Failed to load: ${esc(e.message)}. Serve over http (e.g. <code>python3 -m http.server</code>), not file://.</div>`});
+</script>
+</body>
+</html>
