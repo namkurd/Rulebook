@@ -1,0 +1,178 @@
+[
+ {
+  "id": 1,
+  "category": "GV",
+  "year": null,
+  "group": "",
+  "rule": "Members agree to abide by these rules, which supplement the rules enforced by Sleeper.",
+  "notes": ""
+ },
+ {
+  "id": 2,
+  "category": "RO",
+  "year": 2025,
+  "group": "Format",
+  "rule": "12-person Super Flex league.",
+  "notes": "12 teams passed 2025; Superflex first passed 2022. Sleeper shows 2 SUPER_FLEX slots."
+ },
+ {
+  "id": 3,
+  "category": "SC",
+  "year": 2024,
+  "group": "Format",
+  "rule": "Scoring is Tiered PPR with 0.5 PPFD.",
+  "notes": "0.5 first downs passed 2024. Sleeper scores a flat 1.0 per reception via yardage tiers (0+ yds = 1), i.e. full PPR since 2021."
+ },
+ {
+  "id": 4,
+  "category": "MN",
+  "year": null,
+  "group": "Payout structure",
+  "rule": "Champion: 60%.",
+  "notes": ""
+ },
+ {
+  "id": 5,
+  "category": "MN",
+  "year": null,
+  "group": "Payout structure",
+  "rule": "Runner-up: 20%.",
+  "notes": ""
+ },
+ {
+  "id": 6,
+  "category": "MN",
+  "year": null,
+  "group": "Payout structure",
+  "rule": "3rd place game winner: 10%.",
+  "notes": ""
+ },
+ {
+  "id": 7,
+  "category": "MN",
+  "year": null,
+  "group": "Payout structure",
+  "rule": "First place regular season: 10%.",
+  "notes": "Buy-in raised to $120 in 2019."
+ },
+ {
+  "id": 8,
+  "category": "RO",
+  "year": null,
+  "group": "Valid rosters",
+  "rule": "Each manager must start a minimum of 5 players per week.",
+  "notes": "Not on the suggestions sheet."
+ },
+ {
+  "id": 9,
+  "category": "RO",
+  "year": 2020,
+  "group": "Valid rosters",
+  "rule": "Managers may not start a player grandfathered into a position he is no longer eligible for.",
+  "notes": "2020 vote also lets the commissioner edit such lineups."
+ },
+ {
+  "id": 10,
+  "category": "TR",
+  "year": 2022,
+  "group": "Valid rosters",
+  "rule": "No transactions once a manager is eliminated from Playoff/Sacko contention.",
+  "notes": "Passed 2022 (3rd place counts as a league award)."
+ },
+ {
+  "id": 11,
+  "category": "TR",
+  "year": 2024,
+  "group": "Trading",
+  "rule": "All trades auto-process.",
+  "notes": ""
+ },
+ {
+  "id": 12,
+  "category": "TR",
+  "year": null,
+  "group": "Trading",
+  "rule": "Managers may not veto trades they are a participant in.",
+  "notes": ""
+ },
+ {
+  "id": 13,
+  "category": "TR",
+  "year": null,
+  "group": "Trading",
+  "rule": "A majority vote of the remaining managers is required to veto a trade.",
+  "notes": ""
+ },
+ {
+  "id": 14,
+  "category": "TR",
+  "year": null,
+  "group": "Trading",
+  "rule": "The league does not vote on or enforce trades with multiple transactions; each trade proposed in Sleeper is voted on separately.",
+  "notes": ""
+ },
+ {
+  "id": 15,
+  "category": "PL",
+  "year": null,
+  "group": "Playoff seeding",
+  "rule": "1st and 2nd seeds get a bye.",
+  "notes": "Sleeper: 6 playoff teams. The sheet's 2022 entry said 5 teams / 3-team final; the Site describes 6."
+ },
+ {
+  "id": 16,
+  "category": "PL",
+  "year": null,
+  "group": "Playoff seeding",
+  "rule": "The 3rd seed picks between the 5th and 6th seeds as the first-round opponent.",
+  "notes": ""
+ },
+ {
+  "id": 17,
+  "category": "PL",
+  "year": null,
+  "group": "Playoff seeding",
+  "rule": "The pick must be made by Tuesday night before Week 16 so teams can submit waiver claims.",
+  "notes": ""
+ },
+ {
+  "id": 18,
+  "category": "SA",
+  "year": null,
+  "group": "Sacko",
+  "rule": "Sacko is a Toilet Bowl tournament among the 6 lowest teams, mirroring the playoff seeding.",
+  "notes": "Sacko bracket history: 2020, 2022, 2025."
+ },
+ {
+  "id": 19,
+  "category": "SA",
+  "year": 2025,
+  "group": "Sacko",
+  "rule": "Unless Sacko is decided outright by a 31+ Rumble deficit to 9th place at the end of the regular season.",
+  "notes": "Threshold was 36 before the 2025 change; the 2022 proposal to cut 37 to 29 failed."
+ },
+ {
+  "id": 20,
+  "category": "GV",
+  "year": null,
+  "group": "League rule changes",
+  "rule": "Off-season rule changes pass by simple majority.",
+  "notes": ""
+ },
+ {
+  "id": 21,
+  "category": "GV",
+  "year": 2019,
+  "group": "League rule changes",
+  "rule": "In-season rule changes need a 10 or 11 of 12 \"mega-majority\".",
+  "notes": "Originally 9/10 support in 2019."
+ },
+ {
+  "id": 22,
+  "category": "GV",
+  "year": null,
+  "group": "League rule changes",
+  "rule": "The new season officially begins after the league dinner.",
+  "notes": ""
+ }
+]

@@ -50,11 +50,13 @@ h2{font-size:17px;margin:20px 0 8px}
 </header>
 <main>
   <nav id="tabs">
-    <button data-t="rules" class="on">Rulebook</button>
+    <button data-t="current" class="on">Current rules</button>
+    <button data-t="rules">Rule history</button>
     <button data-t="scoring">Scoring</button>
     <button data-t="setup">League setup</button>
   </nav>
-  <section id="rules"></section>
+  <section id="current"></section>
+  <section id="rules" hidden></section>
   <section id="scoring" hidden></section>
   <section id="setup" hidden></section>
 </main>
@@ -64,6 +66,7 @@ const CONFIG = {
   leagueId: "1389416556617801728",
   api: "https://api.sleeper.app/v1",
   rulesUrl: "data/rules.json",
+  currentUrl: "data/current_rules.json",
   snapshotUrl: "data/sleeper_snapshot.json"
 };
 const CATS = {SC:"Scoring",RO:"Roster & lineup",IR:"IR & injuries",TR:"Waivers, FAB & trades",PL:"Playoffs & standings",SA:"Sacko",DR:"Draft & auction",MN:"Money",GV:"Governance & conduct",FUN:"Shotgun & fun"};
@@ -75,7 +78,7 @@ const getJSON = u => fetch(u).then(r=>{if(!r.ok)throw new Error(u+" "+r.status);
 /* ---- tabs ---- */
 document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));
-  ["rules","scoring","setup"].forEach(id=>$("#"+id).hidden = id!==b.dataset.t);
+  ["current","rules","scoring","setup"].forEach(id=>$("#"+id).hidden = id!==b.dataset.t);
 });
 
 /* ---- rulebook ---- */
@@ -112,6 +115,30 @@ function renderRules(rules){
   };
   ["fq","fc","fs","fy","ff","ft"].forEach(id=>$("#"+id).addEventListener(id==="fq"?"input":"change",apply));
   apply();
+}
+
+/* ---- current rules ---- */
+function renderCurrent(cur){
+  const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
+  const cats=Object.entries(CATS).filter(([k])=>cur.some(r=>r.category===k));
+  $("#current").innerHTML=`<div class="status">The rules as written on the league site. "Since" is when the suggestions sheet shows it was instituted; rules without a year pre-date the sheet or aren't on it.</div>
+  <div class="filters">
+   <label>Search<input type="search" id="cq"></label>
+   <label>Type of rule<select id="cc"><option value="">All types</option>${cats.map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join("")}</select></label>
+   <label>Instituted<select id="cy"><option value="">Any</option><option value="none">Not on sheet</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label></div>
+  <div class="count" id="ccnt"></div><div id="clist"></div>`;
+  const apply=()=>{
+    const q=$("#cq").value.toLowerCase(),c=$("#cc").value,y=$("#cy").value;
+    const m=cur.filter(r=>(!c||r.category===c)&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
+    $("#ccnt").textContent=`${m.length} of ${cur.length} rules`;
+    let out="",last=null;
+    m.forEach(r=>{
+      if(r.group!==last){out+=`<div class="yr">${esc(r.group||"General")}</div>`;last=r.group}
+      out+=`<div class="rule"><h3>${esc(r.rule)}</h3><div class="meta"><span class="tag cat">${esc(CATS[r.category])}</span>${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}</div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+    });
+    $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
+  };
+  ["cq","cc","cy"].forEach(id=>$("#"+id).addEventListener(id==="cq"?"input":"change",apply));apply();
 }
 
 /* ---- scoring (live from Sleeper) ---- */
@@ -188,9 +215,10 @@ function renderSetup(L){
 
 /* ---- boot ---- */
 Promise.all([
+  getJSON(CONFIG.currentUrl),
   getJSON(CONFIG.rulesUrl),
   getJSON(`${CONFIG.api}/league/${CONFIG.leagueId}`).then(d=>[d,true]).catch(()=>getJSON(CONFIG.snapshotUrl).then(d=>[d,false]))
-]).then(([rules,[L,live]])=>{renderRules(rules);renderScoring(L,live);renderSetup(L)})
+]).then(([cur,rules,[L,live]])=>{renderCurrent(cur);renderRules(rules);renderScoring(L,live);renderSetup(L)})
  .catch(e=>{$("#rules").innerHTML=`<div class="callout">Failed to load: ${esc(e.message)}. Serve over http (e.g. <code>python3 -m http.server</code>), not file://.</div>`});
 </script>
 </body>
