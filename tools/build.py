@@ -12,10 +12,40 @@ def lines(name):
 def dump(obj, name):
     json.dump(obj, open(os.path.join(root, 'data', name), 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
 
+import re
+# Logical progression inside each section: (subsection label, regex on the rule text); first match in this order wins, last entry is the catch-all.
+SUBS = {
+ 'SC': [('Receiving & first downs', r'ppr|first down'), ('Quarterback & turnovers', r'\bqb\b|fumble -0'), ('Kicking', r'kicker|extra point|\bxp'),
+        ('Defense & special teams', r'4th down|defensive scoring|3-and-out|defense returning|tackle for loss|forced fumble|offense playing d'), ('Return yards', r'return')],
+ 'RO': [('Lineup slots', r'12-person|superflex|flex|te eligible|wr spot'), ('Bench & roster limits', r'bench|roster cap|cap\b'), ('Valid lineups', r'')],
+ 'IR': [('IR slots & eligibility', r'\bir\b|doubtful'), ('Injury replacement', r'')],
+ 'TR': [('Waivers, FAAB & transactions', r'waiver|faab|\bfab|free agent|no transactions'), ('Trades', r'')],
+ 'PL': [('Schedule', r'schedule'), ('Standings & tiebreakers', r'rumble|tiebreak|standings'), ('Playoff format & seeding', r'')],
+ 'SA': [('Bracket & qualification', r'toilet|outright|bracket|range'), ('Punishment', r'')],
+ 'DR': [('Auction & draft', r'')],
+ 'MN': [('Buy-in', r'buy-in'), ('Payouts', r'')],
+ 'GV': [('Platform & agreement', r'sleeper|abide'), ('Rule changes', r'(?!.*tanking)'), ('Conduct & fair play', r'')],
+ 'FUN': [('Shotgun', r'')],
+}
+CAT_ORDER = ['SC', 'RO', 'IR', 'TR', 'PL', 'SA', 'DR', 'MN', 'GV', 'FUN']
+def classify(cat, text):
+    subs = SUBS[cat]
+    t = text.lower()
+    if cat == 'GV':   # conduct only for tanking/collusion; everything else is rule-change process
+        if re.search(r'sleeper|abide', t): return 0, subs[0][0]
+        if re.search(r'tanking|collusion', t): return 2, subs[2][0]
+        return 1, subs[1][0]
+    for i, (label, rx) in enumerate(subs):
+        if rx == '' or re.search(rx, t): return i, label
+    return len(subs) - 1, subs[-1][0]
+
 rules = []
 for l in lines('rules.txt'):
     y, c, s, t, n, im, v, no, flag, since = l.split('|')
     rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no, flag=flag, since=int(since) if since else None))
+for r in rules:
+    i, r['sub'] = classify(r['category'], r['title'])
+    r['ord'] = CAT_ORDER.index(r['category']) * 100 + i
 dump(rules, 'rules.json')
 
 cur = []
@@ -28,6 +58,8 @@ for r in sorted(rules, key=lambda r: r['year']):
         cur.append(dict(id=len(cur)+1, category=r['category'], year=r['since'] or r['year'], group='', rule=r['title'], notes=r['notes'], source='history'))
 for i, r in enumerate(cur):
     r['id'] = i + 1
+    j, r['sub'] = classify(r['category'], r['rule'])
+    r['ord'] = CAT_ORDER.index(r['category']) * 100 + j
 dump(cur, 'current_rules.json')
 print(len(rules), 'history entries,', len(cur), 'current rules')
 

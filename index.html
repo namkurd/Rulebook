@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DTF Club Rulebook</title>
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#1b1f27;--mute:#6a7383;--line:#e2e5eb;--accent:#2457d6;--hi:#fff4d6;--hi-ink:#7a5200;
---pass:#1f8a4c;--fail:#b4382f;--pend:#b7791f;--tab:#7b5cc4}
-@media(prefers-color-scheme:dark){:root{--bg:#12151b;--card:#1b2029;--ink:#e8ebf1;--mute:#98a1b3;--line:#2b3240;--accent:#7fa2ff;--hi:#3a2f0f;--hi-ink:#ffd27a;--pass:#4cc486;--fail:#ef7b72;--pend:#e3b25a;--tab:#b39cf0}}
+:root{--bg:#0f1115;--card:#171a21;--ink:#e8eaf0;--mute:#9aa1b0;--line:#262b36;--accent:#ff8a3d;--accent2:#4d9fff;--hi:#3a2f0f;--hi-ink:#ffd27a;
+--pass:#35c26b;--fail:#e5484d;--pend:#eab308;
+--c-SC:#ff8a3d;--c-RO:#4d9fff;--c-IR:#e5484d;--c-TR:#14b8a6;--c-PL:#a855f7;--c-SA:#eab308;--c-DR:#35c26b;--c-MN:#d6399e;--c-GV:#9aa1b0;--c-FUN:#22d3ee}
+@media(prefers-color-scheme:light){:root{--bg:#f5f6f9;--card:#fff;--ink:#1a1d24;--mute:#666e7e;--line:#e2e5ec;--accent:#e26a1f;--accent2:#2f6fd6;--hi:#fff4d6;--hi-ink:#7a5200;
+--pass:#1f9d52;--fail:#d43b40;--pend:#a16207;
+--c-SC:#e26a1f;--c-RO:#2f6fd6;--c-IR:#d43b40;--c-TR:#0d9488;--c-PL:#9333ea;--c-SA:#a16207;--c-DR:#1f9d52;--c-MN:#c23b8a;--c-GV:#666e7e;--c-FUN:#0891b2}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 header{padding:20px 16px 8px;max-width:1000px;margin:auto}
@@ -15,19 +18,24 @@ h1{margin:0;font-size:24px}.sub{color:var(--mute);font-size:13px}
 main{max-width:1000px;margin:auto;padding:0 16px 48px}
 nav{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
 nav button,.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:999px;cursor:pointer;font:inherit}
-nav button.on,.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+nav button.on,.chip.on{background:var(--accent);border-color:var(--accent);color:#0f1115;font-weight:600}
+h1{border-left:5px solid var(--accent);padding-left:10px}
 .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:10px}
 .filters label{font-size:12px;color:var(--mute);display:flex;flex-direction:column;gap:3px}
 select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;width:100%}
 .count{color:var(--mute);font-size:13px;margin:6px 0 10px}
-.yr{margin:18px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--mute);text-transform:uppercase}
-.rule{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:8px}
+.yr{margin:22px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--accent);text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:4px}
+.rule{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c,var(--line));border-radius:10px;padding:11px 13px;margin-bottom:8px}
+.sect{display:flex;align-items:center;gap:8px;margin:24px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.sect:before{content:'';width:10px;height:10px;border-radius:3px;background:var(--c)}
+.sect:after{content:'';flex:1;height:1px;background:color-mix(in srgb,var(--c) 40%,transparent)}
+.subh{margin:12px 0 5px 2px;font-size:12px;color:var(--mute);font-weight:600}
 .rule h3{margin:0 0 5px;font-size:15px;font-weight:600}
 .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}
 .tag{padding:1px 8px;border-radius:999px;border:1px solid var(--line);font-size:11px;font-weight:600}
 .s-PASS{color:var(--pass);border-color:var(--pass)}.s-FAIL{color:var(--fail);border-color:var(--fail)}
 .s-PENDING,.s-TABLED,.s-EXPLORE,.s-WITHDRAWN{color:var(--pend);border-color:var(--pend)}
-.cat{color:var(--tab);border-color:var(--tab)}
+.cat{color:var(--c);border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 12%,transparent)}
 .note{margin-top:5px;font-size:13px;color:var(--mute)}
 table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:16px}
 th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
@@ -104,11 +112,11 @@ function renderRules(rules){
       &&(!F.q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(F.q)));
     $("#cnt").textContent=`${m.length} of ${rules.length} entries`;
     let out="",last=null;
-    m.sort((a,b)=>b.year-a.year||a.id-b.id).forEach(r=>{
+    m.sort((a,b)=>b.year-a.year||a.ord-b.ord||a.id-b.id).forEach(r=>{
       if(r.year!==last){out+=`<div class="yr">${r.year}${r.year===2026?" suggestions (open)":""}</div>`;last=r.year}
-      out+=`<div class="rule"><h3>${esc(r.title)}</h3><div class="meta">
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.title)}</h3><div class="meta">
         <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>${r.flag==="sup"?'<span class="tag s-FAIL">Superseded</span>':r.status==="PASS"&&r.flag==="once"?'<span class="tag">One-time</span>':r.status==="PASS"?'<span class="tag s-PASS">In force</span>':""}
-        <span class="tag cat">${esc(CATS[r.category])}</span>
+        <span class="tag cat" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</span>
         ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}</div>
         ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
     });
@@ -132,12 +140,13 @@ function renderCurrent(cur){
     const q=$("#cq").value.toLowerCase(),c=$("#cc").value,y=$("#cy").value;
     const order=Object.keys(CATS);
     const m=cur.filter(r=>(!c||r.category===c)&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
-    m.sort((a,b)=>order.indexOf(a.category)-order.indexOf(b.category)||(a.source==="site"?0:1)-(b.source==="site"?0:1)||(a.year||0)-(b.year||0)||a.id-b.id);
+    m.sort((a,b)=>a.ord-b.ord||(a.source==="site"?0:1)-(b.source==="site"?0:1)||(a.source==="site"?0:(a.year||0)-(b.year||0))||a.id-b.id);
     $("#ccnt").textContent=`${m.length} of ${cur.length} rules in force`;
-    let out="",last=null;
+    let out="",last=null,lastSub=null;
     m.forEach(r=>{
-      if(r.category!==last){out+=`<div class="yr">${esc(CATS[r.category])}</div>`;last=r.category}
-      out+=`<div class="rule"><h3>${esc(r.rule)}</h3><div class="meta">${r.group?`<span class="tag cat">${esc(r.group)}</span>`:""}${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${r.source==="site"?"league site":"suggestions sheet"}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+      if(r.category!==last){out+=`<div class="sect" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</div>`;last=r.category;lastSub=null}
+      if(r.sub!==lastSub){out+=`<div class="subh">${esc(r.sub)}</div>`;lastSub=r.sub}
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.rule)}</h3><div class="meta">${r.group?`<span class="tag cat" style="--c:var(--c-${r.category})">${esc(r.group)}</span>`:""}${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${r.source==="site"?"league site":"suggestions sheet"}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };

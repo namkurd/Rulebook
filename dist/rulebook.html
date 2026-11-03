@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DTF Club Rulebook</title>
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#1b1f27;--mute:#6a7383;--line:#e2e5eb;--accent:#2457d6;--hi:#fff4d6;--hi-ink:#7a5200;
---pass:#1f8a4c;--fail:#b4382f;--pend:#b7791f;--tab:#7b5cc4}
-@media(prefers-color-scheme:dark){:root{--bg:#12151b;--card:#1b2029;--ink:#e8ebf1;--mute:#98a1b3;--line:#2b3240;--accent:#7fa2ff;--hi:#3a2f0f;--hi-ink:#ffd27a;--pass:#4cc486;--fail:#ef7b72;--pend:#e3b25a;--tab:#b39cf0}}
+:root{--bg:#0f1115;--card:#171a21;--ink:#e8eaf0;--mute:#9aa1b0;--line:#262b36;--accent:#ff8a3d;--accent2:#4d9fff;--hi:#3a2f0f;--hi-ink:#ffd27a;
+--pass:#35c26b;--fail:#e5484d;--pend:#eab308;
+--c-SC:#ff8a3d;--c-RO:#4d9fff;--c-IR:#e5484d;--c-TR:#14b8a6;--c-PL:#a855f7;--c-SA:#eab308;--c-DR:#35c26b;--c-MN:#d6399e;--c-GV:#9aa1b0;--c-FUN:#22d3ee}
+@media(prefers-color-scheme:light){:root{--bg:#f5f6f9;--card:#fff;--ink:#1a1d24;--mute:#666e7e;--line:#e2e5ec;--accent:#e26a1f;--accent2:#2f6fd6;--hi:#fff4d6;--hi-ink:#7a5200;
+--pass:#1f9d52;--fail:#d43b40;--pend:#a16207;
+--c-SC:#e26a1f;--c-RO:#2f6fd6;--c-IR:#d43b40;--c-TR:#0d9488;--c-PL:#9333ea;--c-SA:#a16207;--c-DR:#1f9d52;--c-MN:#c23b8a;--c-GV:#666e7e;--c-FUN:#0891b2}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 header{padding:20px 16px 8px;max-width:1000px;margin:auto}
@@ -15,19 +18,24 @@ h1{margin:0;font-size:24px}.sub{color:var(--mute);font-size:13px}
 main{max-width:1000px;margin:auto;padding:0 16px 48px}
 nav{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
 nav button,.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:999px;cursor:pointer;font:inherit}
-nav button.on,.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+nav button.on,.chip.on{background:var(--accent);border-color:var(--accent);color:#0f1115;font-weight:600}
+h1{border-left:5px solid var(--accent);padding-left:10px}
 .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:10px}
 .filters label{font-size:12px;color:var(--mute);display:flex;flex-direction:column;gap:3px}
 select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;width:100%}
 .count{color:var(--mute);font-size:13px;margin:6px 0 10px}
-.yr{margin:18px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--mute);text-transform:uppercase}
-.rule{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:8px}
+.yr{margin:22px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--accent);text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:4px}
+.rule{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c,var(--line));border-radius:10px;padding:11px 13px;margin-bottom:8px}
+.sect{display:flex;align-items:center;gap:8px;margin:24px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.sect:before{content:'';width:10px;height:10px;border-radius:3px;background:var(--c)}
+.sect:after{content:'';flex:1;height:1px;background:color-mix(in srgb,var(--c) 40%,transparent)}
+.subh{margin:12px 0 5px 2px;font-size:12px;color:var(--mute);font-weight:600}
 .rule h3{margin:0 0 5px;font-size:15px;font-weight:600}
 .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}
 .tag{padding:1px 8px;border-radius:999px;border:1px solid var(--line);font-size:11px;font-weight:600}
 .s-PASS{color:var(--pass);border-color:var(--pass)}.s-FAIL{color:var(--fail);border-color:var(--fail)}
 .s-PENDING,.s-TABLED,.s-EXPLORE,.s-WITHDRAWN{color:var(--pend);border-color:var(--pend)}
-.cat{color:var(--tab);border-color:var(--tab)}
+.cat{color:var(--c);border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 12%,transparent)}
 .note{margin-top:5px;font-size:13px;color:var(--mute)}
 table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:16px}
 th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
@@ -74,7 +82,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "Failed in 2022",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 2,
@@ -87,7 +97,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 3,
@@ -100,7 +112,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 4,
@@ -113,7 +127,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 5,
@@ -126,7 +142,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Buy-in",
+  "ord": 700
  },
  {
   "id": 6,
@@ -139,7 +157,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 7,
@@ -152,7 +172,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 8,
@@ -165,7 +187,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 9,
@@ -178,7 +202,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 10,
@@ -191,7 +217,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 11,
@@ -204,7 +232,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Shotgun",
+  "ord": 900
  },
  {
   "id": 12,
@@ -217,7 +247,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 13,
@@ -230,7 +262,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 14,
@@ -243,7 +277,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 15,
@@ -256,7 +292,9 @@ const INLINE={rules:[
   "vote": "8",
   "notes": "Stephanie in; Kait pending interview",
   "flag": "dup",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 16,
@@ -269,7 +307,9 @@ const INLINE={rules:[
   "vote": "7",
   "notes": "Decide new name before season",
   "flag": "once",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 17,
@@ -282,7 +322,9 @@ const INLINE={rules:[
   "vote": "3",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 18,
@@ -295,7 +337,9 @@ const INLINE={rules:[
   "vote": "5",
   "notes": "Needs Ryan, Jake or Christian; Jake voted yes 7/15/26 on Slack. Sleeper currently shows 2 SUPER_FLEX slots",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 19,
@@ -308,7 +352,9 @@ const INLINE={rules:[
   "vote": "2",
   "notes": "Ideas: max 1 new per year, supermajority",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 20,
@@ -321,7 +367,9 @@ const INLINE={rules:[
   "vote": "8",
   "notes": "Explore further",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 21,
@@ -334,7 +382,9 @@ const INLINE={rules:[
   "vote": "8",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 22,
@@ -347,7 +397,9 @@ const INLINE={rules:[
   "vote": "6",
   "notes": "2 IR slots were being used outside the spirit of IR expansion",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 23,
@@ -360,7 +412,9 @@ const INLINE={rules:[
   "vote": "Withdrawn",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 24,
@@ -373,7 +427,9 @@ const INLINE={rules:[
   "vote": "Withdrawn",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 25,
@@ -386,7 +442,9 @@ const INLINE={rules:[
   "vote": "7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 26,
@@ -399,7 +457,9 @@ const INLINE={rules:[
   "vote": "3",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 27,
@@ -412,7 +472,9 @@ const INLINE={rules:[
   "vote": "8",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 28,
@@ -425,7 +487,9 @@ const INLINE={rules:[
   "vote": "3",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Bracket & qualification",
+  "ord": 500
  },
  {
   "id": 29,
@@ -438,7 +502,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "dup",
-  "since": null
+  "since": null,
+  "sub": "Bracket & qualification",
+  "ord": 500
  },
  {
   "id": 30,
@@ -451,7 +517,9 @@ const INLINE={rules:[
   "vote": "3",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 31,
@@ -464,7 +532,9 @@ const INLINE={rules:[
   "vote": "7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Shotgun",
+  "ord": 900
  },
  {
   "id": 32,
@@ -477,7 +547,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Injury still a net negative, but more drama rooting for the backup and limits the downside",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 33,
@@ -490,7 +562,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "Failed on exploration",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 34,
@@ -503,7 +577,9 @@ const INLINE={rules:[
   "vote": "2",
   "notes": "Not voted on due to Knicks blowing it",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 35,
@@ -516,7 +592,9 @@ const INLINE={rules:[
   "vote": "Tabled",
   "notes": "Eli proposal: your defense scales down opponents' offensive scores",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 36,
@@ -529,7 +607,9 @@ const INLINE={rules:[
   "vote": "2",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 37,
@@ -542,7 +622,9 @@ const INLINE={rules:[
   "vote": "7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 38,
@@ -555,7 +637,9 @@ const INLINE={rules:[
   "vote": "6",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 39,
@@ -568,7 +652,9 @@ const INLINE={rules:[
   "vote": "3",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 40,
@@ -581,7 +667,9 @@ const INLINE={rules:[
   "vote": "7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 41,
@@ -594,7 +682,9 @@ const INLINE={rules:[
   "vote": "Tabled",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 42,
@@ -607,7 +697,9 @@ const INLINE={rules:[
   "vote": "2",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 43,
@@ -620,7 +712,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 44,
@@ -633,7 +727,9 @@ const INLINE={rules:[
   "vote": "",
   "notes": "Led to the 2025 expansion",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 45,
@@ -646,7 +742,9 @@ const INLINE={rules:[
   "vote": "6",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Schedule",
+  "ord": 400
  },
  {
   "id": 46,
@@ -659,7 +757,9 @@ const INLINE={rules:[
   "vote": "6",
   "notes": "",
   "flag": "dup",
-  "since": null
+  "since": null,
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 47,
@@ -672,7 +772,9 @@ const INLINE={rules:[
   "vote": "6",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 48,
@@ -685,7 +787,9 @@ const INLINE={rules:[
   "vote": "6",
   "notes": "",
   "flag": "dup",
-  "since": null
+  "since": null,
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 49,
@@ -698,7 +802,9 @@ const INLINE={rules:[
   "vote": "7",
   "notes": "Later tightened (see 2025). Player KR/PR and D/ST INT/fumble returns are now 25 yd/pt (2025); blocked/missed FG returns remain 1 per 100 yd",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 50,
@@ -711,7 +817,9 @@ const INLINE={rules:[
   "vote": "7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 51,
@@ -724,7 +832,9 @@ const INLINE={rules:[
   "vote": "6",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Shotgun",
+  "ord": 900
  },
  {
   "id": 52,
@@ -737,7 +847,9 @@ const INLINE={rules:[
   "vote": "0",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 53,
@@ -750,7 +862,9 @@ const INLINE={rules:[
   "vote": "0",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 54,
@@ -763,7 +877,9 @@ const INLINE={rules:[
   "vote": "4",
   "notes": "Not Sleeperable; passed in 2025 as manual rule",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 55,
@@ -776,7 +892,9 @@ const INLINE={rules:[
   "vote": "4",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 56,
@@ -789,7 +907,9 @@ const INLINE={rules:[
   "vote": "0",
   "notes": "Not Sleeperable",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 57,
@@ -802,7 +922,9 @@ const INLINE={rules:[
   "vote": "0",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Shotgun",
+  "ord": 900
  },
  {
   "id": 58,
@@ -815,7 +937,9 @@ const INLINE={rules:[
   "vote": "1",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 59,
@@ -828,7 +952,9 @@ const INLINE={rules:[
   "vote": "1",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 60,
@@ -841,7 +967,9 @@ const INLINE={rules:[
   "vote": "1",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Bracket & qualification",
+  "ord": 500
  },
  {
   "id": 61,
@@ -854,7 +982,9 @@ const INLINE={rules:[
   "vote": "3-6",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 62,
@@ -867,7 +997,9 @@ const INLINE={rules:[
   "vote": "6-3",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 63,
@@ -880,7 +1012,9 @@ const INLINE={rules:[
   "vote": "2-7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 64,
@@ -893,7 +1027,9 @@ const INLINE={rules:[
   "vote": "2-7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 65,
@@ -906,7 +1042,9 @@ const INLINE={rules:[
   "vote": "4-5",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Schedule",
+  "ord": 400
  },
  {
   "id": 66,
@@ -919,7 +1057,9 @@ const INLINE={rules:[
   "vote": "2-7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 67,
@@ -932,7 +1072,9 @@ const INLINE={rules:[
   "vote": "4-5",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 68,
@@ -945,7 +1087,9 @@ const INLINE={rules:[
   "vote": "4-5",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 69,
@@ -958,7 +1102,9 @@ const INLINE={rules:[
   "vote": "5-4",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 70,
@@ -971,7 +1117,9 @@ const INLINE={rules:[
   "vote": "5-4",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 71,
@@ -984,7 +1132,9 @@ const INLINE={rules:[
   "vote": "5-4",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 72,
@@ -997,7 +1147,9 @@ const INLINE={rules:[
   "vote": "4-5",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 73,
@@ -1010,7 +1162,9 @@ const INLINE={rules:[
   "vote": "2-7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 74,
@@ -1023,7 +1177,9 @@ const INLINE={rules:[
   "vote": "5-4",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 75,
@@ -1036,7 +1192,9 @@ const INLINE={rules:[
   "vote": "7-2",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Kicking",
+  "ord": 2
  },
  {
   "id": 76,
@@ -1049,7 +1207,9 @@ const INLINE={rules:[
   "vote": "5-4",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 77,
@@ -1062,7 +1222,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 78,
@@ -1075,7 +1237,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Ran for 2 seasons (15-week regular season, 5 teams, 3-team final). Replaced by 14 weeks / 6 teams with the 12-team expansion (2025). Bonus options discussed: homefield bonus, best ball, extra flex",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 79,
@@ -1088,7 +1252,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Replaced by 2024 auto-process of all trades",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 80,
@@ -1101,7 +1267,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Replaced by 2024 auto-process of all trades",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 81,
@@ -1114,7 +1282,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 82,
@@ -1127,7 +1297,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 83,
@@ -1140,7 +1312,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Steven vs Joe proposal decided by RCV. Sacko bracket can make moves until safe",
   "flag": "dup",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 84,
@@ -1153,7 +1327,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Soft deadline at the Super Bowl, 20% penalty, then final deadline",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 85,
@@ -1166,7 +1342,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Replaced: Sacko now mirrors playoff seeding among the 6 lowest teams",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 86,
@@ -1179,7 +1357,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 87,
@@ -1192,7 +1372,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 88,
@@ -1205,7 +1387,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 89,
@@ -1218,7 +1402,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 90,
@@ -1231,7 +1417,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Tanking = intentionally setting up a team to lose to gain a later advantage",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Conduct & fair play",
+  "ord": 802
  },
  {
   "id": 91,
@@ -1244,7 +1432,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 92,
@@ -1257,7 +1447,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Waivers run at 12pm Eastern (Sleeper stores hour 9)",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 93,
@@ -1270,7 +1462,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 94,
@@ -1283,7 +1477,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 95,
@@ -1296,7 +1492,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 96,
@@ -1309,7 +1507,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 97,
@@ -1322,7 +1522,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 98,
@@ -1335,7 +1537,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "6pt TD and QB INT -4 discussed but not adopted",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 99,
@@ -1348,7 +1552,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 100,
@@ -1361,7 +1567,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 101,
@@ -1374,7 +1582,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 102,
@@ -1387,7 +1597,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 103,
@@ -1400,7 +1612,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "Passed in 2023",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 104,
@@ -1413,7 +1627,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 105,
@@ -1426,7 +1642,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "Passed in 2023",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 106,
@@ -1439,7 +1657,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "once",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 107,
@@ -1452,7 +1672,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 108,
@@ -1465,7 +1687,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 109,
@@ -1478,7 +1702,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 110,
@@ -1491,7 +1717,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Replaced by the 2022 Superflex (2nd flex); Sleeper now has 2 WR/TE flex slots",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 111,
@@ -1504,7 +1732,9 @@ const INLINE={rules:[
   "vote": "9-0",
   "notes": "Voted 11/24/2020",
   "flag": "dup",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 112,
@@ -1517,7 +1747,9 @@ const INLINE={rules:[
   "vote": "-",
   "notes": "",
   "flag": "once",
-  "since": null
+  "since": null,
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 113,
@@ -1530,7 +1762,9 @@ const INLINE={rules:[
   "vote": "9-0",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Platform & agreement",
+  "ord": 800
  },
  {
   "id": 114,
@@ -1543,7 +1777,9 @@ const INLINE={rules:[
   "vote": "6-4",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 115,
@@ -1556,7 +1792,9 @@ const INLINE={rules:[
   "vote": "4-6",
   "notes": "Passed in 2022",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 116,
@@ -1569,7 +1807,9 @@ const INLINE={rules:[
   "vote": "3-7",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 117,
@@ -1582,7 +1822,9 @@ const INLINE={rules:[
   "vote": "4-6",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 118,
@@ -1595,7 +1837,9 @@ const INLINE={rules:[
   "vote": "7-3",
   "notes": "Became full PPR in 2021. Became full PPR in 2021",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 119,
@@ -1608,7 +1852,9 @@ const INLINE={rules:[
   "vote": "9-1",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 120,
@@ -1621,7 +1867,9 @@ const INLINE={rules:[
   "vote": "7-3",
   "notes": "Reduced to -0.25 in 2023. Reduced to -0.25 in 2023",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 121,
@@ -1634,7 +1882,9 @@ const INLINE={rules:[
   "vote": "3-6",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 122,
@@ -1647,7 +1897,9 @@ const INLINE={rules:[
   "vote": "4-6",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 123,
@@ -1660,7 +1912,9 @@ const INLINE={rules:[
   "vote": "Grandfathered",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Kicking",
+  "ord": 2
  },
  {
   "id": 124,
@@ -1673,7 +1927,9 @@ const INLINE={rules:[
   "vote": "2-8",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 125,
@@ -1686,7 +1942,9 @@ const INLINE={rules:[
   "vote": "8-1",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 126,
@@ -1699,7 +1957,9 @@ const INLINE={rules:[
   "vote": "6-4",
   "notes": "Replaced by the 6-team Sacko tournament",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Bracket & qualification",
+  "ord": 500
  },
  {
   "id": 127,
@@ -1712,7 +1972,9 @@ const INLINE={rules:[
   "vote": "6-3",
   "notes": "Proposed 2020; took effect with the 12-team expansion (2025): 14-week regular season, 6 playoff teams, wildcard weekend. Sleeper confirms (playoffs start Week 15)",
   "flag": "",
-  "since": 2025
+  "since": 2025,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 128,
@@ -1725,7 +1987,9 @@ const INLINE={rules:[
   "vote": "6-3",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 129,
@@ -1738,7 +2002,9 @@ const INLINE={rules:[
   "vote": "6-1",
   "notes": "The 2020-era format (15 weeks, 4 teams). Replaced by the 5-team / 3-team final, then by 14 weeks / 6 teams with 12 teams",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 130,
@@ -1751,7 +2017,9 @@ const INLINE={rules:[
   "vote": "8-1",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 131,
@@ -1764,7 +2032,9 @@ const INLINE={rules:[
   "vote": "Yes (8/19)",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Buy-in",
+  "ord": 700
  },
  {
   "id": 132,
@@ -1777,7 +2047,9 @@ const INLINE={rules:[
   "vote": "Yes (8/25)",
   "notes": "Replaced by 2022 scaled defensive scoring",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 133,
@@ -1790,7 +2062,9 @@ const INLINE={rules:[
   "vote": "No (8/26)",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 134,
@@ -1803,7 +2077,9 @@ const INLINE={rules:[
   "vote": "5-4 for",
   "notes": "Tommy voted No",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 135,
@@ -1816,7 +2092,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 136,
@@ -1829,7 +2107,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Changed to -0.33 in 2023. Now -0.33 (2023)",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Kicking",
+  "ord": 2
  },
  {
   "id": 137,
@@ -1842,7 +2122,9 @@ const INLINE={rules:[
   "vote": "5-4",
   "notes": "Probably replaced by the 2020 Royal Rumble tiebreaker; confirm",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 138,
@@ -1855,7 +2137,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Sleeper now: D/ST forced fumble 1, fumble recovery 1; player forced fumble 0.5, player fumble recovery 1.5",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 139,
@@ -1868,7 +2152,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "dup",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 140,
@@ -1881,7 +2167,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "Replaced by the 2022 Superflex (2nd flex); bench since cut",
   "flag": "sup",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 141,
@@ -1894,7 +2182,9 @@ const INLINE={rules:[
   "vote": "Pass",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 142,
@@ -1907,7 +2197,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 143,
@@ -1920,7 +2212,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "Sheet: \"??? (thought this passed)\"",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 144,
@@ -1933,7 +2227,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "Moved to Sleeper in 2020",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 145,
@@ -1946,7 +2242,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 146,
@@ -1959,7 +2257,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "Passed in 2020",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 147,
@@ -1972,7 +2272,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 148,
@@ -1985,7 +2287,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "Passed in 2025",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 149,
@@ -1998,7 +2302,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 150,
@@ -2011,7 +2317,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 151,
@@ -2024,7 +2332,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 152,
@@ -2037,7 +2347,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 153,
@@ -2050,7 +2362,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "Passed in 2024",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 154,
@@ -2063,7 +2377,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 155,
@@ -2076,7 +2392,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 156,
@@ -2089,7 +2407,9 @@ const INLINE={rules:[
   "vote": "Fail",
   "notes": "",
   "flag": "",
-  "since": null
+  "since": null,
+  "sub": "Return yards",
+  "ord": 4
  }
 ],current:[
  {
@@ -2099,7 +2419,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Members agree to abide by these rules, which supplement the rules enforced by Sleeper.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Platform & agreement",
+  "ord": 800
  },
  {
   "id": 2,
@@ -2108,7 +2430,9 @@ const INLINE={rules:[
   "group": "Format",
   "rule": "12-person Super Flex league.",
   "notes": "12 teams passed 2025; Superflex first passed 2022. Sleeper shows 2 SUPER_FLEX slots.",
-  "source": "site"
+  "source": "site",
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 3,
@@ -2117,7 +2441,9 @@ const INLINE={rules:[
   "group": "Format",
   "rule": "Scoring is Tiered PPR with 0.5 PPFD.",
   "notes": "0.5 first downs passed 2024. Sleeper scores a flat 1.0 per reception via yardage tiers (0+ yds = 1), i.e. full PPR since 2021.",
-  "source": "site"
+  "source": "site",
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 4,
@@ -2126,7 +2452,9 @@ const INLINE={rules:[
   "group": "Payout structure",
   "rule": "Champion: 60%.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 5,
@@ -2135,7 +2463,9 @@ const INLINE={rules:[
   "group": "Payout structure",
   "rule": "Runner-up: 20%.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 6,
@@ -2144,7 +2474,9 @@ const INLINE={rules:[
   "group": "Payout structure",
   "rule": "3rd place game winner: 10%.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 7,
@@ -2153,7 +2485,9 @@ const INLINE={rules:[
   "group": "Payout structure",
   "rule": "First place regular season: 10%.",
   "notes": "Buy-in raised to $120 in 2019.",
-  "source": "site"
+  "source": "site",
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 8,
@@ -2162,7 +2496,9 @@ const INLINE={rules:[
   "group": "Valid rosters",
   "rule": "Each manager must start a minimum of 5 players per week.",
   "notes": "Not on the suggestions sheet.",
-  "source": "site"
+  "source": "site",
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 9,
@@ -2171,7 +2507,9 @@ const INLINE={rules:[
   "group": "Valid rosters",
   "rule": "Managers may not start a player grandfathered into a position he is no longer eligible for.",
   "notes": "2020 vote also lets the commissioner edit such lineups.",
-  "source": "site"
+  "source": "site",
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 10,
@@ -2180,7 +2518,9 @@ const INLINE={rules:[
   "group": "Valid rosters",
   "rule": "No transactions once a manager is eliminated from Playoff/Sacko contention.",
   "notes": "Passed 2022 (3rd place counts as a league award).",
-  "source": "site"
+  "source": "site",
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 11,
@@ -2189,7 +2529,9 @@ const INLINE={rules:[
   "group": "Trading",
   "rule": "All trades auto-process.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 12,
@@ -2198,7 +2540,9 @@ const INLINE={rules:[
   "group": "Trading",
   "rule": "Managers may not veto trades they are a participant in.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 13,
@@ -2207,7 +2551,9 @@ const INLINE={rules:[
   "group": "Trading",
   "rule": "A majority vote of the remaining managers is required to veto a trade.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 14,
@@ -2216,7 +2562,9 @@ const INLINE={rules:[
   "group": "Trading",
   "rule": "The league does not vote on or enforce trades with multiple transactions; each trade proposed in Sleeper is voted on separately.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 15,
@@ -2225,7 +2573,9 @@ const INLINE={rules:[
   "group": "Playoff seeding",
   "rule": "1st and 2nd seeds get a bye.",
   "notes": "Format history: 15 weeks / 4 teams (2020), then 5 teams with a 3-team final for 2 seasons, now 14 weeks / 6 teams with 12 teams (2025). Sleeper: 6 playoff teams, start Week 15.",
-  "source": "site"
+  "source": "site",
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 16,
@@ -2234,7 +2584,9 @@ const INLINE={rules:[
   "group": "Playoff seeding",
   "rule": "The 3rd seed picks between the 5th and 6th seeds as the first-round opponent.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 17,
@@ -2243,7 +2595,9 @@ const INLINE={rules:[
   "group": "Playoff seeding",
   "rule": "The pick must be made by Tuesday night before Week 16 so teams can submit waiver claims.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 18,
@@ -2252,7 +2606,9 @@ const INLINE={rules:[
   "group": "Sacko",
   "rule": "Sacko is a Toilet Bowl tournament among the 6 lowest teams, mirroring the playoff seeding.",
   "notes": "Sacko bracket history: 2020, 2022, 2025.",
-  "source": "site"
+  "source": "site",
+  "sub": "Bracket & qualification",
+  "ord": 500
  },
  {
   "id": 19,
@@ -2261,7 +2617,9 @@ const INLINE={rules:[
   "group": "Sacko",
   "rule": "Unless Sacko is decided outright by a 31+ Rumble deficit to 9th place at the end of the regular season.",
   "notes": "Threshold was 36 before the 2025 change; the 2022 proposal to cut 37 to 29 failed.",
-  "source": "site"
+  "source": "site",
+  "sub": "Bracket & qualification",
+  "ord": 500
  },
  {
   "id": 20,
@@ -2270,7 +2628,9 @@ const INLINE={rules:[
   "group": "League rule changes",
   "rule": "Off-season rule changes pass by simple majority.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 21,
@@ -2279,7 +2639,9 @@ const INLINE={rules:[
   "group": "League rule changes",
   "rule": "In-season rule changes need a 10 or 11 of 12 \"mega-majority\".",
   "notes": "Originally 9/10 support in 2019.",
-  "source": "site"
+  "source": "site",
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 22,
@@ -2288,7 +2650,9 @@ const INLINE={rules:[
   "group": "League rule changes",
   "rule": "The new season officially begins after the league dinner.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 23,
@@ -2297,7 +2661,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Raise buy-in to $120",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Buy-in",
+  "ord": 700
  },
  {
   "id": 24,
@@ -2306,7 +2672,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Announce all approved changes on draft day",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 25,
@@ -2315,7 +2683,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Forced fumble worth 1 point, fumble recovery worth 1 point",
   "notes": "Sleeper now: D/ST forced fumble 1, fumble recovery 1; player forced fumble 0.5, player fumble recovery 1.5",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 26,
@@ -2324,7 +2694,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "WR/TE/RB roster cap increase by 1",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 27,
@@ -2333,7 +2705,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Move to Sleeper",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Platform & agreement",
+  "ord": 800
  },
  {
   "id": 28,
@@ -2342,7 +2716,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Tradeable FAB",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 29,
@@ -2351,7 +2727,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "QB pick-6 additional -2 points",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 30,
@@ -2360,7 +2738,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Decimal scoring for kickers (2018 DTF, base of 3)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Kicking",
+  "ord": 2
  },
  {
   "id": 31,
@@ -2369,7 +2749,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Royal Rumble as tiebreaker",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 32,
@@ -2378,7 +2760,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Add Lamp and Eli: 14 week RS, 6 teams make playoffs, wildcard weekend",
   "notes": "Proposed 2020; took effect with the 12-team expansion (2025): 14-week regular season, 6 playoff teams, wildcard weekend. Sleeper confirms (playoffs start Week 15)",
-  "source": "history"
+  "source": "history",
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 33,
@@ -2387,7 +2771,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Cut 2 bench spots",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 34,
@@ -2396,7 +2782,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Allow Doubtful players into IR (Sleeper allows)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 35,
@@ -2405,7 +2793,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Full PPR for 0+ yards",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 36,
@@ -2414,7 +2804,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Fractional Royal Rumble official standings (fractional win = 0.1, giving H2H more weight)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 37,
@@ -2423,7 +2815,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Waffle House style Sacko punishment",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 38,
@@ -2432,7 +2826,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Sacko punishment deadline: lose membership if punishment not completed before fantasy draft",
   "notes": "Soft deadline at the Super Bowl, 20% penalty, then final deadline",
-  "source": "history"
+  "source": "history",
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 39,
@@ -2441,7 +2837,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Better anti-tanking definition and no collusion",
   "notes": "Tanking = intentionally setting up a team to lose to gain a later advantage",
-  "source": "history"
+  "source": "history",
+  "sub": "Conduct & fair play",
+  "ord": 802
  },
  {
   "id": 40,
@@ -2450,7 +2848,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Waivers move to 12pm; free agents open after Saturday 12pm",
   "notes": "Waivers run at 12pm Eastern (Sleeper stores hour 9)",
-  "source": "history"
+  "source": "history",
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 41,
@@ -2459,7 +2859,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Superflex replaces the 2nd flex (no other changes)",
   "notes": "6pt TD and QB INT -4 discussed but not adopted",
-  "source": "history"
+  "source": "history",
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 42,
@@ -2468,7 +2870,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "1 point for a 4th down stop",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 43,
@@ -2477,7 +2881,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Defensive scoring scaled per yard/point instead of cutoffs",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 44,
@@ -2486,7 +2892,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "2 IR spots",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 45,
@@ -2495,7 +2903,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Reduce QB sack to -0.25",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 46,
@@ -2504,7 +2914,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Points for defensive 3-and-out",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 47,
@@ -2513,7 +2925,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Fumble -0.5, lost fumble -1.5",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 48,
@@ -2522,7 +2936,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Defense returning a 2pt conversion worth 4 points",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 49,
@@ -2531,7 +2947,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Missed XP = -0.33",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Kicking",
+  "ord": 2
  },
  {
   "id": 50,
@@ -2540,7 +2958,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Team kicker: if kicker is injured you get combined points from starter and replacements",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 51,
@@ -2549,7 +2969,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Schedule based on last year's results (playoff rematch week, etc.)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Schedule",
+  "ord": 400
  },
  {
   "id": 52,
@@ -2558,7 +2980,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "TE eligible for WR spot (WR becomes WR/TE)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 53,
@@ -2567,7 +2991,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)",
   "notes": "Later tightened (see 2025). Player KR/PR and D/ST INT/fumble returns are now 25 yd/pt (2025); blocked/missed FG returns remain 1 per 100 yd",
-  "source": "history"
+  "source": "history",
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 54,
@@ -2576,7 +3002,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Offense playing D: 0.5 per tackle, 1 per forced fumble",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 55,
@@ -2585,7 +3013,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Shotgun a beverage of your choice for a 0 or less from a non-DST",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Shotgun",
+  "ord": 900
  },
  {
   "id": 56,
@@ -2594,7 +3024,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Standard protocol for accidental/glitchy bids: shotgun for an accidental bid that is withdrawn",
   "notes": "Explore further",
-  "source": "history"
+  "source": "history",
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 57,
@@ -2603,7 +3035,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Get rid of drafting position minimums at auction",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 58,
@@ -2612,7 +3046,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Must own a player over a roster lock (weekend) before putting him on IR",
   "notes": "2 IR slots were being used outside the spirit of IR expansion",
-  "source": "history"
+  "source": "history",
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 59,
@@ -2621,7 +3057,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Remove a bench spot",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 60,
@@ -2630,7 +3068,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Ban holding a player who is active in a game in an IR slot; must drop that player or another player yet to play",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 61,
@@ -2639,7 +3079,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "Amend shotgun rule to exclude any player ruled OUT who didn't play a play in the 2nd half",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Shotgun",
+  "ord": 900
  },
  {
   "id": 62,
@@ -2648,7 +3090,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "QB injury rule: if QB1 is ruled out at any point, manager gets all QB points for that team (QB1 + QB2/QB3, not position players taking snaps)",
   "notes": "Injury still a net negative, but more drama rooting for the backup and limits the downside",
-  "source": "history"
+  "source": "history",
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 63,
@@ -2657,7 +3101,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "25 yards per point on KR/PR",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 64,
@@ -2666,7 +3112,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "25 yards per point on defensive returns",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 65,
@@ -2675,7 +3123,9 @@ const INLINE={rules:[
   "group": "",
   "rule": "0.2 points for tackle for loss",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  }
 ],snapshot:{"name":"DTF Club","status":"in_season","metadata":{"auto_continue":"on","keeper_deadline":"0","latest_league_winner_roster_id":"4","minis_enabled":"1"},"settings":{"position_limit_rb":9,"best_ball":0,"last_report":8,"waiver_budget":200,"disable_adds":0,"capacity_override":0,"waiver_bid_min":0,"position_limit_te":4,"taxi_deadline":0,"draft_rounds":3,"reserve_allow_na":0,"start_week":1,"playoff_seed_type":1,"playoff_teams":6,"veto_votes_needed":5,"position_limit_qb":3,"squads":1,"num_teams":12,"daily_waivers_hour":9,"playoff_type":1,"taxi_slots":0,"sub_start_time_eligibility":1,"last_scored_leg":8,"daily_waivers_days":1500,"sub_lock_if_starter_active":0,"playoff_week_start":15,"position_limit_k":3,"waiver_clear_days":1,"reserve_allow_doubtful":1,"commissioner_direct_invite":0,"veto_auto_poll":0,"reserve_allow_dnr":0,"taxi_allow_vets":0,"waiver_day_of_week":2,"position_limit_wr":9,"playoff_round_type":0,"reserve_allow_out":1,"reserve_allow_sus":0,"veto_show_votes":0,"trade_deadline":12,"taxi_years":0,"daily_waivers":1,"faab_suggestions":1,"position_limit_def":3,"disable_trades":0,"pick_trading":0,"type":0,"max_keepers":1,"waiver_type":2,"max_subs":3,"league_average_match":0,"trade_review_days":0,"bench_lock":1,"offseason_adds":0,"leg":8,"reserve_slots":2,"reserve_allow_cov":1,"daily_waivers_last_ran":3},"avatar":null,"company_id":null,"scoring_settings":{"sack":1.0,"fgm_40_49":0.0,"pass_int":-2.0,"pts_allow_0":4.62,"pass_2pt":2.0,"rec_0_4":1.0,"yds_allow_450_499":5.75,"blk_kick_ret_yd":0.01,"st_td":6.0,"rec_30_39":1.0,"fgm_yds_over_30":0.10000000149011612,"rec_td":6.0,"yds_allow_400_449":5.75,"rec_20_29":1.0,"fgm_30_39":0.0,"xpmiss":-0.33,"rush_td":6.0,"bonus_fd_wr":0.5,"pts_allow":-0.23,"def_4_and_stop":1.0,"fg_ret_yd":0.01,"yds_allow_550p":5.75,"yds_allow_350_399":5.75,"fgm":3.0,"rec_2pt":2.0,"rush_fd":0.0,"pass_int_td":-2.0,"int_ret_yd":0.04,"st_fum_rec":1.0,"fgmiss":-1.0,"ff":0.5,"rec":0.0,"yds_allow_200_299":5.75,"pts_allow_14_20":4.62,"def_2pt":4.0,"fgm_0_19":0.0,"int":2.0,"def_st_fum_rec":1.0,"fum_lost":-1.5,"pts_allow_1_6":4.62,"rec_fd":0.0,"kr_yd":0.04,"yds_allow":-0.02,"rec_5_9":1.0,"fgm_20_29":0.0,"yds_allow_500_549":5.75,"pts_allow_21_27":4.62,"xpm":1.0,"pass_sack":-0.25,"rec_40p":1.0,"def_3_and_out":0.5,"tkl_loss":0.2,"rush_2pt":2.0,"yds_allow_300_349":5.75,"fum_rec":1.5,"rec_10_19":1.0,"def_st_td":6.0,"fgm_50p":0.0,"def_td":6.0,"pass_fd":0.0,"rec_td_40p":0.0,"safe":2.0,"pass_yd":0.04,"blk_kick":2.0,"pass_td":4.0,"yds_allow_100_199":5.75,"bonus_fd_qb":0.2,"rush_yd":0.1,"yds_allow_0_100":5.75,"pr_yd":0.04,"fum":-0.5,"pts_allow_28_34":4.62,"pts_allow_35p":4.62,"fum_rec_td":6.0,"rec_yd":0.1,"bonus_fd_te":0.5,"bonus_fd_rb":0.5,"fum_ret_yd":0.04,"def_st_ff":1.0,"pass_inc":0.0,"pts_allow_7_13":4.62,"st_ff":1.0},"season":"2026","season_type":"regular","shard":764,"sport":"nfl","last_message_id":"1423385794088812544","last_author_avatar":null,"last_author_display_name":"sys","last_author_id":"166666666666666666","last_author_is_bot":true,"last_message_attachment":null,"last_message_text_map":null,"last_message_time":1793724127842,"last_pinned_message_id":null,"draft_id":"1389416556630405120","last_read_id":null,"league_id":"1389416556617801728","previous_league_id":"1256991725184876544","roster_positions":["RB","RB","TE","FLEX","REC_FLEX","REC_FLEX","SUPER_FLEX","SUPER_FLEX","K","DEF","BN","BN","BN","BN","BN","BN"],"bracket_id":null,"bracket_overrides_id":null,"group_id":null,"loser_bracket_id":null,"loser_bracket_overrides_id":null,"total_rosters":12}};
 const CONFIG = {
@@ -2720,11 +3170,11 @@ function renderRules(rules){
       &&(!F.q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(F.q)));
     $("#cnt").textContent=`${m.length} of ${rules.length} entries`;
     let out="",last=null;
-    m.sort((a,b)=>b.year-a.year||a.id-b.id).forEach(r=>{
+    m.sort((a,b)=>b.year-a.year||a.ord-b.ord||a.id-b.id).forEach(r=>{
       if(r.year!==last){out+=`<div class="yr">${r.year}${r.year===2026?" suggestions (open)":""}</div>`;last=r.year}
-      out+=`<div class="rule"><h3>${esc(r.title)}</h3><div class="meta">
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.title)}</h3><div class="meta">
         <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>${r.flag==="sup"?'<span class="tag s-FAIL">Superseded</span>':r.status==="PASS"&&r.flag==="once"?'<span class="tag">One-time</span>':r.status==="PASS"?'<span class="tag s-PASS">In force</span>':""}
-        <span class="tag cat">${esc(CATS[r.category])}</span>
+        <span class="tag cat" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</span>
         ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}</div>
         ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
     });
@@ -2748,12 +3198,13 @@ function renderCurrent(cur){
     const q=$("#cq").value.toLowerCase(),c=$("#cc").value,y=$("#cy").value;
     const order=Object.keys(CATS);
     const m=cur.filter(r=>(!c||r.category===c)&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
-    m.sort((a,b)=>order.indexOf(a.category)-order.indexOf(b.category)||(a.source==="site"?0:1)-(b.source==="site"?0:1)||(a.year||0)-(b.year||0)||a.id-b.id);
+    m.sort((a,b)=>a.ord-b.ord||(a.source==="site"?0:1)-(b.source==="site"?0:1)||(a.source==="site"?0:(a.year||0)-(b.year||0))||a.id-b.id);
     $("#ccnt").textContent=`${m.length} of ${cur.length} rules in force`;
-    let out="",last=null;
+    let out="",last=null,lastSub=null;
     m.forEach(r=>{
-      if(r.category!==last){out+=`<div class="yr">${esc(CATS[r.category])}</div>`;last=r.category}
-      out+=`<div class="rule"><h3>${esc(r.rule)}</h3><div class="meta">${r.group?`<span class="tag cat">${esc(r.group)}</span>`:""}${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${r.source==="site"?"league site":"suggestions sheet"}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+      if(r.category!==last){out+=`<div class="sect" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</div>`;last=r.category;lastSub=null}
+      if(r.sub!==lastSub){out+=`<div class="subh">${esc(r.sub)}</div>`;lastSub=r.sub}
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.rule)}</h3><div class="meta">${r.group?`<span class="tag cat" style="--c:var(--c-${r.category})">${esc(r.group)}</span>`:""}${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${r.source==="site"?"league site":"suggestions sheet"}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };

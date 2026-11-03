@@ -6,7 +6,9 @@
   "group": "",
   "rule": "Members agree to abide by these rules, which supplement the rules enforced by Sleeper.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Platform & agreement",
+  "ord": 800
  },
  {
   "id": 2,
@@ -15,7 +17,9 @@
   "group": "Format",
   "rule": "12-person Super Flex league.",
   "notes": "12 teams passed 2025; Superflex first passed 2022. Sleeper shows 2 SUPER_FLEX slots.",
-  "source": "site"
+  "source": "site",
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 3,
@@ -24,7 +28,9 @@
   "group": "Format",
   "rule": "Scoring is Tiered PPR with 0.5 PPFD.",
   "notes": "0.5 first downs passed 2024. Sleeper scores a flat 1.0 per reception via yardage tiers (0+ yds = 1), i.e. full PPR since 2021.",
-  "source": "site"
+  "source": "site",
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 4,
@@ -33,7 +39,9 @@
   "group": "Payout structure",
   "rule": "Champion: 60%.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 5,
@@ -42,7 +50,9 @@
   "group": "Payout structure",
   "rule": "Runner-up: 20%.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 6,
@@ -51,7 +61,9 @@
   "group": "Payout structure",
   "rule": "3rd place game winner: 10%.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 7,
@@ -60,7 +72,9 @@
   "group": "Payout structure",
   "rule": "First place regular season: 10%.",
   "notes": "Buy-in raised to $120 in 2019.",
-  "source": "site"
+  "source": "site",
+  "sub": "Payouts",
+  "ord": 701
  },
  {
   "id": 8,
@@ -69,7 +83,9 @@
   "group": "Valid rosters",
   "rule": "Each manager must start a minimum of 5 players per week.",
   "notes": "Not on the suggestions sheet.",
-  "source": "site"
+  "source": "site",
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 9,
@@ -78,7 +94,9 @@
   "group": "Valid rosters",
   "rule": "Managers may not start a player grandfathered into a position he is no longer eligible for.",
   "notes": "2020 vote also lets the commissioner edit such lineups.",
-  "source": "site"
+  "source": "site",
+  "sub": "Valid lineups",
+  "ord": 102
  },
  {
   "id": 10,
@@ -87,7 +105,9 @@
   "group": "Valid rosters",
   "rule": "No transactions once a manager is eliminated from Playoff/Sacko contention.",
   "notes": "Passed 2022 (3rd place counts as a league award).",
-  "source": "site"
+  "source": "site",
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 11,
@@ -96,7 +116,9 @@
   "group": "Trading",
   "rule": "All trades auto-process.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 12,
@@ -105,7 +127,9 @@
   "group": "Trading",
   "rule": "Managers may not veto trades they are a participant in.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 13,
@@ -114,7 +138,9 @@
   "group": "Trading",
   "rule": "A majority vote of the remaining managers is required to veto a trade.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 14,
@@ -123,7 +149,9 @@
   "group": "Trading",
   "rule": "The league does not vote on or enforce trades with multiple transactions; each trade proposed in Sleeper is voted on separately.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Trades",
+  "ord": 301
  },
  {
   "id": 15,
@@ -132,7 +160,9 @@
   "group": "Playoff seeding",
   "rule": "1st and 2nd seeds get a bye.",
   "notes": "Format history: 15 weeks / 4 teams (2020), then 5 teams with a 3-team final for 2 seasons, now 14 weeks / 6 teams with 12 teams (2025). Sleeper: 6 playoff teams, start Week 15.",
-  "source": "site"
+  "source": "site",
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 16,
@@ -141,7 +171,9 @@
   "group": "Playoff seeding",
   "rule": "The 3rd seed picks between the 5th and 6th seeds as the first-round opponent.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 17,
@@ -150,7 +182,9 @@
   "group": "Playoff seeding",
   "rule": "The pick must be made by Tuesday night before Week 16 so teams can submit waiver claims.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 18,
@@ -159,7 +193,9 @@
   "group": "Sacko",
   "rule": "Sacko is a Toilet Bowl tournament among the 6 lowest teams, mirroring the playoff seeding.",
   "notes": "Sacko bracket history: 2020, 2022, 2025.",
-  "source": "site"
+  "source": "site",
+  "sub": "Bracket & qualification",
+  "ord": 500
  },
  {
   "id": 19,
@@ -168,7 +204,9 @@
   "group": "Sacko",
   "rule": "Unless Sacko is decided outright by a 31+ Rumble deficit to 9th place at the end of the regular season.",
   "notes": "Threshold was 36 before the 2025 change; the 2022 proposal to cut 37 to 29 failed.",
-  "source": "site"
+  "source": "site",
+  "sub": "Bracket & qualification",
+  "ord": 500
  },
  {
   "id": 20,
@@ -177,7 +215,9 @@
   "group": "League rule changes",
   "rule": "Off-season rule changes pass by simple majority.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 21,
@@ -186,7 +226,9 @@
   "group": "League rule changes",
   "rule": "In-season rule changes need a 10 or 11 of 12 \"mega-majority\".",
   "notes": "Originally 9/10 support in 2019.",
-  "source": "site"
+  "source": "site",
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 22,
@@ -195,7 +237,9 @@
   "group": "League rule changes",
   "rule": "The new season officially begins after the league dinner.",
   "notes": "",
-  "source": "site"
+  "source": "site",
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 23,
@@ -204,7 +248,9 @@
   "group": "",
   "rule": "Raise buy-in to $120",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Buy-in",
+  "ord": 700
  },
  {
   "id": 24,
@@ -213,7 +259,9 @@
   "group": "",
   "rule": "Announce all approved changes on draft day",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Rule changes",
+  "ord": 801
  },
  {
   "id": 25,
@@ -222,7 +270,9 @@
   "group": "",
   "rule": "Forced fumble worth 1 point, fumble recovery worth 1 point",
   "notes": "Sleeper now: D/ST forced fumble 1, fumble recovery 1; player forced fumble 0.5, player fumble recovery 1.5",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 26,
@@ -231,7 +281,9 @@
   "group": "",
   "rule": "WR/TE/RB roster cap increase by 1",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 27,
@@ -240,7 +292,9 @@
   "group": "",
   "rule": "Move to Sleeper",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Platform & agreement",
+  "ord": 800
  },
  {
   "id": 28,
@@ -249,7 +303,9 @@
   "group": "",
   "rule": "Tradeable FAB",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 29,
@@ -258,7 +314,9 @@
   "group": "",
   "rule": "QB pick-6 additional -2 points",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 30,
@@ -267,7 +325,9 @@
   "group": "",
   "rule": "Decimal scoring for kickers (2018 DTF, base of 3)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Kicking",
+  "ord": 2
  },
  {
   "id": 31,
@@ -276,7 +336,9 @@
   "group": "",
   "rule": "Royal Rumble as tiebreaker",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 32,
@@ -285,7 +347,9 @@
   "group": "",
   "rule": "Add Lamp and Eli: 14 week RS, 6 teams make playoffs, wildcard weekend",
   "notes": "Proposed 2020; took effect with the 12-team expansion (2025): 14-week regular season, 6 playoff teams, wildcard weekend. Sleeper confirms (playoffs start Week 15)",
-  "source": "history"
+  "source": "history",
+  "sub": "Playoff format & seeding",
+  "ord": 402
  },
  {
   "id": 33,
@@ -294,7 +358,9 @@
   "group": "",
   "rule": "Cut 2 bench spots",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 34,
@@ -303,7 +369,9 @@
   "group": "",
   "rule": "Allow Doubtful players into IR (Sleeper allows)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 35,
@@ -312,7 +380,9 @@
   "group": "",
   "rule": "Full PPR for 0+ yards",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Receiving & first downs",
+  "ord": 0
  },
  {
   "id": 36,
@@ -321,7 +391,9 @@
   "group": "",
   "rule": "Fractional Royal Rumble official standings (fractional win = 0.1, giving H2H more weight)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Standings & tiebreakers",
+  "ord": 401
  },
  {
   "id": 37,
@@ -330,7 +402,9 @@
   "group": "",
   "rule": "Waffle House style Sacko punishment",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 38,
@@ -339,7 +413,9 @@
   "group": "",
   "rule": "Sacko punishment deadline: lose membership if punishment not completed before fantasy draft",
   "notes": "Soft deadline at the Super Bowl, 20% penalty, then final deadline",
-  "source": "history"
+  "source": "history",
+  "sub": "Punishment",
+  "ord": 501
  },
  {
   "id": 39,
@@ -348,7 +424,9 @@
   "group": "",
   "rule": "Better anti-tanking definition and no collusion",
   "notes": "Tanking = intentionally setting up a team to lose to gain a later advantage",
-  "source": "history"
+  "source": "history",
+  "sub": "Conduct & fair play",
+  "ord": 802
  },
  {
   "id": 40,
@@ -357,7 +435,9 @@
   "group": "",
   "rule": "Waivers move to 12pm; free agents open after Saturday 12pm",
   "notes": "Waivers run at 12pm Eastern (Sleeper stores hour 9)",
-  "source": "history"
+  "source": "history",
+  "sub": "Waivers, FAAB & transactions",
+  "ord": 300
  },
  {
   "id": 41,
@@ -366,7 +446,9 @@
   "group": "",
   "rule": "Superflex replaces the 2nd flex (no other changes)",
   "notes": "6pt TD and QB INT -4 discussed but not adopted",
-  "source": "history"
+  "source": "history",
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 42,
@@ -375,7 +457,9 @@
   "group": "",
   "rule": "1 point for a 4th down stop",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 43,
@@ -384,7 +468,9 @@
   "group": "",
   "rule": "Defensive scoring scaled per yard/point instead of cutoffs",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 44,
@@ -393,7 +479,9 @@
   "group": "",
   "rule": "2 IR spots",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 45,
@@ -402,7 +490,9 @@
   "group": "",
   "rule": "Reduce QB sack to -0.25",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 46,
@@ -411,7 +501,9 @@
   "group": "",
   "rule": "Points for defensive 3-and-out",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 47,
@@ -420,7 +512,9 @@
   "group": "",
   "rule": "Fumble -0.5, lost fumble -1.5",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Quarterback & turnovers",
+  "ord": 1
  },
  {
   "id": 48,
@@ -429,7 +523,9 @@
   "group": "",
   "rule": "Defense returning a 2pt conversion worth 4 points",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 49,
@@ -438,7 +534,9 @@
   "group": "",
   "rule": "Missed XP = -0.33",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Kicking",
+  "ord": 2
  },
  {
   "id": 50,
@@ -447,7 +545,9 @@
   "group": "",
   "rule": "Team kicker: if kicker is injured you get combined points from starter and replacements",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 51,
@@ -456,7 +556,9 @@
   "group": "",
   "rule": "Schedule based on last year's results (playoff rematch week, etc.)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Schedule",
+  "ord": 400
  },
  {
   "id": 52,
@@ -465,7 +567,9 @@
   "group": "",
   "rule": "TE eligible for WR spot (WR becomes WR/TE)",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Lineup slots",
+  "ord": 100
  },
  {
   "id": 53,
@@ -474,7 +578,9 @@
   "group": "",
   "rule": "Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)",
   "notes": "Later tightened (see 2025). Player KR/PR and D/ST INT/fumble returns are now 25 yd/pt (2025); blocked/missed FG returns remain 1 per 100 yd",
-  "source": "history"
+  "source": "history",
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 54,
@@ -483,7 +589,9 @@
   "group": "",
   "rule": "Offense playing D: 0.5 per tackle, 1 per forced fumble",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  },
  {
   "id": 55,
@@ -492,7 +600,9 @@
   "group": "",
   "rule": "Shotgun a beverage of your choice for a 0 or less from a non-DST",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Shotgun",
+  "ord": 900
  },
  {
   "id": 56,
@@ -501,7 +611,9 @@
   "group": "",
   "rule": "Standard protocol for accidental/glitchy bids: shotgun for an accidental bid that is withdrawn",
   "notes": "Explore further",
-  "source": "history"
+  "source": "history",
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 57,
@@ -510,7 +622,9 @@
   "group": "",
   "rule": "Get rid of drafting position minimums at auction",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Auction & draft",
+  "ord": 600
  },
  {
   "id": 58,
@@ -519,7 +633,9 @@
   "group": "",
   "rule": "Must own a player over a roster lock (weekend) before putting him on IR",
   "notes": "2 IR slots were being used outside the spirit of IR expansion",
-  "source": "history"
+  "source": "history",
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 59,
@@ -528,7 +644,9 @@
   "group": "",
   "rule": "Remove a bench spot",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Bench & roster limits",
+  "ord": 101
  },
  {
   "id": 60,
@@ -537,7 +655,9 @@
   "group": "",
   "rule": "Ban holding a player who is active in a game in an IR slot; must drop that player or another player yet to play",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "IR slots & eligibility",
+  "ord": 200
  },
  {
   "id": 61,
@@ -546,7 +666,9 @@
   "group": "",
   "rule": "Amend shotgun rule to exclude any player ruled OUT who didn't play a play in the 2nd half",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Shotgun",
+  "ord": 900
  },
  {
   "id": 62,
@@ -555,7 +677,9 @@
   "group": "",
   "rule": "QB injury rule: if QB1 is ruled out at any point, manager gets all QB points for that team (QB1 + QB2/QB3, not position players taking snaps)",
   "notes": "Injury still a net negative, but more drama rooting for the backup and limits the downside",
-  "source": "history"
+  "source": "history",
+  "sub": "Injury replacement",
+  "ord": 201
  },
  {
   "id": 63,
@@ -564,7 +688,9 @@
   "group": "",
   "rule": "25 yards per point on KR/PR",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 64,
@@ -573,7 +699,9 @@
   "group": "",
   "rule": "25 yards per point on defensive returns",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Return yards",
+  "ord": 4
  },
  {
   "id": 65,
@@ -582,6 +710,8 @@
   "group": "",
   "rule": "0.2 points for tackle for loss",
   "notes": "",
-  "source": "history"
+  "source": "history",
+  "sub": "Defense & special teams",
+  "ord": 3
  }
 ]
