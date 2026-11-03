@@ -7,6 +7,6 @@ plus scoring and league settings pulled live from Sleeper, with distinctive rule
 - `data/rules.json` – rule history, generated from `tools/rules.txt` (pipe-delimited; edit that, then `python3 tools/build.py`).
 - `data/sleeper_snapshot.json` – offline fallback of the Sleeper league object.
 
-Run: `python3 -m http.server` then open http://localhost:8000.
+Build: `python3 tools/build.py` regenerates `data/rules.json` and a single-file `dist/rulebook.html` (rules and Sleeper snapshot inlined; still fetches live scoring from Sleeper when online, so it opens straight from disk). Dev: `python3 -m http.server`.
 Add a rule: append a line to `tools/rules.txt` (`year|cat|status|title|nominator|impact|vote|note`).
 Categories: SC RO IR TR PL SA DR MN GV FUN. Statuses: PASS FAIL PENDING TABLED EXPLORE WITHDRAWN.
