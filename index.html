@@ -39,6 +39,11 @@ select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius
 .chipc.on{background:var(--c,var(--accent));color:#0f1115;font-weight:600}
 .chipc.all{--c:var(--ink)}.chipc.all.on{color:var(--bg)}
 a.tag{text-decoration:none;color:var(--accent2);border-color:var(--accent2)}
+.rhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.rhead h3{margin:0}
+.corner{flex:none;text-align:right;line-height:1.15}
+.corner b{display:block;font-size:13px;color:var(--c);font-variant-numeric:tabular-nums}
+.corner span{display:block;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
 .fn{margin-top:8px;padding-top:7px;border-top:1px dashed var(--line);font-size:12px;color:var(--mute)}
 .fn b{font-weight:600}
 .val{color:var(--c);font-weight:700}
@@ -216,11 +221,12 @@ function scoreView(r,sc){
   try{const v=SCORE[r.bind](sc);return /NaN|undefined|Infinity/.test(JSON.stringify(v))?null:v}catch(e){return null}
 }
 
+const SRC={"league site":"Site","suggestions sheet":"Sheet","per commissioner":"Comm."};
 /* ---- current rules ---- */
 function renderCurrent(cur,sc){
   const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
   const cats=Object.keys(CATS).filter(k=>cur.some(r=>r.category===k));
-  $("#current").innerHTML=`<div class="status">Every rule in force: the league site rules plus each rule passed over the years (2019 on) that hasn't been replaced. "Since" is the year it passed on the suggestions sheet. Replaced rules are in Rule history, tagged Superseded.</div>
+  $("#current").innerHTML=`<div class="status">Every rule in force: the league site rules plus each rule passed over the years (2019 on) that hasn't been replaced. The year in each card's top-right corner is when it passed (— = not dated), with its source below it: Site = league site, Sheet = suggestions sheet, Comm. = commissioner. Replaced rules are in Rule history, tagged Superseded.</div>
   <div class="layout"><aside id="cchips"></aside><div class="body">
   <div class="filters">
    <label>Search<input type="search" id="cq"></label>
@@ -237,7 +243,7 @@ function renderCurrent(cur,sc){
       if(r.category!==last){out+=`<div class="sect" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</div>`;last=r.category;lastSub=null}
       if(r.sub!==lastSub){out+=`<div class="subh">${esc(r.sub)}</div>`;lastSub=r.sub}
       const sv=scoreView(r,sc);
-      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${sv?`${esc(sv.label)}: <span class="val">${esc(sv.value)}</span>`:esc(r.rule)}</h3><div class="meta">${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${esc(r.label)}</span></div>${sv?(sv.detail||[]).map(d=>`<div class="note">${esc(d)}</div>`).join(""):r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length?`<div class="fn">${r.replaces.map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><div class="rhead"><h3>${sv?`${esc(sv.label)}: <span class="val">${esc(sv.value)}</span>`:esc(r.rule)}</h3><div class="corner"><b>${r.year||"—"}</b><span title="${esc(r.label)}">${esc(SRC[r.label]||r.label)}</span></div></div>${sv?(sv.detail||[]).map(d=>`<div class="note">${esc(d)}</div>`).join(""):r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length?`<div class="fn">${r.replaces.map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };
