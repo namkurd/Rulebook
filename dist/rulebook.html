@@ -3828,7 +3828,7 @@ function renderSetup(L){
     ${kv("Trade review days",s.trade_review_days)}${kv("Daily waivers",s.daily_waivers?"On":"Off")}${kv("Waivers clear (hour, league tz)",s.daily_waivers_hour+":00")}
     ${kv("IR allows",["out"&&s.reserve_allow_out?"Out":null,s.reserve_allow_doubtful?"Doubtful":null,s.reserve_allow_sus?"Suspended":null,s.reserve_allow_cov?"COVID":null,s.reserve_allow_dnr?"DNR":null].filter(Boolean).join(", ")||"–")}
     ${kv("Bench lock",s.bench_lock?"On":"Off")}</div>
-   <h2>Playoffs</h2><div class="grid">${kv("Playoff teams",s.playoff_teams)}${kv("Playoffs start","Week "+s.playoff_week_start)}${kv("Regular season weeks",s.playoff_week_start-1)}${kv("Max keepers",s.max_keepers)}</div>
+   <h2>Playoffs</h2><div class="grid">${kv("Playoff teams",s.playoff_teams)}${kv("Playoffs start","Week "+s.playoff_week_start)}${kv("Regular season weeks",s.playoff_week_start-1)}</div>
    <div class="note" style="margin-top:12px">Sacko bracket, Rumbles standings and the auction aren't Sleeper settings. See the Rulebook tab, Sacko and Playoffs categories.</div>`;
 }
 
