@@ -35,5 +35,6 @@ html = html.replace("getJSON(CONFIG.currentUrl),", "Promise.resolve(INLINE.curre
 html = html.replace("getJSON(CONFIG.rulesUrl),", "Promise.resolve(INLINE.rules),", 1)
 html = html.replace("getJSON(CONFIG.snapshotUrl).then(d=>[d,false])", "Promise.resolve([INLINE.snapshot,false])", 1)
 os.makedirs(os.path.join(root, 'dist'), exist_ok=True)
-open(os.path.join(root, 'dist', 'rulebook.html'), 'w', encoding='utf-8').write(html)
+for n in ('rulebook.html', 'index.html'):
+    open(os.path.join(root, 'dist', n), 'w', encoding='utf-8').write(html)
 print('wrote dist/rulebook.html', len(html)//1024, 'KB')

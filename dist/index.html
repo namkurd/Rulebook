@@ -1,0 +1,2120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DTF Club Rulebook</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1b1f27;--mute:#6a7383;--line:#e2e5eb;--accent:#2457d6;--hi:#fff4d6;--hi-ink:#7a5200;
+--pass:#1f8a4c;--fail:#b4382f;--pend:#b7791f;--tab:#7b5cc4}
+@media(prefers-color-scheme:dark){:root{--bg:#12151b;--card:#1b2029;--ink:#e8ebf1;--mute:#98a1b3;--line:#2b3240;--accent:#7fa2ff;--hi:#3a2f0f;--hi-ink:#ffd27a;--pass:#4cc486;--fail:#ef7b72;--pend:#e3b25a;--tab:#b39cf0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:1000px;margin:auto}
+h1{margin:0;font-size:24px}.sub{color:var(--mute);font-size:13px}
+main{max-width:1000px;margin:auto;padding:0 16px 48px}
+nav{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+nav button,.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:999px;cursor:pointer;font:inherit}
+nav button.on,.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:10px}
+.filters label{font-size:12px;color:var(--mute);display:flex;flex-direction:column;gap:3px}
+select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;width:100%}
+.count{color:var(--mute);font-size:13px;margin:6px 0 10px}
+.yr{margin:18px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--mute);text-transform:uppercase}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:8px}
+.rule h3{margin:0 0 5px;font-size:15px;font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}
+.tag{padding:1px 8px;border-radius:999px;border:1px solid var(--line);font-size:11px;font-weight:600}
+.s-PASS{color:var(--pass);border-color:var(--pass)}.s-FAIL{color:var(--fail);border-color:var(--fail)}
+.s-PENDING,.s-TABLED,.s-EXPLORE,.s-WITHDRAWN{color:var(--pend);border-color:var(--pend)}
+.cat{color:var(--tab);border-color:var(--tab)}
+.note{margin-top:5px;font-size:13px;color:var(--mute)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:16px}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
+th{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hi{background:var(--hi)}tr.hi td:first-child{color:var(--hi-ink);font-weight:600}
+.badge{background:var(--hi);color:var(--hi-ink);border-radius:6px;padding:1px 6px;font-size:11px;font-weight:700;margin-left:6px}
+h2{font-size:17px;margin:20px 0 8px}
+.callout{background:var(--hi);color:var(--hi-ink);border-radius:10px;padding:10px 13px;margin-bottom:12px;font-size:14px}
+.callout ul{margin:6px 0 0;padding-left:18px}
+.status{font-size:12px;color:var(--mute);margin:4px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.kv{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px}.kv b{display:block;font-size:12px;color:var(--mute);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>DTF Club Rulebook</h1>
+  <div class="sub">Rule history from the League Suggestions sheet · scoring &amp; settings pulled live from Sleeper</div>
+</header>
+<main>
+  <nav id="tabs">
+    <button data-t="current" class="on">Current rules</button>
+    <button data-t="rules">Rule history</button>
+    <button data-t="scoring">Scoring</button>
+    <button data-t="setup">League setup</button>
+  </nav>
+  <section id="current"></section>
+  <section id="rules" hidden></section>
+  <section id="scoring" hidden></section>
+  <section id="setup" hidden></section>
+</main>
+<script>
+/* ---- config (swap these when integrating into the master tool) ---- */
+const INLINE={rules:[
+ {
+  "id": 1,
+  "year": 2026,
+  "category": "IR",
+  "status": "PENDING",
+  "title": "Make suspended players IR eligible",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "",
+  "notes": "Failed in 2022"
+ },
+ {
+  "id": 2,
+  "year": 2026,
+  "category": "SC",
+  "status": "PENDING",
+  "title": "Points for recovering fumble (1 or 0.5)",
+  "nominator": "Aidan",
+  "impact": "Low",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 3,
+  "year": 2026,
+  "category": "GV",
+  "status": "PENDING",
+  "title": "Continental Congress: reset everything and revote everything, 2/3 majority needed",
+  "nominator": "Christian",
+  "impact": "Yuge",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 4,
+  "year": 2026,
+  "category": "GV",
+  "status": "PENDING",
+  "title": "For each rule added one must be taken away",
+  "nominator": "Christian",
+  "impact": "Yuge",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 5,
+  "year": 2026,
+  "category": "MN",
+  "status": "PENDING",
+  "title": "Increase buy-in so the highest-scoring manager each week gets $20; no change to other payouts",
+  "nominator": "Joe",
+  "impact": "Low/Medium",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 6,
+  "year": 2026,
+  "category": "DR",
+  "status": "PENDING",
+  "title": "Keeper: keep up to X drafted players (never traded for/added/dropped) at draft price +10%, min raise to $10 if drafted under $10",
+  "nominator": "Joe",
+  "impact": "High",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 7,
+  "year": 2026,
+  "category": "RO",
+  "status": "PENDING",
+  "title": "Remove Kicker",
+  "nominator": "Ankit?",
+  "impact": "",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 8,
+  "year": 2026,
+  "category": "RO",
+  "status": "PENDING",
+  "title": "Remove roster maximums",
+  "nominator": "Mike",
+  "impact": "",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 9,
+  "year": 2026,
+  "category": "IR",
+  "status": "PENDING",
+  "title": "Allow direct to IR for traded players",
+  "nominator": "Joe",
+  "impact": "Low/Medium",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 10,
+  "year": 2026,
+  "category": "MN",
+  "status": "PENDING",
+  "title": "$5 extra in auction per child",
+  "nominator": "Jake",
+  "impact": "High",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 11,
+  "year": 2026,
+  "category": "FUN",
+  "status": "PENDING",
+  "title": "Extend Doubtful to count as OUT for shotgun purposes",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 12,
+  "year": 2026,
+  "category": "RO",
+  "status": "PENDING",
+  "title": "Disallow illegal gameday roster; must drop or commissioner will (like illegal IR rule)",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 13,
+  "year": 2026,
+  "category": "RO",
+  "status": "PENDING",
+  "title": "2 Defenses",
+  "nominator": "Christian",
+  "impact": "High",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 14,
+  "year": 2026,
+  "category": "IR",
+  "status": "PENDING",
+  "title": "Remove the new IR-related rules",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 15,
+  "year": 2025,
+  "category": "PL",
+  "status": "PASS",
+  "title": "Expand to 12 teams",
+  "nominator": "People",
+  "impact": "High",
+  "vote": "8",
+  "notes": "Stephanie in; Kait pending interview"
+ },
+ {
+  "id": 16,
+  "year": 2025,
+  "category": "GV",
+  "status": "PASS",
+  "title": "Name change exploratory",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "7",
+  "notes": "Decide new name before season"
+ },
+ {
+  "id": 17,
+  "year": 2025,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "If 12 teams, reduce to 1 QB with 6pt TD",
+  "nominator": "Aidan/Ben",
+  "impact": "High",
+  "vote": "3",
+  "notes": ""
+ },
+ {
+  "id": 18,
+  "year": 2025,
+  "category": "RO",
+  "status": "PENDING",
+  "title": "If 12 teams, make all QBs SFLEX",
+  "nominator": "",
+  "impact": "",
+  "vote": "5",
+  "notes": "Needs Ryan, Jake or Christian; Jake voted yes 7/15/26 on Slack. Sleeper currently shows 2 SUPER_FLEX slots"
+ },
+ {
+  "id": 19,
+  "year": 2025,
+  "category": "GV",
+  "status": "FAIL",
+  "title": "DTF Club annual suspension list (morality clause: vote players out of the league for a season)",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "2",
+  "notes": "Ideas: max 1 new per year, supermajority"
+ },
+ {
+  "id": 20,
+  "year": 2025,
+  "category": "DR",
+  "status": "PASS",
+  "title": "Standard protocol for accidental/glitchy bids: shotgun for an accidental bid that is withdrawn",
+  "nominator": "Ankit",
+  "impact": "Low/Medium",
+  "vote": "8",
+  "notes": "Explore further"
+ },
+ {
+  "id": 21,
+  "year": 2025,
+  "category": "DR",
+  "status": "PASS",
+  "title": "Get rid of drafting position minimums at auction",
+  "nominator": "Joe",
+  "impact": "Low/Medium",
+  "vote": "8",
+  "notes": ""
+ },
+ {
+  "id": 22,
+  "year": 2025,
+  "category": "IR",
+  "status": "PASS",
+  "title": "Must own a player over a roster lock (weekend) before putting him on IR",
+  "nominator": "Ben",
+  "impact": "Low/Medium",
+  "vote": "6",
+  "notes": "2 IR slots were being used outside the spirit of IR expansion"
+ },
+ {
+  "id": 23,
+  "year": 2025,
+  "category": "RO",
+  "status": "WITHDRAWN",
+  "title": "Add 1 Flex, remove 1 bench spot",
+  "nominator": "Joe",
+  "impact": "Medium",
+  "vote": "Withdrawn",
+  "notes": ""
+ },
+ {
+  "id": 24,
+  "year": 2025,
+  "category": "RO",
+  "status": "WITHDRAWN",
+  "title": "Add WR/TE spot, remove bench",
+  "nominator": "Ankit",
+  "impact": "Medium",
+  "vote": "Withdrawn",
+  "notes": ""
+ },
+ {
+  "id": 25,
+  "year": 2025,
+  "category": "RO",
+  "status": "PASS",
+  "title": "Remove a bench spot",
+  "nominator": "Aidan",
+  "impact": "Medium",
+  "vote": "7",
+  "notes": ""
+ },
+ {
+  "id": 26,
+  "year": 2025,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "Remove an additional bench spot",
+  "nominator": "",
+  "impact": "",
+  "vote": "3",
+  "notes": ""
+ },
+ {
+  "id": 27,
+  "year": 2025,
+  "category": "IR",
+  "status": "PASS",
+  "title": "Ban holding a player who is active in a game in an IR slot; must drop that player or another player yet to play",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "8",
+  "notes": ""
+ },
+ {
+  "id": 28,
+  "year": 2025,
+  "category": "SA",
+  "status": "FAIL",
+  "title": "Sacko range: only teams within X rumbles of 10th are in Sacko Bowl",
+  "nominator": "Steven",
+  "impact": "Medium",
+  "vote": "3",
+  "notes": ""
+ },
+ {
+  "id": 29,
+  "year": 2025,
+  "category": "SA",
+  "status": "PASS",
+  "title": "Sacko range updated from 36 to X (more teams, longer playoffs, 1 fewer regular season game)",
+  "nominator": "",
+  "impact": "",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 30,
+  "year": 2025,
+  "category": "PL",
+  "status": "FAIL",
+  "title": "NIT Bowl / DTF Cup for non-Sacko and eliminated teams",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "3",
+  "notes": ""
+ },
+ {
+  "id": 31,
+  "year": 2025,
+  "category": "FUN",
+  "status": "PASS",
+  "title": "Amend shotgun rule to exclude any player ruled OUT who didn't play a play in the 2nd half",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "7",
+  "notes": ""
+ },
+ {
+  "id": 32,
+  "year": 2025,
+  "category": "IR",
+  "status": "PASS",
+  "title": "QB injury rule: if QB1 is ruled out at any point, manager gets all QB points for that team (QB1 + QB2/QB3, not position players taking snaps)",
+  "nominator": "Ben/Joe",
+  "impact": "Medium",
+  "vote": "Pass",
+  "notes": "Injury still a net negative, but more drama rooting for the backup and limits the downside"
+ },
+ {
+  "id": 33,
+  "year": 2025,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Individual points for picks, pick returns, tackles, sacks (rare two-way players)",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": "Failed on exploration"
+ },
+ {
+  "id": 34,
+  "year": 2025,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "More negative points for shorter missed FGs",
+  "nominator": "Steven",
+  "impact": "Low/Medium",
+  "vote": "2",
+  "notes": "Not voted on due to Knicks blowing it"
+ },
+ {
+  "id": 35,
+  "year": 2025,
+  "category": "SC",
+  "status": "TABLED",
+  "title": "Make D/ST more valuable generally (benchmark vs TE scoring?)",
+  "nominator": "Chris",
+  "impact": "Medium",
+  "vote": "Tabled",
+  "notes": "Eli proposal: your defense scales down opponents' offensive scores"
+ },
+ {
+  "id": 36,
+  "year": 2025,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "2 D/STs",
+  "nominator": "Chris",
+  "impact": "High",
+  "vote": "2",
+  "notes": ""
+ },
+ {
+  "id": 37,
+  "year": 2025,
+  "category": "SC",
+  "status": "PASS",
+  "title": "25 yards per point on KR/PR",
+  "nominator": "Aidan",
+  "impact": "Low/Medium",
+  "vote": "7",
+  "notes": ""
+ },
+ {
+  "id": 38,
+  "year": 2025,
+  "category": "SC",
+  "status": "PASS",
+  "title": "25 yards per point on defensive returns",
+  "nominator": "Ben",
+  "impact": "Medium",
+  "vote": "6",
+  "notes": ""
+ },
+ {
+  "id": 39,
+  "year": 2025,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Turnover on downs worth 2 points",
+  "nominator": "Steven",
+  "impact": "Medium",
+  "vote": "3",
+  "notes": ""
+ },
+ {
+  "id": 40,
+  "year": 2025,
+  "category": "SC",
+  "status": "PASS",
+  "title": "0.2 points for tackle for loss",
+  "nominator": "Ben",
+  "impact": "Low/Medium",
+  "vote": "7",
+  "notes": ""
+ },
+ {
+  "id": 41,
+  "year": 2025,
+  "category": "SC",
+  "status": "TABLED",
+  "title": "6pt pass TD and 35 pass yards per point",
+  "nominator": "Ben",
+  "impact": "Medium",
+  "vote": "Tabled",
+  "notes": ""
+ },
+ {
+  "id": 42,
+  "year": 2025,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "5pt TD for all",
+  "nominator": "Aidan",
+  "impact": "High",
+  "vote": "2",
+  "notes": ""
+ },
+ {
+  "id": 43,
+  "year": 2024,
+  "category": "PL",
+  "status": "EXPLORE",
+  "title": "Midseason tournament in some way (Alex: DFS hybrid vs custom scoring weeks)",
+  "nominator": "Alex",
+  "impact": "Medium",
+  "vote": "",
+  "notes": ""
+ },
+ {
+  "id": 44,
+  "year": 2024,
+  "category": "PL",
+  "status": "EXPLORE",
+  "title": "12 teams and associated playoff changes, smaller bench",
+  "nominator": "",
+  "impact": "",
+  "vote": "",
+  "notes": "Led to the 2025 expansion"
+ },
+ {
+  "id": 45,
+  "year": 2024,
+  "category": "PL",
+  "status": "PASS",
+  "title": "Schedule based on last year's results (playoff rematch week, etc.)",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "6",
+  "notes": ""
+ },
+ {
+  "id": 46,
+  "year": 2024,
+  "category": "TR",
+  "status": "PASS",
+  "title": "Autoprocess all trades",
+  "nominator": "Joe",
+  "impact": "Medium",
+  "vote": "6",
+  "notes": ""
+ },
+ {
+  "id": 47,
+  "year": 2024,
+  "category": "RO",
+  "status": "PASS",
+  "title": "TE eligible for WR spot (WR becomes WR/TE)",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "6",
+  "notes": ""
+ },
+ {
+  "id": 48,
+  "year": 2024,
+  "category": "SC",
+  "status": "PASS",
+  "title": "0.5 per first down for WR/RB/TE, 0.2 for QB first down",
+  "nominator": "Ben",
+  "impact": "Medium",
+  "vote": "6",
+  "notes": ""
+ },
+ {
+  "id": 49,
+  "year": 2024,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)",
+  "nominator": "Ben",
+  "impact": "Low/Medium",
+  "vote": "7",
+  "notes": "Later tightened (see 2025)"
+ },
+ {
+  "id": 50,
+  "year": 2024,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Offense playing D: 0.5 per tackle, 1 per forced fumble",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "7",
+  "notes": ""
+ },
+ {
+  "id": 51,
+  "year": 2024,
+  "category": "FUN",
+  "status": "PASS",
+  "title": "Shotgun a beverage of your choice for a 0 or less from a non-DST",
+  "nominator": "",
+  "impact": "",
+  "vote": "6",
+  "notes": ""
+ },
+ {
+  "id": 52,
+  "year": 2024,
+  "category": "TR",
+  "status": "FAIL",
+  "title": "FAB for rumble trade or cash out",
+  "nominator": "Ankit",
+  "impact": "High",
+  "vote": "0",
+  "notes": ""
+ },
+ {
+  "id": 53,
+  "year": 2024,
+  "category": "TR",
+  "status": "FAIL",
+  "title": "Built-in Trash Considerations v2: FAB winning bid for a same-week re-claimed drop goes to previous owner",
+  "nominator": "Ben",
+  "impact": "Medium",
+  "vote": "0",
+  "notes": ""
+ },
+ {
+  "id": 54,
+  "year": 2024,
+  "category": "IR",
+  "status": "FAIL",
+  "title": "Require owning a player over a roster lock for IR eligibility",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "4",
+  "notes": "Not Sleeperable; passed in 2025 as manual rule"
+ },
+ {
+  "id": 55,
+  "year": 2024,
+  "category": "IR",
+  "status": "FAIL",
+  "title": "Apply Kicker injury rule to QBs",
+  "nominator": "Joe",
+  "impact": "Low/Medium",
+  "vote": "4",
+  "notes": ""
+ },
+ {
+  "id": 56,
+  "year": 2024,
+  "category": "IR",
+  "status": "FAIL",
+  "title": "Add to IR from waivers directly",
+  "nominator": "Steven",
+  "impact": "Low",
+  "vote": "0",
+  "notes": "Not Sleeperable"
+ },
+ {
+  "id": 57,
+  "year": 2024,
+  "category": "FUN",
+  "status": "FAIL",
+  "title": "Designate weekly captain whose points are doubled",
+  "nominator": "Alex",
+  "impact": "Huge",
+  "vote": "0",
+  "notes": ""
+ },
+ {
+  "id": 58,
+  "year": 2024,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "6pt QB TD (mutually exclusive with other QB changes)",
+  "nominator": "Joe",
+  "impact": "Medium",
+  "vote": "1",
+  "notes": ""
+ },
+ {
+  "id": 59,
+  "year": 2024,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Passing yards 1pt per 15 or 20 (mutually exclusive with other QB changes)",
+  "nominator": "Ankit/Joe",
+  "impact": "Medium",
+  "vote": "1",
+  "notes": ""
+ },
+ {
+  "id": 60,
+  "year": 2024,
+  "category": "SA",
+  "status": "FAIL",
+  "title": "First round Sacko bracket: bottom 2 scorers advance",
+  "nominator": "",
+  "impact": "",
+  "vote": "1",
+  "notes": ""
+ },
+ {
+  "id": 61,
+  "year": 2023,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "Extra FLEX spot (with or without bench removal)",
+  "nominator": "Ankit",
+  "impact": "High",
+  "vote": "3-6",
+  "notes": ""
+ },
+ {
+  "id": 62,
+  "year": 2023,
+  "category": "IR",
+  "status": "PASS",
+  "title": "2 IR spots",
+  "nominator": "Joe",
+  "impact": "Medium",
+  "vote": "6-3",
+  "notes": ""
+ },
+ {
+  "id": 63,
+  "year": 2023,
+  "category": "TR",
+  "status": "FAIL",
+  "title": "Built-in Trash Considerations: same-week drop and re-claim FAB goes to previous owner",
+  "nominator": "Ben",
+  "impact": "Medium",
+  "vote": "2-7",
+  "notes": ""
+ },
+ {
+  "id": 64,
+  "year": 2023,
+  "category": "IR",
+  "status": "FAIL",
+  "title": "One injury sub in playoffs (pre-declared sub per position)",
+  "nominator": "Alex/Aidan/Ben",
+  "impact": "Medium",
+  "vote": "2-7",
+  "notes": ""
+ },
+ {
+  "id": 65,
+  "year": 2023,
+  "category": "PL",
+  "status": "FAIL",
+  "title": "Schedule based on last season finish",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "4-5",
+  "notes": ""
+ },
+ {
+  "id": 66,
+  "year": 2023,
+  "category": "GV",
+  "status": "FAIL",
+  "title": "Bully Pulpit: champ pre-announces one suggestion with 2 votes",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "2-7",
+  "notes": ""
+ },
+ {
+  "id": 67,
+  "year": 2023,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "6pt pass TD",
+  "nominator": "Ben",
+  "impact": "High",
+  "vote": "4-5",
+  "notes": ""
+ },
+ {
+  "id": 68,
+  "year": 2023,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "0.5 PPFD, 0.1 per passing first down",
+  "nominator": "Ben",
+  "impact": "High",
+  "vote": "4-5",
+  "notes": ""
+ },
+ {
+  "id": 69,
+  "year": 2023,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Reduce QB sack to -0.25",
+  "nominator": "Joe",
+  "impact": "Medium",
+  "vote": "5-4",
+  "notes": ""
+ },
+ {
+  "id": 70,
+  "year": 2023,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Points for defensive 3-and-out",
+  "nominator": "Joe",
+  "impact": "Medium",
+  "vote": "5-4",
+  "notes": ""
+ },
+ {
+  "id": 71,
+  "year": 2023,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Fumble -0.5, lost fumble -1.5",
+  "nominator": "Ben",
+  "impact": "Low/Medium",
+  "vote": "5-4",
+  "notes": ""
+ },
+ {
+  "id": 72,
+  "year": 2023,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Scaled D/ST points for sacks",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "4-5",
+  "notes": ""
+ },
+ {
+  "id": 73,
+  "year": 2023,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Points for kick/punt return yards (1 per 50)",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "2-7",
+  "notes": ""
+ },
+ {
+  "id": 74,
+  "year": 2023,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Defense returning a 2pt conversion worth 4 points",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "5-4",
+  "notes": ""
+ },
+ {
+  "id": 75,
+  "year": 2023,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Missed XP = -0.33",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "7-2",
+  "notes": ""
+ },
+ {
+  "id": 76,
+  "year": 2023,
+  "category": "IR",
+  "status": "PASS",
+  "title": "Team kicker: if kicker is injured you get combined points from starter and replacements",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "5-4",
+  "notes": ""
+ },
+ {
+  "id": 77,
+  "year": 2022,
+  "category": "DR",
+  "status": "FAIL",
+  "title": "Dynasty (keeper option)",
+  "nominator": "Alex/Ben",
+  "impact": "Yuge",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 78,
+  "year": 2022,
+  "category": "PL",
+  "status": "PASS",
+  "title": "5 team playoff / 3 team final (1 seed gets bye and is guaranteed finals)",
+  "nominator": "Jake/Steven",
+  "impact": "High",
+  "vote": "Pass",
+  "notes": "Bonus options discussed: homefield bonus, best ball, extra flex"
+ },
+ {
+  "id": 79,
+  "year": 2022,
+  "category": "TR",
+  "status": "PASS",
+  "title": "Auto-push FAAB trades of $10 or less",
+  "nominator": "Jake",
+  "impact": "Medium/High",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 80,
+  "year": 2022,
+  "category": "TR",
+  "status": "PASS",
+  "title": "Reduce trade completion window to 24 hrs",
+  "nominator": "Steven",
+  "impact": "Medium",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 81,
+  "year": 2022,
+  "category": "SA",
+  "status": "FAIL",
+  "title": "Reduce rumbles needed to avoid Sacko tourney from 37 to 29",
+  "nominator": "Ben",
+  "impact": "Medium",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 82,
+  "year": 2022,
+  "category": "SA",
+  "status": "FAIL",
+  "title": "Always have a Sacko tournament",
+  "nominator": "Joe",
+  "impact": "Medium",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 83,
+  "year": 2022,
+  "category": "TR",
+  "status": "PASS",
+  "title": "No transactions if not in contention for a league trophy or award (3rd place counts)",
+  "nominator": "Steven/Joe",
+  "impact": "Medium",
+  "vote": "Pass",
+  "notes": "Steven vs Joe proposal decided by RCV. Sacko bracket can make moves until safe"
+ },
+ {
+  "id": 84,
+  "year": 2022,
+  "category": "SA",
+  "status": "PASS",
+  "title": "Sacko punishment deadline: lose membership if punishment not completed before fantasy draft",
+  "nominator": "Joe/Steven",
+  "impact": "Medium",
+  "vote": "Pass",
+  "notes": "Soft deadline at the Super Bowl, 20% penalty, then final deadline"
+ },
+ {
+  "id": 85,
+  "year": 2022,
+  "category": "SA",
+  "status": "PASS",
+  "title": "In Sacko tournament, 7 seed chooses between 9th and 10th seed in 1st round",
+  "nominator": "Steven",
+  "impact": "Low/Medium",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 86,
+  "year": 2022,
+  "category": "PL",
+  "status": "FAIL",
+  "title": "Scheduling system (rivalry week, top 5 vs bottom 5 twice)",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 87,
+  "year": 2022,
+  "category": "PL",
+  "status": "FAIL",
+  "title": "Highest scoring team picks next week's opponent",
+  "nominator": "Steven",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 88,
+  "year": 2022,
+  "category": "GV",
+  "status": "FAIL",
+  "title": "Champions Endorsement (2 votes on one pre-announced suggestion)",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 89,
+  "year": 2022,
+  "category": "PL",
+  "status": "FAIL",
+  "title": "Highest single-week score gets X rumbles",
+  "nominator": "Steven",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 90,
+  "year": 2022,
+  "category": "GV",
+  "status": "PASS",
+  "title": "Better anti-tanking definition and no collusion",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "Pass",
+  "notes": "Tanking = intentionally setting up a team to lose to gain a later advantage"
+ },
+ {
+  "id": 91,
+  "year": 2022,
+  "category": "MN",
+  "status": "FAIL",
+  "title": "Everyone pays weekly top scorer",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 92,
+  "year": 2022,
+  "category": "TR",
+  "status": "PASS",
+  "title": "Waivers move to 12pm; free agents open after Saturday 12pm",
+  "nominator": "Ankit",
+  "impact": "High",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 93,
+  "year": 2022,
+  "category": "IR",
+  "status": "FAIL",
+  "title": "One injury sub in playoffs",
+  "nominator": "Alex/Aidan/Ben",
+  "impact": "Medium",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 94,
+  "year": 2022,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "Revert to two full flexes",
+  "nominator": "Tommy",
+  "impact": "Medium",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 95,
+  "year": 2022,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "Replace kicker with second D/ST",
+  "nominator": "Ryan",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 96,
+  "year": 2022,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "Make all WR spots WR/TE",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 97,
+  "year": 2022,
+  "category": "IR",
+  "status": "FAIL",
+  "title": "Make suspended players IR eligible",
+  "nominator": "Joe",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 98,
+  "year": 2022,
+  "category": "RO",
+  "status": "PASS",
+  "title": "Superflex replaces the 2nd flex (no other changes)",
+  "nominator": "Joe",
+  "impact": "High",
+  "vote": "Pass",
+  "notes": "6pt TD and QB INT -4 discussed but not adopted"
+ },
+ {
+  "id": 99,
+  "year": 2022,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "0.5 PFD (rec and rush) in addition to PPR",
+  "nominator": "Ben",
+  "impact": "Medium/High",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 100,
+  "year": 2022,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Individual KR/PR yardage (50/pt KR, 25/pt PR)",
+  "nominator": "Ben",
+  "impact": "Low/Medium",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 101,
+  "year": 2022,
+  "category": "SC",
+  "status": "PASS",
+  "title": "1 point for a 4th down stop",
+  "nominator": "Rohaan",
+  "impact": "Low/Medium",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 102,
+  "year": 2022,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Defensive scoring scaled per yard/point instead of cutoffs",
+  "nominator": "Aidan",
+  "impact": "Low",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 103,
+  "year": 2022,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Fumble -0.5, lost fumble -1.5",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": "Passed in 2023"
+ },
+ {
+  "id": 104,
+  "year": 2022,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Scaled D/ST sack points",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 105,
+  "year": 2022,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Defense returning 2pt conversion worth 4 (RCV 4/6/8)",
+  "nominator": "Ben",
+  "impact": "Low",
+  "vote": "Fail",
+  "notes": "Passed in 2023"
+ },
+ {
+  "id": 106,
+  "year": 2021,
+  "category": "GV",
+  "status": "PASS",
+  "title": "Alex joins league",
+  "nominator": "",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 107,
+  "year": 2021,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Full PPR for 0+ yards",
+  "nominator": "",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 108,
+  "year": 2021,
+  "category": "PL",
+  "status": "PASS",
+  "title": "Fractional Royal Rumble official standings (fractional win = 0.1, giving H2H more weight)",
+  "nominator": "",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 109,
+  "year": 2021,
+  "category": "SA",
+  "status": "PASS",
+  "title": "Waffle House style Sacko punishment",
+  "nominator": "",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 110,
+  "year": 2021,
+  "category": "RO",
+  "status": "PASS",
+  "title": "2nd flex is now WR/TE only",
+  "nominator": "",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 111,
+  "year": 2020,
+  "category": "RO",
+  "status": "PASS",
+  "title": "Commissioner may manually edit lineups containing a player grandfathered into a position he is no longer eligible for",
+  "nominator": "Aidan",
+  "impact": "",
+  "vote": "9-0",
+  "notes": "Voted 11/24/2020"
+ },
+ {
+  "id": 112,
+  "year": 2020,
+  "category": "SA",
+  "status": "PASS",
+  "title": "Sacko volunteer / use buy-in for trophy: Joe 3D-prints the trophy",
+  "nominator": "Aidan",
+  "impact": "",
+  "vote": "-",
+  "notes": ""
+ },
+ {
+  "id": 113,
+  "year": 2020,
+  "category": "GV",
+  "status": "PASS",
+  "title": "Move to Sleeper",
+  "nominator": "Ben/Haan",
+  "impact": "",
+  "vote": "9-0",
+  "notes": ""
+ },
+ {
+  "id": 114,
+  "year": 2020,
+  "category": "TR",
+  "status": "PASS",
+  "title": "Tradeable FAB",
+  "nominator": "Steven",
+  "impact": "",
+  "vote": "6-4",
+  "notes": ""
+ },
+ {
+  "id": 115,
+  "year": 2020,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "Superflex",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "4-6",
+  "notes": "Passed in 2022"
+ },
+ {
+  "id": 116,
+  "year": 2020,
+  "category": "DR",
+  "status": "FAIL",
+  "title": "1 player keeper league",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "3-7",
+  "notes": ""
+ },
+ {
+  "id": 117,
+  "year": 2020,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "Remove D/ST",
+  "nominator": "Tommy",
+  "impact": "",
+  "vote": "4-6",
+  "notes": ""
+ },
+ {
+  "id": 118,
+  "year": 2020,
+  "category": "SC",
+  "status": "PASS",
+  "title": "PPR of some sort: full, 0.5, 0.5 with gradient",
+  "nominator": "Joe/Steven/Ben",
+  "impact": "",
+  "vote": "7-3",
+  "notes": "Became full PPR in 2021"
+ },
+ {
+  "id": 119,
+  "year": 2020,
+  "category": "SC",
+  "status": "PASS",
+  "title": "QB pick-6 additional -2 points",
+  "nominator": "Ben/Haan",
+  "impact": "",
+  "vote": "9-1",
+  "notes": ""
+ },
+ {
+  "id": 120,
+  "year": 2020,
+  "category": "SC",
+  "status": "PASS",
+  "title": "QB sack -0.5",
+  "nominator": "Ben/Joe",
+  "impact": "",
+  "vote": "7-3",
+  "notes": "Reduced to -0.25 in 2023"
+ },
+ {
+  "id": 121,
+  "year": 2020,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Sacks on defense scaled to yardage",
+  "nominator": "Ben/Joe",
+  "impact": "",
+  "vote": "3-6",
+  "notes": ""
+ },
+ {
+  "id": 122,
+  "year": 2020,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "KR/PR yards for players (KR 50/pt, PR 25/pt)",
+  "nominator": "Ben",
+  "impact": "",
+  "vote": "4-6",
+  "notes": ""
+ },
+ {
+  "id": 123,
+  "year": 2020,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Decimal scoring for kickers (2018 DTF, base of 3)",
+  "nominator": "2018 DTF",
+  "impact": "",
+  "vote": "Grandfathered",
+  "notes": ""
+ },
+ {
+  "id": 124,
+  "year": 2020,
+  "category": "PL",
+  "status": "FAIL",
+  "title": "New standings: combo of RR and H2H",
+  "nominator": "Tommy/Ben",
+  "impact": "",
+  "vote": "2-8",
+  "notes": ""
+ },
+ {
+  "id": 125,
+  "year": 2020,
+  "category": "PL",
+  "status": "PASS",
+  "title": "Royal Rumble as tiebreaker",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "8-1",
+  "notes": ""
+ },
+ {
+  "id": 126,
+  "year": 2020,
+  "category": "SA",
+  "status": "PASS",
+  "title": "Sacko bracket with lowest 4 seeds: 10 seed locks Sacko if 9th is 3+ games ahead; 5-6 play 2-week H2H",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "6-4",
+  "notes": ""
+ },
+ {
+  "id": 127,
+  "year": 2020,
+  "category": "PL",
+  "status": "PASS",
+  "title": "Add Lamp and Eli: 14 week RS, 6 teams make playoffs, wildcard weekend",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "6-3",
+  "notes": "Conflicts with 15-week/4-team entry below; sheet lists both as Pass"
+ },
+ {
+  "id": 128,
+  "year": 2020,
+  "category": "RO",
+  "status": "PASS",
+  "title": "Cut 2 bench spots",
+  "nominator": "Ankit",
+  "impact": "",
+  "vote": "6-3",
+  "notes": ""
+ },
+ {
+  "id": 129,
+  "year": 2020,
+  "category": "PL",
+  "status": "PASS",
+  "title": "15 week regular season, 4 teams advance, 1-week semis and finals",
+  "nominator": "Aidan",
+  "impact": "",
+  "vote": "6-1",
+  "notes": ""
+ },
+ {
+  "id": 130,
+  "year": 2020,
+  "category": "IR",
+  "status": "PASS",
+  "title": "Allow Doubtful players into IR (Sleeper allows)",
+  "nominator": "Rohaan",
+  "impact": "",
+  "vote": "8-1",
+  "notes": ""
+ },
+ {
+  "id": 131,
+  "year": 2019,
+  "category": "MN",
+  "status": "PASS",
+  "title": "Raise buy-in to $120",
+  "nominator": "Jake/Ryan",
+  "impact": "",
+  "vote": "Yes (8/19)",
+  "notes": ""
+ },
+ {
+  "id": 132,
+  "year": 2019,
+  "category": "SC",
+  "status": "PASS",
+  "title": "New defensive scoring",
+  "nominator": "Ben",
+  "impact": "",
+  "vote": "Yes (8/25)",
+  "notes": ""
+ },
+ {
+  "id": 133,
+  "year": 2019,
+  "category": "DR",
+  "status": "FAIL",
+  "title": "Use ESPN online system to draft",
+  "nominator": "Steven",
+  "impact": "",
+  "vote": "No (8/26)",
+  "notes": ""
+ },
+ {
+  "id": 134,
+  "year": 2019,
+  "category": "TR",
+  "status": "FAIL",
+  "title": "$1000 FAAB (more granular bids)",
+  "nominator": "Ankit",
+  "impact": "",
+  "vote": "5-4 for",
+  "notes": "Tommy voted No"
+ },
+ {
+  "id": 135,
+  "year": 2019,
+  "category": "GV",
+  "status": "PASS",
+  "title": "Announce all approved changes on draft day",
+  "nominator": "Rohaan",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 136,
+  "year": 2019,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Missed extra points count as -1",
+  "nominator": "Rohaan",
+  "impact": "",
+  "vote": "Pass",
+  "notes": "Changed to -0.33 in 2023"
+ },
+ {
+  "id": 137,
+  "year": 2019,
+  "category": "PL",
+  "status": "PASS",
+  "title": "Tiebreaker stays Point Wins (vote to go back to PF only failed)",
+  "nominator": "Aidan",
+  "impact": "",
+  "vote": "5-4",
+  "notes": ""
+ },
+ {
+  "id": 138,
+  "year": 2019,
+  "category": "SC",
+  "status": "PASS",
+  "title": "Forced fumble worth 1 point, fumble recovery worth 1 point",
+  "nominator": "Aidan",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 139,
+  "year": 2019,
+  "category": "GV",
+  "status": "PASS",
+  "title": "9/10 support required for changing rules midseason",
+  "nominator": "",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 140,
+  "year": 2019,
+  "category": "RO",
+  "status": "PASS",
+  "title": "2 FLEX, add one roster space",
+  "nominator": "",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 141,
+  "year": 2019,
+  "category": "RO",
+  "status": "PASS",
+  "title": "WR/TE/RB roster cap increase by 1",
+  "nominator": "",
+  "impact": "",
+  "vote": "Pass",
+  "notes": ""
+ },
+ {
+  "id": 142,
+  "year": 2019,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Microdosing (0.1 PPR)",
+  "nominator": "Haan",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 143,
+  "year": 2019,
+  "category": "GV",
+  "status": "FAIL",
+  "title": "Deadline for league rule changes of 7/31",
+  "nominator": "Rohaan",
+  "impact": "",
+  "vote": "Fail",
+  "notes": "Sheet: \"??? (thought this passed)\""
+ },
+ {
+  "id": 144,
+  "year": 2019,
+  "category": "GV",
+  "status": "FAIL",
+  "title": "Leave ESPN",
+  "nominator": "Everyone",
+  "impact": "",
+  "vote": "Fail",
+  "notes": "Moved to Sleeper in 2020"
+ },
+ {
+  "id": 145,
+  "year": 2019,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "If staying with ESPN, abolish kickers",
+  "nominator": "Aidan",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 146,
+  "year": 2019,
+  "category": "TR",
+  "status": "FAIL",
+  "title": "Tradeable FAAB",
+  "nominator": "Steven",
+  "impact": "",
+  "vote": "Fail",
+  "notes": "Passed in 2020"
+ },
+ {
+  "id": 147,
+  "year": 2019,
+  "category": "GV",
+  "status": "FAIL",
+  "title": "Risk/Reward system for premature GG in thread",
+  "nominator": "Ben",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 148,
+  "year": 2019,
+  "category": "PL",
+  "status": "FAIL",
+  "title": "12 teams (6 playoff teams or 4?)",
+  "nominator": "Steven/Joe",
+  "impact": "",
+  "vote": "Fail",
+  "notes": "Passed in 2025"
+ },
+ {
+  "id": 149,
+  "year": 2019,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "0.5 PPR",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 150,
+  "year": 2019,
+  "category": "RO",
+  "status": "FAIL",
+  "title": "Superflex position (including QB)",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 151,
+  "year": 2019,
+  "category": "TR",
+  "status": "FAIL",
+  "title": "No playoff add/drops",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 152,
+  "year": 2019,
+  "category": "MN",
+  "status": "FAIL",
+  "title": "Weekly payout to top-scoring team",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 153,
+  "year": 2019,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "Points for first down",
+  "nominator": "Steven",
+  "impact": "",
+  "vote": "Fail",
+  "notes": "Passed in 2024"
+ },
+ {
+  "id": 154,
+  "year": 2019,
+  "category": "PL",
+  "status": "FAIL",
+  "title": "Composite wins (H2H W + Point W) as official standings",
+  "nominator": "Ben",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 155,
+  "year": 2019,
+  "category": "DR",
+  "status": "FAIL",
+  "title": "1 player keeper league",
+  "nominator": "Ben",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ },
+ {
+  "id": 156,
+  "year": 2019,
+  "category": "SC",
+  "status": "FAIL",
+  "title": "QBs lose receiving yards (for sacks)",
+  "nominator": "Joe",
+  "impact": "",
+  "vote": "Fail",
+  "notes": ""
+ }
+],current:[
+ {
+  "id": 1,
+  "category": "GV",
+  "year": null,
+  "group": "",
+  "rule": "Members agree to abide by these rules, which supplement the rules enforced by Sleeper.",
+  "notes": ""
+ },
+ {
+  "id": 2,
+  "category": "RO",
+  "year": 2025,
+  "group": "Format",
+  "rule": "12-person Super Flex league.",
+  "notes": "12 teams passed 2025; Superflex first passed 2022. Sleeper shows 2 SUPER_FLEX slots."
+ },
+ {
+  "id": 3,
+  "category": "SC",
+  "year": 2024,
+  "group": "Format",
+  "rule": "Scoring is Tiered PPR with 0.5 PPFD.",
+  "notes": "0.5 first downs passed 2024. Sleeper scores a flat 1.0 per reception via yardage tiers (0+ yds = 1), i.e. full PPR since 2021."
+ },
+ {
+  "id": 4,
+  "category": "MN",
+  "year": null,
+  "group": "Payout structure",
+  "rule": "Champion: 60%.",
+  "notes": ""
+ },
+ {
+  "id": 5,
+  "category": "MN",
+  "year": null,
+  "group": "Payout structure",
+  "rule": "Runner-up: 20%.",
+  "notes": ""
+ },
+ {
+  "id": 6,
+  "category": "MN",
+  "year": null,
+  "group": "Payout structure",
+  "rule": "3rd place game winner: 10%.",
+  "notes": ""
+ },
+ {
+  "id": 7,
+  "category": "MN",
+  "year": null,
+  "group": "Payout structure",
+  "rule": "First place regular season: 10%.",
+  "notes": "Buy-in raised to $120 in 2019."
+ },
+ {
+  "id": 8,
+  "category": "RO",
+  "year": null,
+  "group": "Valid rosters",
+  "rule": "Each manager must start a minimum of 5 players per week.",
+  "notes": "Not on the suggestions sheet."
+ },
+ {
+  "id": 9,
+  "category": "RO",
+  "year": 2020,
+  "group": "Valid rosters",
+  "rule": "Managers may not start a player grandfathered into a position he is no longer eligible for.",
+  "notes": "2020 vote also lets the commissioner edit such lineups."
+ },
+ {
+  "id": 10,
+  "category": "TR",
+  "year": 2022,
+  "group": "Valid rosters",
+  "rule": "No transactions once a manager is eliminated from Playoff/Sacko contention.",
+  "notes": "Passed 2022 (3rd place counts as a league award)."
+ },
+ {
+  "id": 11,
+  "category": "TR",
+  "year": 2024,
+  "group": "Trading",
+  "rule": "All trades auto-process.",
+  "notes": ""
+ },
+ {
+  "id": 12,
+  "category": "TR",
+  "year": null,
+  "group": "Trading",
+  "rule": "Managers may not veto trades they are a participant in.",
+  "notes": ""
+ },
+ {
+  "id": 13,
+  "category": "TR",
+  "year": null,
+  "group": "Trading",
+  "rule": "A majority vote of the remaining managers is required to veto a trade.",
+  "notes": ""
+ },
+ {
+  "id": 14,
+  "category": "TR",
+  "year": null,
+  "group": "Trading",
+  "rule": "The league does not vote on or enforce trades with multiple transactions; each trade proposed in Sleeper is voted on separately.",
+  "notes": ""
+ },
+ {
+  "id": 15,
+  "category": "PL",
+  "year": null,
+  "group": "Playoff seeding",
+  "rule": "1st and 2nd seeds get a bye.",
+  "notes": "Sleeper: 6 playoff teams. The sheet's 2022 entry said 5 teams / 3-team final; the Site describes 6."
+ },
+ {
+  "id": 16,
+  "category": "PL",
+  "year": null,
+  "group": "Playoff seeding",
+  "rule": "The 3rd seed picks between the 5th and 6th seeds as the first-round opponent.",
+  "notes": ""
+ },
+ {
+  "id": 17,
+  "category": "PL",
+  "year": null,
+  "group": "Playoff seeding",
+  "rule": "The pick must be made by Tuesday night before Week 16 so teams can submit waiver claims.",
+  "notes": ""
+ },
+ {
+  "id": 18,
+  "category": "SA",
+  "year": null,
+  "group": "Sacko",
+  "rule": "Sacko is a Toilet Bowl tournament among the 6 lowest teams, mirroring the playoff seeding.",
+  "notes": "Sacko bracket history: 2020, 2022, 2025."
+ },
+ {
+  "id": 19,
+  "category": "SA",
+  "year": 2025,
+  "group": "Sacko",
+  "rule": "Unless Sacko is decided outright by a 31+ Rumble deficit to 9th place at the end of the regular season.",
+  "notes": "Threshold was 36 before the 2025 change; the 2022 proposal to cut 37 to 29 failed."
+ },
+ {
+  "id": 20,
+  "category": "GV",
+  "year": null,
+  "group": "League rule changes",
+  "rule": "Off-season rule changes pass by simple majority.",
+  "notes": ""
+ },
+ {
+  "id": 21,
+  "category": "GV",
+  "year": 2019,
+  "group": "League rule changes",
+  "rule": "In-season rule changes need a 10 or 11 of 12 \"mega-majority\".",
+  "notes": "Originally 9/10 support in 2019."
+ },
+ {
+  "id": 22,
+  "category": "GV",
+  "year": null,
+  "group": "League rule changes",
+  "rule": "The new season officially begins after the league dinner.",
+  "notes": ""
+ }
+],snapshot:{"name":"DTF Club","status":"in_season","metadata":{"auto_continue":"on","keeper_deadline":"0","latest_league_winner_roster_id":"4","minis_enabled":"1"},"settings":{"position_limit_rb":9,"best_ball":0,"last_report":8,"waiver_budget":200,"disable_adds":0,"capacity_override":0,"waiver_bid_min":0,"position_limit_te":4,"taxi_deadline":0,"draft_rounds":3,"reserve_allow_na":0,"start_week":1,"playoff_seed_type":1,"playoff_teams":6,"veto_votes_needed":5,"position_limit_qb":3,"squads":1,"num_teams":12,"daily_waivers_hour":9,"playoff_type":1,"taxi_slots":0,"sub_start_time_eligibility":1,"last_scored_leg":8,"daily_waivers_days":1500,"sub_lock_if_starter_active":0,"playoff_week_start":15,"position_limit_k":3,"waiver_clear_days":1,"reserve_allow_doubtful":1,"commissioner_direct_invite":0,"veto_auto_poll":0,"reserve_allow_dnr":0,"taxi_allow_vets":0,"waiver_day_of_week":2,"position_limit_wr":9,"playoff_round_type":0,"reserve_allow_out":1,"reserve_allow_sus":0,"veto_show_votes":0,"trade_deadline":12,"taxi_years":0,"daily_waivers":1,"faab_suggestions":1,"position_limit_def":3,"disable_trades":0,"pick_trading":0,"type":0,"max_keepers":1,"waiver_type":2,"max_subs":3,"league_average_match":0,"trade_review_days":0,"bench_lock":1,"offseason_adds":0,"leg":8,"reserve_slots":2,"reserve_allow_cov":1,"daily_waivers_last_ran":3},"avatar":null,"company_id":null,"scoring_settings":{"sack":1.0,"fgm_40_49":0.0,"pass_int":-2.0,"pts_allow_0":4.62,"pass_2pt":2.0,"rec_0_4":1.0,"yds_allow_450_499":5.75,"blk_kick_ret_yd":0.01,"st_td":6.0,"rec_30_39":1.0,"fgm_yds_over_30":0.10000000149011612,"rec_td":6.0,"yds_allow_400_449":5.75,"rec_20_29":1.0,"fgm_30_39":0.0,"xpmiss":-0.33,"rush_td":6.0,"bonus_fd_wr":0.5,"pts_allow":-0.23,"def_4_and_stop":1.0,"fg_ret_yd":0.01,"yds_allow_550p":5.75,"yds_allow_350_399":5.75,"fgm":3.0,"rec_2pt":2.0,"rush_fd":0.0,"pass_int_td":-2.0,"int_ret_yd":0.04,"st_fum_rec":1.0,"fgmiss":-1.0,"ff":0.5,"rec":0.0,"yds_allow_200_299":5.75,"pts_allow_14_20":4.62,"def_2pt":4.0,"fgm_0_19":0.0,"int":2.0,"def_st_fum_rec":1.0,"fum_lost":-1.5,"pts_allow_1_6":4.62,"rec_fd":0.0,"kr_yd":0.04,"yds_allow":-0.02,"rec_5_9":1.0,"fgm_20_29":0.0,"yds_allow_500_549":5.75,"pts_allow_21_27":4.62,"xpm":1.0,"pass_sack":-0.25,"rec_40p":1.0,"def_3_and_out":0.5,"tkl_loss":0.2,"rush_2pt":2.0,"yds_allow_300_349":5.75,"fum_rec":1.5,"rec_10_19":1.0,"def_st_td":6.0,"fgm_50p":0.0,"def_td":6.0,"pass_fd":0.0,"rec_td_40p":0.0,"safe":2.0,"pass_yd":0.04,"blk_kick":2.0,"pass_td":4.0,"yds_allow_100_199":5.75,"bonus_fd_qb":0.2,"rush_yd":0.1,"yds_allow_0_100":5.75,"pr_yd":0.04,"fum":-0.5,"pts_allow_28_34":4.62,"pts_allow_35p":4.62,"fum_rec_td":6.0,"rec_yd":0.1,"bonus_fd_te":0.5,"bonus_fd_rb":0.5,"fum_ret_yd":0.04,"def_st_ff":1.0,"pass_inc":0.0,"pts_allow_7_13":4.62,"st_ff":1.0},"season":"2026","season_type":"regular","shard":764,"sport":"nfl","last_message_id":"1423385794088812544","last_author_avatar":null,"last_author_display_name":"sys","last_author_id":"166666666666666666","last_author_is_bot":true,"last_message_attachment":null,"last_message_text_map":null,"last_message_time":1793724127842,"last_pinned_message_id":null,"draft_id":"1389416556630405120","last_read_id":null,"league_id":"1389416556617801728","previous_league_id":"1256991725184876544","roster_positions":["RB","RB","TE","FLEX","REC_FLEX","REC_FLEX","SUPER_FLEX","SUPER_FLEX","K","DEF","BN","BN","BN","BN","BN","BN"],"bracket_id":null,"bracket_overrides_id":null,"group_id":null,"loser_bracket_id":null,"loser_bracket_overrides_id":null,"total_rosters":12}};
+const CONFIG = {
+  leagueId: "1389416556617801728",
+  api: "https://api.sleeper.app/v1",
+  rulesUrl: "data/rules.json",
+  currentUrl: "data/current_rules.json",
+  snapshotUrl: "data/sleeper_snapshot.json"
+};
+const CATS = {SC:"Scoring",RO:"Roster & lineup",IR:"IR & injuries",TR:"Waivers, FAB & trades",PL:"Playoffs & standings",SA:"Sacko",DR:"Draft & auction",MN:"Money",GV:"Governance & conduct",FUN:"Shotgun & fun"};
+const STATUS = {PASS:"Passed",FAIL:"Failed",PENDING:"Pending",TABLED:"Tabled",EXPLORE:"Exploring",WITHDRAWN:"Withdrawn"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const getJSON = u => fetch(u).then(r=>{if(!r.ok)throw new Error(u+" "+r.status);return r.json()});
+
+/* ---- tabs ---- */
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));
+  ["current","rules","scoring","setup"].forEach(id=>$("#"+id).hidden = id!==b.dataset.t);
+});
+
+/* ---- rulebook ---- */
+const F = {q:"",cat:"",year:"",status:"PASS",from:"",to:""};
+function renderRules(rules){
+  const years=[...new Set(rules.map(r=>r.year))].sort((a,b)=>b-a);
+  const opt=(o,sel)=>Object.entries(o).map(([k,v])=>`<option value="${k}"${sel===k?" selected":""}>${esc(v)}</option>`).join("");
+  $("#rules").innerHTML=`
+  <div class="filters">
+    <label>Search<input type="search" id="fq" placeholder="e.g. kicker, IR, sacko"></label>
+    <label>Type of rule<select id="fc"><option value="">All types</option>${opt(CATS,F.cat)}</select></label>
+    <label>Status<select id="fs"><option value="">Every proposal</option>${opt(STATUS,F.status)}</select></label>
+    <label>Instituted in<select id="fy"><option value="">Any year</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label>
+    <label>From year<select id="ff"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
+    <label>To year<select id="ft"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
+  </div>
+  <div class="count" id="cnt"></div><div id="list"></div>`;
+  const apply=()=>{
+    F.q=$("#fq").value.toLowerCase();F.cat=$("#fc").value;F.status=$("#fs").value;F.year=$("#fy").value;F.from=$("#ff").value;F.to=$("#ft").value;
+    const m=rules.filter(r=>(!F.cat||r.category===F.cat)&&(!F.status||r.status===F.status)&&(!F.year||r.year==F.year)
+      &&(!F.from||r.year>=+F.from)&&(!F.to||r.year<=+F.to)
+      &&(!F.q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(F.q)));
+    $("#cnt").textContent=`${m.length} of ${rules.length} entries`;
+    let out="",last=null;
+    m.sort((a,b)=>b.year-a.year||a.id-b.id).forEach(r=>{
+      if(r.year!==last){out+=`<div class="yr">${r.year}${r.year===2026?" suggestions (open)":""}</div>`;last=r.year}
+      out+=`<div class="rule"><h3>${esc(r.title)}</h3><div class="meta">
+        <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>
+        <span class="tag cat">${esc(CATS[r.category])}</span>
+        ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}</div>
+        ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+    });
+    $("#list").innerHTML=out||'<div class="note">No entries match.</div>';
+  };
+  ["fq","fc","fs","fy","ff","ft"].forEach(id=>$("#"+id).addEventListener(id==="fq"?"input":"change",apply));
+  apply();
+}
+
+/* ---- current rules ---- */
+function renderCurrent(cur){
+  const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
+  const cats=Object.entries(CATS).filter(([k])=>cur.some(r=>r.category===k));
+  $("#current").innerHTML=`<div class="status">The rules as written on the league site. "Since" is when the suggestions sheet shows it was instituted; rules without a year pre-date the sheet or aren't on it.</div>
+  <div class="filters">
+   <label>Search<input type="search" id="cq"></label>
+   <label>Type of rule<select id="cc"><option value="">All types</option>${cats.map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join("")}</select></label>
+   <label>Instituted<select id="cy"><option value="">Any</option><option value="none">Not on sheet</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label></div>
+  <div class="count" id="ccnt"></div><div id="clist"></div>`;
+  const apply=()=>{
+    const q=$("#cq").value.toLowerCase(),c=$("#cc").value,y=$("#cy").value;
+    const m=cur.filter(r=>(!c||r.category===c)&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
+    $("#ccnt").textContent=`${m.length} of ${cur.length} rules`;
+    let out="",last=null;
+    m.forEach(r=>{
+      if(r.group!==last){out+=`<div class="yr">${esc(r.group||"General")}</div>`;last=r.group}
+      out+=`<div class="rule"><h3>${esc(r.rule)}</h3><div class="meta"><span class="tag cat">${esc(CATS[r.category])}</span>${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}</div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+    });
+    $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
+  };
+  ["cq","cc","cy"].forEach(id=>$("#"+id).addEventListener(id==="cq"?"input":"change",apply));apply();
+}
+
+/* ---- scoring (live from Sleeper) ---- */
+/* Baseline = Sleeper's stock PPR-style template; anything different is flagged as distinctive. */
+const BASE={pass_yd:.04,pass_td:4,pass_int:-1,pass_2pt:2,rush_yd:.1,rush_td:6,rush_2pt:2,rec:1,rec_yd:.1,rec_td:6,rec_2pt:2,fum_lost:-1,fum_rec_td:6,
+ xpm:1,fgm_0_19:3,fgm_20_29:3,fgm_30_39:3,fgm_40_49:4,fgm_50p:5,fgmiss:0,sack:1,int:2,fum_rec:2,safe:2,blk_kick:2,def_td:6,def_st_td:6,st_td:6,st_ff:1,st_fum_rec:1,def_st_ff:1,def_st_fum_rec:1,ff:0,
+ pts_allow_0:10,pts_allow_1_6:7,pts_allow_7_13:4,pts_allow_14_20:1,pts_allow_21_27:0,pts_allow_28_34:-1,pts_allow_35p:-4};
+const LABEL={pass_yd:"Passing yard",pass_td:"Passing TD",pass_int:"Interception thrown",pass_int_td:"Pick-six thrown (extra)",pass_sack:"QB sacked",pass_2pt:"Passing 2pt",pass_fd:"Passing first down",bonus_fd_qb:"QB first down",
+ rush_yd:"Rushing yard",rush_td:"Rushing TD",rush_2pt:"Rushing 2pt",rush_fd:"Rushing first down",bonus_fd_rb:"RB first down",bonus_fd_wr:"WR first down",bonus_fd_te:"TE first down",
+ rec:"Reception",rec_0_4:"Reception (0–4 yd)",rec_5_9:"Reception (5–9 yd)",rec_10_19:"Reception (10–19 yd)",rec_20_29:"Reception (20–29 yd)",rec_30_39:"Reception (30–39 yd)",rec_40p:"Reception (40+ yd)",
+ rec_yd:"Receiving yard",rec_td:"Receiving TD",rec_2pt:"Receiving 2pt",rec_fd:"Receiving first down",fum:"Fumble",fum_lost:"Fumble lost",fum_rec:"Fumble recovered",fum_rec_td:"Fumble recovery TD",fum_ret_yd:"Fumble return yard",
+ kr_yd:"Kick return yard",pr_yd:"Punt return yard",st_td:"Special teams TD",st_ff:"ST forced fumble",st_fum_rec:"ST fumble recovery",
+ ff:"Forced fumble (player)",tkl_loss:"Tackle for loss",
+ xpm:"Extra point made",xpmiss:"Extra point missed",fgm:"FG made (base)",fgm_yds_over_30:"FG bonus per yard over 30",fgmiss:"FG missed",
+ sack:"Sack",int:"Interception",int_ret_yd:"INT return yard",safe:"Safety",blk_kick:"Blocked kick",blk_kick_ret_yd:"Blocked kick return yard",fg_ret_yd:"Missed-FG return yard",
+ def_td:"Defensive TD",def_st_td:"D/ST special teams TD",def_st_ff:"D/ST forced fumble",def_st_fum_rec:"D/ST fumble recovery",def_2pt:"Defense returns 2pt",def_3_and_out:"3-and-out forced",def_4_and_stop:"4th down stop",
+ pts_allow:"Per point allowed",yds_allow:"Per yard allowed"};
+const GROUPS=[["Passing",/^(pass_|bonus_fd_qb)/],["Rushing",/^rush_|bonus_fd_rb/],["Receiving",/^(rec|bonus_fd_(wr|te))/],["Fumbles",/^fum(?!_ret)/],
+ ["Returns",/^(kr_|pr_|fum_ret_yd|int_ret_yd|blk_kick_ret|fg_ret_yd|st_td)/],["Kicking",/^(xp|fg)/],["Defense / ST",/^(sack|int$|safe|blk_kick$|def_|st_|ff$|tkl_loss|pts_allow$|yds_allow$)/]];
+function labelFor(k){
+  if(LABEL[k])return LABEL[k];
+  let m;
+  if(m=k.match(/^pts_allow_(\d+)(?:_(\d+))?(p)?$/))return "Points allowed: "+(m[3]?m[1]+"+":m[2]?m[1]+"–"+m[2]:m[1]);
+  if(m=k.match(/^yds_allow_(\d+)(?:_(\d+))?(p)?$/))return "Yards allowed: "+(m[3]?m[1]+"+":m[2]?m[1]+"–"+m[2]:m[1]);
+  if(m=k.match(/^fgm_(\d+)_?(\d+|p)$/))return "FG "+m[1]+(m[2]==="p"?"+":"–"+m[2])+" yd";
+  return k;
+}
+const fmt=v=>(v>0?"+":"")+(Math.round(v*10000)/10000);
+function distinct(sc){
+  const notes=[];const s=sc;
+  if(s.yds_allow!==undefined&&s.yds_allow_0_100!==undefined)notes.push(`<b>Scaled defense:</b> instead of cutoffs, D/ST gets a flat ${s.pts_allow_0} for points allowed ${fmt(s.pts_allow)} per point, and ${s.yds_allow_0_100} for yards allowed ${fmt(s.yds_allow)} per yard.`);
+  if(s.fgm!==undefined)notes.push(`<b>Decimal kickers:</b> FG = ${s.fgm} + ${+s.fgm_yds_over_30.toFixed(2)} per yard over 30 (a 50-yarder = ${(s.fgm+20*s.fgm_yds_over_30).toFixed(1)}), miss ${fmt(s.fgmiss)}, missed XP ${fmt(s.xpmiss)}.`);
+  if(s.bonus_fd_wr||s.bonus_fd_rb)notes.push(`<b>First downs:</b> ${s.bonus_fd_rb} for RB/WR/TE and ${s.bonus_fd_qb} for QB first downs.`);
+  if(s.kr_yd||s.pr_yd)notes.push(`<b>Return yards count</b> for players (${(1/s.kr_yd).toFixed(0)} yd/pt KR &amp; PR) and for D/ST (${(1/s.int_ret_yd).toFixed(0)} yd/pt INT/fumble returns, ${(1/s.fg_ret_yd).toFixed(0)} yd/pt on blocked/missed FG returns).`);
+  if(s.def_3_and_out||s.def_4_and_stop)notes.push(`<b>Defensive stops:</b> ${s.def_3_and_out} per 3-and-out, ${s.def_4_and_stop} per 4th-down stop; ${s.tkl_loss} per tackle for loss.`);
+  if(s.def_2pt)notes.push(`<b>Defense returns a 2pt conversion:</b> ${s.def_2pt} pts.`);
+  if(s.fum_rec>=1)notes.push(`<b>Fumble recovery</b> is worth ${s.fum_rec}; fumble ${fmt(s.fum)}, lost ${fmt(s.fum_lost)}; QB sack ${fmt(s.pass_sack)}; pick-six thrown ${fmt(s.pass_int+s.pass_int_td)} total.`);
+  if(s.rec===0&&s.rec_0_4===1)notes.push(`<b>Full PPR on every catch</b> via yardage buckets (0+ yds = 1 pt), not the flat PPR setting.`);
+  return notes;
+}
+function renderScoring(L,live){
+  const sc=L.scoring_settings;const used=new Set();
+  const nd=distinct(sc);
+  let h=`<div class="status">${live?"Live from Sleeper":"Offline snapshot (Sleeper unreachable)"} · ${esc(L.name)} ${esc(L.season)}. Highlighted rows differ from Sleeper's stock PPR template.</div>`;
+  if(nd.length)h+=`<div class="callout"><b>What's distinctive about our scoring</b><ul>${nd.map(n=>`<li>${n}</li>`).join("")}</ul></div>`;
+  const buckets=k=>/^(pts_allow_|yds_allow_|fgm_\d|rec_\d)/.test(k);
+  GROUPS.forEach(([name,re])=>{
+    const keys=Object.keys(sc).filter(k=>!used.has(k)&&re.test(k)&&sc[k]!==0).sort();
+    if(!keys.length)return;
+    keys.forEach(k=>used.add(k));
+    h+=`<h2>${name}</h2><table><tr><th>Stat</th><th class="num">Points</th></tr>`+keys.map(k=>{
+      const diff = k in BASE ? BASE[k]!==sc[k] : !buckets(k)||true;
+      return `<tr class="${diff?"hi":""}"><td>${esc(labelFor(k))}</td><td class="num">${fmt(sc[k])}</td></tr>`}).join("")+`</table>`;
+  });
+  $("#scoring").innerHTML=h;
+}
+
+/* ---- league setup ---- */
+function renderSetup(L){
+  const s=L.settings,pos={};L.roster_positions.forEach(p=>pos[p]=(pos[p]||0)+1);
+  const NAME={QB:"QB",RB:"RB",WR:"WR",TE:"TE",FLEX:"FLEX (RB/WR/TE)",REC_FLEX:"WR/TE flex",SUPER_FLEX:"SUPERFLEX (incl. QB)",K:"Kicker",DEF:"D/ST",BN:"Bench"};
+  const kv=(a,b)=>`<div class="kv"><b>${esc(a)}</b>${esc(b)}</div>`;
+  const wt={0:"Rolling",1:"Reverse standings",2:"FAAB"}[s.waiver_type]||s.waiver_type;
+  $("#setup").innerHTML=`<h2>Lineup (${L.total_rosters} teams)</h2><div class="grid">`+
+   Object.entries(pos).map(([p,n])=>kv(NAME[p]||p,n+" slot"+(n>1?"s":""))).join("")+kv("IR slots",s.reserve_slots)+`</div>
+   <h2>Roster limits</h2><div class="grid">${["qb","rb","wr","te","k","def"].map(p=>kv(p.toUpperCase()+" max",s["position_limit_"+p])).join("")}</div>
+   <h2>Transactions</h2><div class="grid">${kv("Waiver type",wt)}${kv("FAAB budget","$"+s.waiver_budget)}${kv("Trade deadline","Week "+s.trade_deadline)}
+    ${kv("Trade review days",s.trade_review_days)}${kv("Daily waivers",s.daily_waivers?"On":"Off")}${kv("Waivers clear (hour, league tz)",s.daily_waivers_hour+":00")}
+    ${kv("IR allows",["out"&&s.reserve_allow_out?"Out":null,s.reserve_allow_doubtful?"Doubtful":null,s.reserve_allow_sus?"Suspended":null,s.reserve_allow_cov?"COVID":null,s.reserve_allow_dnr?"DNR":null].filter(Boolean).join(", ")||"–")}
+    ${kv("Bench lock",s.bench_lock?"On":"Off")}</div>
+   <h2>Playoffs</h2><div class="grid">${kv("Playoff teams",s.playoff_teams)}${kv("Playoffs start","Week "+s.playoff_week_start)}${kv("Regular season weeks",s.playoff_week_start-1)}${kv("Max keepers",s.max_keepers)}</div>
+   <div class="note" style="margin-top:12px">Sacko bracket, Rumbles standings and the auction aren't Sleeper settings. See the Rulebook tab, Sacko and Playoffs categories.</div>`;
+}
+
+/* ---- boot ---- */
+Promise.all([
+  Promise.resolve(INLINE.current),
+  Promise.resolve(INLINE.rules),
+  getJSON(`${CONFIG.api}/league/${CONFIG.leagueId}`).then(d=>[d,true]).catch(()=>Promise.resolve([INLINE.snapshot,false]))
+]).then(([cur,rules,[L,live]])=>{renderCurrent(cur);renderRules(rules);renderScoring(L,live);renderSetup(L)})
+ .catch(e=>{$("#rules").innerHTML=`<div class="callout">Failed to load: ${esc(e.message)}. Serve over http (e.g. <code>python3 -m http.server</code>), not file://.</div>`});
+</script>
+</body>
+</html>
