@@ -1,0 +1,23 @@
+# cat|year|group|rule|note   (year blank = not on the suggestions sheet; source: Google Site rules page)
+GV|||Members agree to abide by these rules, which supplement the rules enforced by Sleeper.|
+RO|2025|Format|12-person Super Flex league.|12 teams passed 2025; Superflex first passed 2022. Sleeper shows 2 SUPER_FLEX slots.
+SC|2024|Format|Scoring is Tiered PPR with 0.5 PPFD.|0.5 first downs passed 2024. Sleeper scores a flat 1.0 per reception via yardage tiers (0+ yds = 1), i.e. full PPR since 2021.
+MN||Payout structure|Champion: 60%.|
+MN||Payout structure|Runner-up: 20%.|
+MN||Payout structure|3rd place game winner: 10%.|
+MN||Payout structure|First place regular season: 10%.|Buy-in raised to $120 in 2019.
+RO||Valid rosters|Each manager must start a minimum of 5 players per week.|Not on the suggestions sheet.
+RO|2020|Valid rosters|Managers may not start a player grandfathered into a position he is no longer eligible for.|2020 vote also lets the commissioner edit such lineups.
+TR|2022|Valid rosters|No transactions once a manager is eliminated from Playoff/Sacko contention.|Passed 2022 (3rd place counts as a league award).
+TR|2024|Trading|All trades auto-process.|
+TR||Trading|Managers may not veto trades they are a participant in.|
+TR||Trading|A majority vote of the remaining managers is required to veto a trade.|
+TR||Trading|The league does not vote on or enforce trades with multiple transactions; each trade proposed in Sleeper is voted on separately.|
+PL||Playoff seeding|1st and 2nd seeds get a bye.|Sleeper: 6 playoff teams. The sheet's 2022 entry said 5 teams / 3-team final; the Site describes 6.
+PL||Playoff seeding|The 3rd seed picks between the 5th and 6th seeds as the first-round opponent.|
+PL||Playoff seeding|The pick must be made by Tuesday night before Week 16 so teams can submit waiver claims.|
+SA||Sacko|Sacko is a Toilet Bowl tournament among the 6 lowest teams, mirroring the playoff seeding.|Sacko bracket history: 2020, 2022, 2025.
+SA|2025|Sacko|Unless Sacko is decided outright by a 31+ Rumble deficit to 9th place at the end of the regular season.|Threshold was 36 before the 2025 change; the 2022 proposal to cut 37 to 29 failed.
+GV||League rule changes|Off-season rule changes pass by simple majority.|
+GV|2019|League rule changes|In-season rule changes need a 10 or 11 of 12 "mega-majority".|Originally 9/10 support in 2019.
+GV||League rule changes|The new season officially begins after the league dinner.|
