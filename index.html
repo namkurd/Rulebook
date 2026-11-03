@@ -29,6 +29,12 @@ select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius
 .sect{display:flex;align-items:center;gap:8px;margin:24px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
 .sect:before{content:'';width:10px;height:10px;border-radius:3px;background:var(--c)}
 .sect:after{content:'';flex:1;height:1px;background:color-mix(in srgb,var(--c) 40%,transparent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.chipc{border:1px solid color-mix(in srgb,var(--c,var(--accent)) 65%,transparent);color:var(--c,var(--accent));background:color-mix(in srgb,var(--c,var(--accent)) 8%,transparent);padding:5px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px}
+.chipc:hover{background:color-mix(in srgb,var(--c,var(--accent)) 20%,transparent)}
+.chipc.on{background:var(--c,var(--accent));color:#0f1115;font-weight:600}
+.chipc.all{--c:var(--ink)}.chipc.all.on{color:var(--bg)}
+a.tag{text-decoration:none;color:var(--accent2);border-color:var(--accent2)}
 .subh{margin:12px 0 5px 2px;font-size:12px;color:var(--mute);font-weight:600}
 .rule h3{margin:0 0 5px;font-size:15px;font-weight:600}
 .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}
@@ -59,11 +65,13 @@ h2{font-size:17px;margin:20px 0 8px}
 <main>
   <nav id="tabs">
     <button data-t="current" class="on">Current rules</button>
+    <button data-t="open">Open suggestions</button>
     <button data-t="rules">Rule history</button>
     <button data-t="scoring">Scoring</button>
     <button data-t="setup">League setup</button>
   </nav>
   <section id="current"></section>
+  <section id="open" hidden></section>
   <section id="rules" hidden></section>
   <section id="scoring" hidden></section>
   <section id="setup" hidden></section>
@@ -87,29 +95,46 @@ const getJSON = u => fetch(u).then(r=>{if(!r.ok)throw new Error(u+" "+r.status);
 /* ---- tabs ---- */
 document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));
-  ["current","rules","scoring","setup"].forEach(id=>$("#"+id).hidden = id!==b.dataset.t);
+  ["current","open","rules","scoring","setup"].forEach(id=>$("#"+id).hidden = id!==b.dataset.t);
 });
 
-/* ---- rulebook ---- */
-const F = {q:"",cat:"",year:"",status:"PASS",from:"",to:""};
+/* ---- color-coded type filter buttons (multi-select; none selected = all) ---- */
+function chipBar(host, cats, onChange){
+  const sel=new Set();
+  host.className="chips";
+  host.innerHTML=`<button class="chipc all on" data-k="">All types</button>`+cats.map(k=>`<button class="chipc" data-k="${k}" style="--c:var(--c-${k})">${esc(CATS[k])}</button>`).join("");
+  host.onclick=e=>{
+    const b=e.target.closest("button");if(!b)return;
+    const k=b.dataset.k;
+    if(!k)sel.clear();else sel.has(k)?sel.delete(k):sel.add(k);
+    host.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.k?sel.has(x.dataset.k):!sel.size));
+    onChange();
+  };
+  return ()=>sel;
+}
+const link=r=>r.link?`<a class="tag" href="${esc(r.link)}" target="_blank" rel="noopener">Slack post ↗</a>`:"";
+
+/* ---- rule history ---- */
 function renderRules(rules){
   const years=[...new Set(rules.map(r=>r.year))].sort((a,b)=>b-a);
-  const opt=(o,sel)=>Object.entries(o).map(([k,v])=>`<option value="${k}"${sel===k?" selected":""}>${esc(v)}</option>`).join("");
+  const opt=o=>Object.entries(o).map(([k,v])=>`<option value="${k}"${k==="PASS"?" selected":""}>${esc(v)}</option>`).join("");
   $("#rules").innerHTML=`
+  <div id="fchips"></div>
   <div class="filters">
     <label>Search<input type="search" id="fq" placeholder="e.g. kicker, IR, sacko"></label>
-    <label>Type of rule<select id="fc"><option value="">All types</option>${opt(CATS,F.cat)}</select></label>
-    <label>Status<select id="fs"><option value="">Every proposal</option>${opt(STATUS,F.status)}</select></label>
+    <label>Status<select id="fs"><option value="">Every proposal</option>${opt(STATUS)}</select></label>
     <label>Instituted in<select id="fy"><option value="">Any year</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label>
     <label>From year<select id="ff"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
     <label>To year<select id="ft"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
   </div>
   <div class="count" id="cnt"></div><div id="list"></div>`;
+  const cats=()=>sel();
+  const sel=chipBar($("#fchips"),Object.keys(CATS),()=>apply());
   const apply=()=>{
-    F.q=$("#fq").value.toLowerCase();F.cat=$("#fc").value;F.status=$("#fs").value;F.year=$("#fy").value;F.from=$("#ff").value;F.to=$("#ft").value;
-    const m=rules.filter(r=>(!F.cat||r.category===F.cat)&&(!F.status||r.status===F.status)&&(!F.year||r.year==F.year)
-      &&(!F.from||r.year>=+F.from)&&(!F.to||r.year<=+F.to)
-      &&(!F.q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(F.q)));
+    const q=$("#fq").value.toLowerCase(),st=$("#fs").value,fy=$("#fy").value,ff=$("#ff").value,ft=$("#ft").value,c=cats();
+    const m=rules.filter(r=>(!c.size||c.has(r.category))&&(!st||r.status===st)&&(!fy||r.year==fy)
+      &&(!ff||r.year>=+ff)&&(!ft||r.year<=+ft)
+      &&(!q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(q)));
     $("#cnt").textContent=`${m.length} of ${rules.length} entries`;
     let out="",last=null;
     m.sort((a,b)=>b.year-a.year||a.ord-b.ord||a.id-b.id).forEach(r=>{
@@ -117,29 +142,60 @@ function renderRules(rules){
       out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.title)}</h3><div class="meta">
         <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>${r.flag==="sup"?'<span class="tag s-FAIL">Superseded</span>':r.status==="PASS"&&r.flag==="once"?'<span class="tag">One-time</span>':r.status==="PASS"?'<span class="tag s-PASS">In force</span>':""}
         <span class="tag cat" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</span>
-        ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}</div>
+        ${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}${link(r)}</div>
         ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
     });
     $("#list").innerHTML=out||'<div class="note">No entries match.</div>';
   };
-  ["fq","fc","fs","fy","ff","ft"].forEach(id=>$("#"+id).addEventListener(id==="fq"?"input":"change",apply));
+  ["fs","fy","ff","ft"].forEach(id=>$("#"+id).addEventListener("change",apply));
+  $("#fq").addEventListener("input",apply);
   apply();
+}
+
+/* ---- open suggestions (pending / tabled / exploring) ---- */
+function renderOpen(rules){
+  const OPEN=["PENDING","TABLED","EXPLORE"];
+  const all=rules.filter(r=>OPEN.includes(r.status));
+  const cats=Object.keys(CATS).filter(k=>all.some(r=>r.category===k));
+  $("#open").innerHTML=`<div class="status">Suggestions awaiting a vote. 2026 comes from the League Suggestions sheet tab; new posts from #league-suggestions are added when Ben reacts to them with 📖. Items still open from earlier years are listed below.</div>
+  <div id="ochips"></div>
+  <div class="filters"><label>Search<input type="search" id="oq"></label></div>
+  <div class="count" id="ocnt"></div><div id="olist"></div>`;
+  const sel=chipBar($("#ochips"),cats,()=>apply());
+  const apply=()=>{
+    const q=$("#oq").value.toLowerCase(),c=sel();
+    const m=all.filter(r=>(!c.size||c.has(r.category))&&(!q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(q)));
+    m.sort((a,b)=>(b.year===2026)-(a.year===2026)||b.year-a.year||a.ord-b.ord||a.id-b.id);
+    $("#ocnt").textContent=`${m.length} open suggestion${m.length===1?"":"s"}`;
+    let out="",last=null;
+    m.forEach(r=>{
+      const g=r.year===2026?"2026 suggestions":"Carried over from earlier years";
+      if(g!==last){out+=`<div class="yr">${g}</div>`;last=g}
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.title)}</h3><div class="meta">
+        <span class="tag s-${r.status}">${esc(STATUS[r.status])}${r.vote?" · "+esc(r.vote):""}</span>
+        <span class="tag cat" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</span>
+        ${r.year!==2026?`<span class="tag">from ${r.year}</span>`:""}${r.nominator?`<span>by ${esc(r.nominator)}</span>`:""}${r.impact?`<span>impact: ${esc(r.impact)}</span>`:""}${link(r)}</div>
+        ${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+    });
+    $("#olist").innerHTML=out||'<div class="note">Nothing open.</div>';
+  };
+  $("#oq").addEventListener("input",apply);apply();
 }
 
 /* ---- current rules ---- */
 function renderCurrent(cur){
   const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
-  const cats=Object.entries(CATS).filter(([k])=>cur.some(r=>r.category===k));
+  const cats=Object.keys(CATS).filter(k=>cur.some(r=>r.category===k));
   $("#current").innerHTML=`<div class="status">Every rule in force: the league site rules plus each rule passed over the years (2019 on) that hasn't been replaced. "Since" is the year it passed on the suggestions sheet. Replaced rules are in Rule history, tagged Superseded.</div>
+  <div id="cchips"></div>
   <div class="filters">
    <label>Search<input type="search" id="cq"></label>
-   <label>Type of rule<select id="cc"><option value="">All types</option>${cats.map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join("")}</select></label>
    <label>Instituted<select id="cy"><option value="">Any</option><option value="none">Not on sheet</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label></div>
   <div class="count" id="ccnt"></div><div id="clist"></div>`;
+  const sel=chipBar($("#cchips"),cats,()=>apply());
   const apply=()=>{
-    const q=$("#cq").value.toLowerCase(),c=$("#cc").value,y=$("#cy").value;
-    const order=Object.keys(CATS);
-    const m=cur.filter(r=>(!c||r.category===c)&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
+    const q=$("#cq").value.toLowerCase(),c=sel(),y=$("#cy").value;
+    const m=cur.filter(r=>(!c.size||c.has(r.category))&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
     m.sort((a,b)=>a.ord-b.ord||(a.source==="site"?0:1)-(b.source==="site"?0:1)||(a.source==="site"?0:(a.year||0)-(b.year||0))||a.id-b.id);
     $("#ccnt").textContent=`${m.length} of ${cur.length} rules in force`;
     let out="",last=null,lastSub=null;
@@ -150,7 +206,7 @@ function renderCurrent(cur){
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };
-  ["cq","cc","cy"].forEach(id=>$("#"+id).addEventListener(id==="cq"?"input":"change",apply));apply();
+  $("#cq").addEventListener("input",apply);$("#cy").addEventListener("change",apply);apply();
 }
 
 /* ---- scoring (live from Sleeper) ---- */
@@ -230,7 +286,7 @@ Promise.all([
   getJSON(CONFIG.currentUrl),
   getJSON(CONFIG.rulesUrl),
   getJSON(`${CONFIG.api}/league/${CONFIG.leagueId}`).then(d=>[d,true]).catch(()=>getJSON(CONFIG.snapshotUrl).then(d=>[d,false]))
-]).then(([cur,rules,[L,live]])=>{renderCurrent(cur);renderRules(rules);renderScoring(L,live);renderSetup(L)})
+]).then(([cur,rules,[L,live]])=>{renderCurrent(cur);renderOpen(rules);renderRules(rules);renderScoring(L,live);renderSetup(L)})
  .catch(e=>{$("#rules").innerHTML=`<div class="callout">Failed to load: ${esc(e.message)}. Serve over http (e.g. <code>python3 -m http.server</code>), not file://.</div>`});
 </script>
 </body>
