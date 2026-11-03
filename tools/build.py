@@ -41,8 +41,8 @@ def classify(cat, text):
 
 rules = []
 for l in lines('rules.txt'):
-    y, c, s, t, n, im, v, no, flag, since, link = l.split('|')
-    rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no, flag=flag, since=int(since) if since else None, link=link))
+    y, c, s, t, n, im, v, no, flag, since, link, by = l.split('|')
+    rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no, flag=flag, since=int(since) if since else None, link=link, by=by))
 for r in rules:
     i, r['sub'] = classify(r['category'], r['title'])
     r['ord'] = CAT_ORDER.index(r['category']) * 100 + i
@@ -50,12 +50,22 @@ dump(rules, 'rules.json')
 
 cur = []
 for l in lines('current.txt'):
-    c, y, g, t, n = l.split('|')
-    cur.append(dict(id=len(cur)+1, category=c, year=int(y) if y else None, group=g, rule=t, notes=n, source='site'))
+    parts = l.split('|')
+    c, y, g, t, n = parts[:5]
+    label = parts[5] if len(parts) > 5 else 'league site'
+    cur.append(dict(id=len(cur)+1, category=c, year=int(y) if y else None, group=g, rule=t, notes=n, source='site', label=label))
 # every passed rule still in force (not superseded, not a duplicate of a Site rule, not a one-time action)
 for r in sorted(rules, key=lambda r: r['year']):
     if r['status'] == 'PASS' and not r['flag']:
-        cur.append(dict(id=len(cur)+1, category=r['category'], year=r['since'] or r['year'], group='', rule=r['title'], notes=r['notes'], source='history'))
+        cur.append(dict(id=len(cur)+1, category=r['category'], year=r['since'] or r['year'], group='', rule=r['title'], notes=r['notes'], source='history', label='suggestions sheet'))
+# superseded rules become footnotes on the rule that replaced them
+for r in rules:
+    if r['by']:
+        tgt = [c for c in cur if c['rule'].startswith(r['by'])]
+        assert len(tgt) == 1, ('no unique target for', r['title'], r['by'], len(tgt))
+        tgt[0].setdefault('replaces', []).append(dict(year=r['year'], title=r['title'], notes=r['notes']))
+for c in cur:
+    c.get('replaces', []).sort(key=lambda x: -x['year'])
 for i, r in enumerate(cur):
     r['id'] = i + 1
     j, r['sub'] = classify(r['category'], r['rule'])

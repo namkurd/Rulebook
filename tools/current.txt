@@ -2,6 +2,7 @@
 GV|||Members agree to abide by these rules, which supplement the rules enforced by Sleeper.|
 RO|2025|Format|12-person Super Flex league.|12 teams passed 2025; Superflex first passed 2022. Sleeper shows 2 SUPER_FLEX slots.
 SC|2024|Format|Scoring is Tiered PPR with 0.5 PPFD.|0.5 first downs passed 2024. Sleeper scores a flat 1.0 per reception via yardage tiers (0+ yds = 1), i.e. full PPR since 2021.
+MN|2025|Buy-in|Buy-in is $200.||per commissioner
 MN||Payout structure|Champion: 60%.|
 MN||Payout structure|Runner-up: 20%.|
 MN||Payout structure|3rd place game winner: 10%.|

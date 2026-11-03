@@ -29,12 +29,18 @@ select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius
 .sect{display:flex;align-items:center;gap:8px;margin:24px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
 .sect:before{content:'';width:10px;height:10px;border-radius:3px;background:var(--c)}
 .sect:after{content:'';flex:1;height:1px;background:color-mix(in srgb,var(--c) 40%,transparent)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:18px;align-items:start}
+.layout .body{min-width:0}
+.chips{display:flex;flex-direction:column;gap:6px;position:sticky;top:12px}
+.chips .chipc{text-align:left;width:100%;border-radius:10px;padding:8px 12px}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.chips{flex-direction:row;flex-wrap:wrap;position:static}.chips .chipc{width:auto;border-radius:999px}}
 .chipc{border:1px solid color-mix(in srgb,var(--c,var(--accent)) 65%,transparent);color:var(--c,var(--accent));background:color-mix(in srgb,var(--c,var(--accent)) 8%,transparent);padding:5px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px}
 .chipc:hover{background:color-mix(in srgb,var(--c,var(--accent)) 20%,transparent)}
 .chipc.on{background:var(--c,var(--accent));color:#0f1115;font-weight:600}
 .chipc.all{--c:var(--ink)}.chipc.all.on{color:var(--bg)}
 a.tag{text-decoration:none;color:var(--accent2);border-color:var(--accent2)}
+.fn{margin-top:8px;padding-top:7px;border-top:1px dashed var(--line);font-size:12px;color:var(--mute)}
+.fn b{font-weight:600}
 .subh{margin:12px 0 5px 2px;font-size:12px;color:var(--mute);font-weight:600}
 .rule h3{margin:0 0 5px;font-size:15px;font-weight:600}
 .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}
@@ -119,7 +125,7 @@ function renderRules(rules){
   const years=[...new Set(rules.map(r=>r.year))].sort((a,b)=>b-a);
   const opt=o=>Object.entries(o).map(([k,v])=>`<option value="${k}"${k==="PASS"?" selected":""}>${esc(v)}</option>`).join("");
   $("#rules").innerHTML=`
-  <div id="fchips"></div>
+  <div class="layout"><aside id="fchips"></aside><div class="body">
   <div class="filters">
     <label>Search<input type="search" id="fq" placeholder="e.g. kicker, IR, sacko"></label>
     <label>Status<select id="fs"><option value="">Every proposal</option>${opt(STATUS)}</select></label>
@@ -127,7 +133,7 @@ function renderRules(rules){
     <label>From year<select id="ff"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
     <label>To year<select id="ft"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
   </div>
-  <div class="count" id="cnt"></div><div id="list"></div>`;
+  <div class="count" id="cnt"></div><div id="list"></div></div></div>`;
   const cats=()=>sel();
   const sel=chipBar($("#fchips"),Object.keys(CATS),()=>apply());
   const apply=()=>{
@@ -158,9 +164,9 @@ function renderOpen(rules){
   const all=rules.filter(r=>r.year===2026&&OPEN.includes(r.status));
   const cats=Object.keys(CATS).filter(k=>all.some(r=>r.category===k));
   $("#open").innerHTML=`<div class="status">Suggestions awaiting a vote. These come from the 2026 tab of the League Suggestions sheet; new posts from #league-suggestions are added when Ben reacts to them with 📖.</div>
-  <div id="ochips"></div>
+  <div class="layout"><aside id="ochips"></aside><div class="body">
   <div class="filters"><label>Search<input type="search" id="oq"></label></div>
-  <div class="count" id="ocnt"></div><div id="olist"></div>`;
+  <div class="count" id="ocnt"></div><div id="olist"></div></div></div>`;
   const sel=chipBar($("#ochips"),cats,()=>apply());
   const apply=()=>{
     const q=$("#oq").value.toLowerCase(),c=sel();
@@ -185,11 +191,11 @@ function renderCurrent(cur){
   const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
   const cats=Object.keys(CATS).filter(k=>cur.some(r=>r.category===k));
   $("#current").innerHTML=`<div class="status">Every rule in force: the league site rules plus each rule passed over the years (2019 on) that hasn't been replaced. "Since" is the year it passed on the suggestions sheet. Replaced rules are in Rule history, tagged Superseded.</div>
-  <div id="cchips"></div>
+  <div class="layout"><aside id="cchips"></aside><div class="body">
   <div class="filters">
    <label>Search<input type="search" id="cq"></label>
    <label>Instituted<select id="cy"><option value="">Any</option><option value="none">Not on sheet</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label></div>
-  <div class="count" id="ccnt"></div><div id="clist"></div>`;
+  <div class="count" id="ccnt"></div><div id="clist"></div></div></div>`;
   const sel=chipBar($("#cchips"),cats,()=>apply());
   const apply=()=>{
     const q=$("#cq").value.toLowerCase(),c=sel(),y=$("#cy").value;
@@ -200,7 +206,7 @@ function renderCurrent(cur){
     m.forEach(r=>{
       if(r.category!==last){out+=`<div class="sect" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</div>`;last=r.category;lastSub=null}
       if(r.sub!==lastSub){out+=`<div class="subh">${esc(r.sub)}</div>`;lastSub=r.sub}
-      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.rule)}</h3><div class="meta">${r.group?`<span class="tag cat" style="--c:var(--c-${r.category})">${esc(r.group)}</span>`:""}${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${r.source==="site"?"league site":"suggestions sheet"}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}</div>`;
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.rule)}</h3><div class="meta">${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${esc(r.label)}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length?`<div class="fn">${r.replaces.map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };

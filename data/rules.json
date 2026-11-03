@@ -12,6 +12,7 @@
   "flag": "",
   "since": null,
   "link": "https://dtf-club.slack.com/archives/CCG47441Z/p1788271924979469",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -28,6 +29,7 @@
   "flag": "",
   "since": null,
   "link": "https://dtf-club.slack.com/archives/CCG47441Z/p1789482593157049",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -44,6 +46,7 @@
   "flag": "",
   "since": null,
   "link": "https://dtf-club.slack.com/archives/CCG47441Z/p1789486327971949",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -60,6 +63,7 @@
   "flag": "",
   "since": null,
   "link": "https://dtf-club.slack.com/archives/CCG47441Z/p1789487347600449",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -76,6 +80,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Buy-in",
   "ord": 700
  },
@@ -92,6 +97,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Auction & draft",
   "ord": 600
  },
@@ -108,6 +114,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -124,6 +131,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -140,6 +148,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -156,6 +165,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Payouts",
   "ord": 701
  },
@@ -172,6 +182,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Shotgun",
   "ord": 900
  },
@@ -188,6 +199,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -204,6 +216,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -220,6 +233,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -236,6 +250,7 @@
   "flag": "dup",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -252,6 +267,7 @@
   "flag": "once",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -268,6 +284,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -284,6 +301,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -300,6 +318,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -316,6 +335,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Auction & draft",
   "ord": 600
  },
@@ -332,6 +352,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Auction & draft",
   "ord": 600
  },
@@ -348,6 +369,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -364,6 +386,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -380,6 +403,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Bench & roster limits",
   "ord": 101
  },
@@ -396,6 +420,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Bench & roster limits",
   "ord": 101
  },
@@ -412,6 +437,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Bench & roster limits",
   "ord": 101
  },
@@ -428,6 +454,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -444,6 +471,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Bracket & qualification",
   "ord": 500
  },
@@ -460,6 +488,7 @@
   "flag": "dup",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Bracket & qualification",
   "ord": 500
  },
@@ -476,6 +505,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -492,6 +522,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Shotgun",
   "ord": 900
  },
@@ -508,6 +539,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Injury replacement",
   "ord": 201
  },
@@ -524,6 +556,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -540,6 +573,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -556,6 +590,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -572,6 +607,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -588,6 +624,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -604,6 +641,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -620,6 +658,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -636,6 +675,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -652,6 +692,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -668,6 +709,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -684,6 +726,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -700,6 +743,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -716,6 +760,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Schedule",
   "ord": 400
  },
@@ -732,6 +777,7 @@
   "flag": "dup",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Trades",
   "ord": 301
  },
@@ -748,6 +794,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -764,6 +811,7 @@
   "flag": "dup",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -780,6 +828,7 @@
   "flag": "unv",
   "since": null,
   "link": "",
+  "by": "25 yards per point on KR/PR",
   "sub": "Return yards",
   "ord": 4
  },
@@ -796,6 +845,7 @@
   "flag": "unv",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -812,6 +862,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Shotgun",
   "ord": 900
  },
@@ -828,6 +879,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -844,6 +896,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -860,6 +913,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -876,6 +930,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Injury replacement",
   "ord": 201
  },
@@ -892,6 +947,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -908,6 +964,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Shotgun",
   "ord": 900
  },
@@ -924,6 +981,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -940,6 +998,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -956,6 +1015,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Bracket & qualification",
   "ord": 500
  },
@@ -972,6 +1032,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -988,6 +1049,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -1004,6 +1066,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -1020,6 +1083,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Injury replacement",
   "ord": 201
  },
@@ -1036,6 +1100,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Schedule",
   "ord": 400
  },
@@ -1052,6 +1117,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -1068,6 +1134,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -1084,6 +1151,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -1100,6 +1168,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -1116,6 +1185,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -1132,6 +1202,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -1148,6 +1219,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -1164,6 +1236,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -1180,6 +1253,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -1196,6 +1270,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Kicking",
   "ord": 2
  },
@@ -1212,6 +1287,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Injury replacement",
   "ord": 201
  },
@@ -1228,6 +1304,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Auction & draft",
   "ord": 600
  },
@@ -1244,6 +1321,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Add Lamp and Eli",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -1260,6 +1338,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "All trades auto-process",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -1276,6 +1355,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "All trades auto-process",
   "sub": "Trades",
   "ord": 301
  },
@@ -1292,6 +1372,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Punishment",
   "ord": 501
  },
@@ -1308,6 +1389,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Punishment",
   "ord": 501
  },
@@ -1324,6 +1406,7 @@
   "flag": "dup",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -1340,6 +1423,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Punishment",
   "ord": 501
  },
@@ -1356,6 +1440,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Sacko is a Toilet Bowl",
   "sub": "Punishment",
   "ord": 501
  },
@@ -1372,6 +1457,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -1388,6 +1474,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -1404,6 +1491,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -1420,6 +1508,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Standings & tiebreakers",
   "ord": 401
  },
@@ -1436,6 +1525,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Conduct & fair play",
   "ord": 802
  },
@@ -1452,6 +1542,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Payouts",
   "ord": 701
  },
@@ -1468,6 +1559,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -1484,6 +1576,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Injury replacement",
   "ord": 201
  },
@@ -1500,6 +1593,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -1516,6 +1610,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -1532,6 +1627,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -1548,6 +1644,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -1564,6 +1661,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -1580,6 +1678,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -1596,6 +1695,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -1612,6 +1712,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -1628,6 +1729,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -1644,6 +1746,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -1660,6 +1763,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -1676,6 +1780,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -1692,6 +1797,7 @@
   "flag": "once",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -1708,6 +1814,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -1724,6 +1831,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Standings & tiebreakers",
   "ord": 401
  },
@@ -1740,6 +1848,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Punishment",
   "ord": 501
  },
@@ -1756,6 +1865,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Superflex replaces the 2nd flex",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -1772,6 +1882,7 @@
   "flag": "dup",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -1788,6 +1899,7 @@
   "flag": "once",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Punishment",
   "ord": 501
  },
@@ -1804,6 +1916,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Platform & agreement",
   "ord": 800
  },
@@ -1820,6 +1933,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -1836,6 +1950,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -1852,6 +1967,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Auction & draft",
   "ord": 600
  },
@@ -1868,6 +1984,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -1884,6 +2001,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Full PPR for 0+",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -1900,6 +2018,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -1916,6 +2035,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Reduce QB sack",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -1932,6 +2052,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -1948,6 +2069,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  },
@@ -1964,6 +2086,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Kicking",
   "ord": 2
  },
@@ -1980,6 +2103,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Standings & tiebreakers",
   "ord": 401
  },
@@ -1992,10 +2116,11 @@
   "nominator": "Joe",
   "impact": "",
   "vote": "8-1",
-  "notes": "",
-  "flag": "",
+  "notes": "Royal Rumble is now the main standings setting (2021)",
+  "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Fractional Royal Rumble",
   "sub": "Standings & tiebreakers",
   "ord": 401
  },
@@ -2012,6 +2137,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Sacko is a Toilet Bowl",
   "sub": "Bracket & qualification",
   "ord": 500
  },
@@ -2028,6 +2154,7 @@
   "flag": "",
   "since": 2025,
   "link": "",
+  "by": "",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -2044,6 +2171,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Bench & roster limits",
   "ord": 101
  },
@@ -2060,6 +2188,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Add Lamp and Eli",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -2076,6 +2205,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "IR slots & eligibility",
   "ord": 200
  },
@@ -2088,10 +2218,11 @@
   "nominator": "Jake/Ryan",
   "impact": "",
   "vote": "Yes (8/19)",
-  "notes": "",
-  "flag": "",
+  "notes": "Raised to $200 in 2025",
+  "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Buy-in is $200",
   "sub": "Buy-in",
   "ord": 700
  },
@@ -2108,6 +2239,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Defensive scoring scaled",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -2124,6 +2256,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Auction & draft",
   "ord": 600
  },
@@ -2140,6 +2273,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -2156,6 +2290,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -2172,6 +2307,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Missed XP",
   "sub": "Kicking",
   "ord": 2
  },
@@ -2184,10 +2320,11 @@
   "nominator": "Aidan",
   "impact": "",
   "vote": "5-4",
-  "notes": "Probably replaced by the 2020 Royal Rumble tiebreaker; confirm",
+  "notes": "Royal Rumble standings now decide ties",
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Fractional Royal Rumble",
   "sub": "Standings & tiebreakers",
   "ord": 401
  },
@@ -2204,6 +2341,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -2220,6 +2358,7 @@
   "flag": "dup",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -2236,6 +2375,7 @@
   "flag": "sup",
   "since": null,
   "link": "",
+  "by": "Superflex replaces the 2nd flex",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -2252,6 +2392,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Bench & roster limits",
   "ord": 101
  },
@@ -2268,6 +2409,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -2284,6 +2426,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -2300,6 +2443,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -2316,6 +2460,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Valid lineups",
   "ord": 102
  },
@@ -2332,6 +2477,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Waivers, FAAB & transactions",
   "ord": 300
  },
@@ -2348,6 +2494,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Rule changes",
   "ord": 801
  },
@@ -2364,6 +2511,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Playoff format & seeding",
   "ord": 402
  },
@@ -2380,6 +2528,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -2396,6 +2545,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Lineup slots",
   "ord": 100
  },
@@ -2412,6 +2562,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Trades",
   "ord": 301
  },
@@ -2428,6 +2579,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Payouts",
   "ord": 701
  },
@@ -2444,6 +2596,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -2460,6 +2613,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Standings & tiebreakers",
   "ord": 401
  },
@@ -2476,6 +2630,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Auction & draft",
   "ord": 600
  },
@@ -2492,6 +2647,7 @@
   "flag": "",
   "since": null,
   "link": "",
+  "by": "",
   "sub": "Return yards",
   "ord": 4
  }
