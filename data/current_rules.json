@@ -128,10 +128,10 @@
  {
   "id": 15,
   "category": "PL",
-  "year": null,
+  "year": 2025,
   "group": "Playoff seeding",
   "rule": "1st and 2nd seeds get a bye.",
-  "notes": "Sleeper: 6 playoff teams. The sheet's 2022 entry said 5 teams / 3-team final; the Site describes 6.",
+  "notes": "Format history: 15 weeks / 4 teams (2020), then 5 teams with a 3-team final for 2 seasons, now 14 weeks / 6 teams with 12 teams (2025). Sleeper: 6 playoff teams, start Week 15.",
   "source": "site"
  },
  {
@@ -281,10 +281,10 @@
  {
   "id": 32,
   "category": "PL",
-  "year": 2020,
+  "year": 2025,
   "group": "",
   "rule": "Add Lamp and Eli: 14 week RS, 6 teams make playoffs, wildcard weekend",
-  "notes": "Conflicts with 15-week/4-team entry below; sheet lists both as Pass. Sleeper confirms: 6 playoff teams, playoffs start Week 15 (14-week regular season)",
+  "notes": "Proposed 2020; took effect with the 12-team expansion (2025): 14-week regular season, 6 playoff teams, wildcard weekend. Sleeper confirms (playoffs start Week 15)",
   "source": "history"
  },
  {
@@ -356,7 +356,7 @@
   "year": 2022,
   "group": "",
   "rule": "Waivers move to 12pm; free agents open after Saturday 12pm",
-  "notes": "Sleeper shows daily waiver hour 9; confirm the timezone",
+  "notes": "Waivers run at 12pm Eastern (Sleeper stores hour 9)",
   "source": "history"
  },
  {

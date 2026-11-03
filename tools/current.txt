@@ -13,7 +13,7 @@ TR|2024|Trading|All trades auto-process.|
 TR||Trading|Managers may not veto trades they are a participant in.|
 TR||Trading|A majority vote of the remaining managers is required to veto a trade.|
 TR||Trading|The league does not vote on or enforce trades with multiple transactions; each trade proposed in Sleeper is voted on separately.|
-PL||Playoff seeding|1st and 2nd seeds get a bye.|Sleeper: 6 playoff teams. The sheet's 2022 entry said 5 teams / 3-team final; the Site describes 6.
+PL|2025|Playoff seeding|1st and 2nd seeds get a bye.|Format history: 15 weeks / 4 teams (2020), then 5 teams with a 3-team final for 2 seasons, now 14 weeks / 6 teams with 12 teams (2025). Sleeper: 6 playoff teams, start Week 15.
 PL||Playoff seeding|The 3rd seed picks between the 5th and 6th seeds as the first-round opponent.|
 PL||Playoff seeding|The pick must be made by Tuesday night before Week 16 so teams can submit waiver claims.|
 SA||Sacko|Sacko is a Toilet Bowl tournament among the 6 lowest teams, mirroring the playoff seeding.|Sacko bracket history: 2020, 2022, 2025.

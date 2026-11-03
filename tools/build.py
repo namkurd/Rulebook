@@ -14,8 +14,8 @@ def dump(obj, name):
 
 rules = []
 for l in lines('rules.txt'):
-    y, c, s, t, n, im, v, no, flag = l.split('|')
-    rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no, flag=flag))
+    y, c, s, t, n, im, v, no, flag, since = l.split('|')
+    rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no, flag=flag, since=int(since) if since else None))
 dump(rules, 'rules.json')
 
 cur = []
@@ -25,7 +25,7 @@ for l in lines('current.txt'):
 # every passed rule still in force (not superseded, not a duplicate of a Site rule, not a one-time action)
 for r in sorted(rules, key=lambda r: r['year']):
     if r['status'] == 'PASS' and not r['flag']:
-        cur.append(dict(id=len(cur)+1, category=r['category'], year=r['year'], group='', rule=r['title'], notes=r['notes'], source='history'))
+        cur.append(dict(id=len(cur)+1, category=r['category'], year=r['since'] or r['year'], group='', rule=r['title'], notes=r['notes'], source='history'))
 for i, r in enumerate(cur):
     r['id'] = i + 1
 dump(cur, 'current_rules.json')
