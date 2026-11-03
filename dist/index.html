@@ -29,11 +29,17 @@ select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius
 .sect{display:flex;align-items:center;gap:8px;margin:24px 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
 .sect:before{content:'';width:10px;height:10px;border-radius:3px;background:var(--c)}
 .sect:after{content:'';flex:1;height:1px;background:color-mix(in srgb,var(--c) 40%,transparent)}
+.ylab{font-size:12px;color:var(--mute);margin:2px 0 4px}
+.yrs{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:5px;margin-bottom:12px}
+.yrc{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:5px 0;border-radius:8px;cursor:pointer;font:inherit;font-size:13px;text-align:center;font-variant-numeric:tabular-nums}
+.yrc:hover{border-color:var(--accent)}
+.yrc.on{background:var(--accent);border-color:var(--accent);color:#0f1115;font-weight:600}
 .layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:18px;align-items:start}
 .layout .body{min-width:0}
 .chips{display:flex;flex-direction:column;gap:6px;position:sticky;top:12px}
 .chips .chipc{text-align:left;width:100%;border-radius:10px;padding:8px 12px}
 .chipc .short{display:none}
+@media(max-width:720px){.yrs{grid-template-columns:repeat(auto-fit,minmax(36px,1fr));gap:4px}.yrc{font-size:11.5px;padding:5px 0;border-radius:7px}}
 @media(max-width:720px){.layout{grid-template-columns:1fr;gap:10px}.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;position:static;margin-bottom:4px}.chips .chipc{width:100%;min-width:0;padding:7px 2px;font-size:12px;line-height:1.1;text-align:center;border-radius:8px;white-space:nowrap}.chipc .full{display:none}.chipc .short{display:inline}}
 .chipc{border:1px solid color-mix(in srgb,var(--c,var(--accent)) 65%,transparent);color:var(--c,var(--accent));background:color-mix(in srgb,var(--c,var(--accent)) 8%,transparent);padding:5px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px}
 .chipc:hover{background:color-mix(in srgb,var(--c,var(--accent)) 20%,transparent)}
@@ -3938,6 +3944,19 @@ function chipBar(host, cats, onChange){
   };
   return ()=>sel;
 }
+function yearBar(host, years, onChange, withNone){
+  const sel=new Set();
+  host.className="yrs";
+  host.innerHTML=`<button class="yrc all on" data-k="">All</button>`+years.map(y=>`<button class="yrc" data-k="${y}">${y}</button>`).join("")+(withNone?`<button class="yrc" data-k="none" title="No year on the sheet">—</button>`:"");
+  host.onclick=e=>{
+    const b=e.target.closest("button");if(!b)return;
+    const k=b.dataset.k;
+    if(!k)sel.clear();else sel.has(k)?sel.delete(k):sel.add(k);
+    host.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.k?sel.has(x.dataset.k):!sel.size));
+    onChange();
+  };
+  return ()=>sel;
+}
 const link=r=>r.link?`<a class="tag" href="${esc(r.link)}" target="_blank" rel="noopener">Slack post ↗</a>`:"";
 
 /* ---- rule history ---- */
@@ -3949,17 +3968,15 @@ function renderRules(rules){
   <div class="filters">
     <label>Search<input type="search" id="fq" placeholder="e.g. kicker, IR, sacko"></label>
     <label>Status<select id="fs"><option value="">Every proposal</option>${opt(STATUS)}</select></label>
-    <label>Instituted in<select id="fy"><option value="">Any year</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label>
-    <label>From year<select id="ff"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
-    <label>To year<select id="ft"><option value="">–</option>${years.slice().reverse().map(y=>`<option>${y}</option>`).join("")}</select></label>
   </div>
+  <div class="ylab">Year</div><div id="fyears"></div>
   <div class="count" id="cnt"></div><div id="list"></div></div></div>`;
   const cats=()=>sel();
   const sel=chipBar($("#fchips"),Object.keys(CATS),()=>apply());
+  const ysel=yearBar($("#fyears"),years.slice().reverse(),()=>apply(),false);
   const apply=()=>{
-    const q=$("#fq").value.toLowerCase(),st=$("#fs").value,fy=$("#fy").value,ff=$("#ff").value,ft=$("#ft").value,c=cats();
-    const m=rules.filter(r=>(!c.size||c.has(r.category))&&(!st||r.status===st)&&(!fy||r.year==fy)
-      &&(!ff||r.year>=+ff)&&(!ft||r.year<=+ft)
+    const q=$("#fq").value.toLowerCase(),st=$("#fs").value,c=cats(),ys=ysel();
+    const m=rules.filter(r=>(!c.size||c.has(r.category))&&(!st||r.status===st)&&(!ys.size||ys.has(String(r.year)))
       &&(!q||(r.title+" "+r.notes+" "+r.nominator).toLowerCase().includes(q)));
     $("#cnt").textContent=`${m.length} of ${rules.length} entries`;
     let out="",last=null;
@@ -3973,7 +3990,7 @@ function renderRules(rules){
     });
     $("#list").innerHTML=out||'<div class="note">No entries match.</div>';
   };
-  ["fs","fy","ff","ft"].forEach(id=>$("#"+id).addEventListener("change",apply));
+  $("#fs").addEventListener("change",apply);
   $("#fq").addEventListener("input",apply);
   apply();
 }
@@ -4050,12 +4067,14 @@ function renderCurrent(cur,sc){
   <div class="layout"><aside id="cchips"></aside><div class="body">
   <div class="filters">
    <label>Search<input type="search" id="cq"></label>
-   <label>Instituted<select id="cy"><option value="">Any</option><option value="none">Not on sheet</option>${years.map(y=>`<option>${y}</option>`).join("")}</select></label></div>
+  </div>
+  <div class="ylab">Year</div><div id="cyears"></div>
   <div class="count" id="ccnt"></div><div id="clist"></div></div></div>`;
   const sel=chipBar($("#cchips"),cats,()=>apply());
+  const ysel=yearBar($("#cyears"),years.slice().reverse(),()=>apply(),true);
   const apply=()=>{
-    const q=$("#cq").value.toLowerCase(),c=sel(),y=$("#cy").value;
-    const m=cur.filter(r=>(!c.size||c.has(r.category))&&(!y||(y==="none"?!r.year:r.year==y))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
+    const q=$("#cq").value.toLowerCase(),c=sel(),ys=ysel();
+    const m=cur.filter(r=>(!c.size||c.has(r.category))&&(!ys.size||ys.has(r.year?String(r.year):"none"))&&(!q||(r.rule+" "+r.group+" "+r.notes).toLowerCase().includes(q)));
     m.sort((a,b)=>a.ord-b.ord||(b.year||0)-(a.year||0)||a.id-b.id);
     $("#ccnt").textContent=`${m.length} of ${cur.length} rules in force`;
     let out="",last=null,lastSub=null;
@@ -4067,7 +4086,7 @@ function renderCurrent(cur,sc){
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };
-  $("#cq").addEventListener("input",apply);$("#cy").addEventListener("change",apply);apply();
+  $("#cq").addEventListener("input",apply);apply();
 }
 
 /* ---- scoring (live from Sleeper) ---- */
