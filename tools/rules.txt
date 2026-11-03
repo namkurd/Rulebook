@@ -23,7 +23,7 @@
 2025|IR|PASS|Must own a player over a roster lock (weekend) before putting him on IR|Ben|Low/Medium|6|2 IR slots were being used outside the spirit of IR expansion|||
 2025|RO|WITHDRAWN|Add 1 Flex, remove 1 bench spot|Joe|Medium|Withdrawn||||
 2025|RO|WITHDRAWN|Add WR/TE spot, remove bench|Ankit|Medium|Withdrawn||||
-2025|RO|PASS|Remove a bench spot|Aidan|Medium|7||||
+2025|RO|PASS|Remove a bench spot|Aidan|Medium|7|Result: bench goes from 7 to 6 spots (Sleeper shows 6 BN); 18 roster spots in total with the 2 IR slots|||
 2025|RO|FAIL|Remove an additional bench spot|||3||||
 2025|IR|PASS|Ban holding a player who is active in a game in an IR slot; must drop that player or another player yet to play|Joe|Low|8||||
 2025|SA|FAIL|Sacko range: only teams within X rumbles of 10th are in Sacko Bowl|Steven|Medium|3||||
@@ -126,7 +126,7 @@
 2020|PL|PASS|Royal Rumble as tiebreaker|Joe||8-1||||
 2020|SA|PASS|Sacko bracket with lowest 4 seeds: 10 seed locks Sacko if 9th is 3+ games ahead; 5-6 play 2-week H2H|Joe||6-4|Replaced by the 6-team Sacko tournament|sup||
 2020|PL|PASS|Add Lamp and Eli: 14 week RS, 6 teams make playoffs, wildcard weekend|Joe||6-3|Proposed 2020; took effect with the 12-team expansion (2025): 14-week regular season, 6 playoff teams, wildcard weekend. Sleeper confirms (playoffs start Week 15)||2025|
-2020|RO|PASS|Cut 2 bench spots|Ankit||6-3||||
+2020|RO|PASS|Cut 2 bench spots|Ankit||6-3|Result: bench is now 6 spots (7 before the 2025 cut below); 18 roster spots in total with the 2 IR slots|||
 2020|PL|PASS|15 week regular season, 4 teams advance, 1-week semis and finals|Aidan||6-1|The 2020-era format (15 weeks, 4 teams). Replaced by the 5-team / 3-team final, then by 14 weeks / 6 teams with 12 teams|sup||
 2020|IR|PASS|Allow Doubtful players into IR (Sleeper allows)|Rohaan||8-1||||
 2019|MN|PASS|Raise buy-in to $120|Jake/Ryan||Yes (8/19)||||
@@ -139,7 +139,7 @@
 2019|SC|PASS|Forced fumble worth 1 point, fumble recovery worth 1 point|Aidan||Pass|Sleeper now: D/ST forced fumble 1, fumble recovery 1; player forced fumble 0.5, player fumble recovery 1.5|||
 2019|GV|PASS|9/10 support required for changing rules midseason|||Pass||dup||
 2019|RO|PASS|2 FLEX, add one roster space|||Pass|Replaced by the 2022 Superflex (2nd flex); bench since cut|sup||
-2019|RO|PASS|WR/TE/RB roster cap increase by 1|||Pass||||
+2019|RO|PASS|WR/TE/RB roster cap increase by 1|||Pass|Result today (Sleeper): max 9 RB, 9 WR, 4 TE on a roster (QB 3, K 3, D/ST 3)|||
 2019|SC|FAIL|Microdosing (0.1 PPR)|Haan||Fail||||
 2019|GV|FAIL|Deadline for league rule changes of 7/31|Rohaan||Fail|Sheet: "??? (thought this passed)"|||
 2019|GV|FAIL|Leave ESPN|Everyone||Fail|Moved to Sleeper in 2020|||
