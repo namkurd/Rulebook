@@ -41,8 +41,8 @@ def classify(cat, text):
 
 rules = []
 for l in lines('rules.txt'):
-    y, c, s, t, n, im, v, no, flag, since, link, by = l.split('|')
-    rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no, flag=flag, since=int(since) if since else None, link=link, by=by))
+    y, c, s, t, n, im, v, no, flag, since, link, by, ctitle, cnote = l.split('|')
+    rules.append(dict(id=len(rules)+1, year=int(y), category=c, status=s, title=t, nominator=n, impact=im, vote=v, notes=no, flag=flag, since=int(since) if since else None, link=link, by=by, ctitle=ctitle, cnote=cnote))
 for r in rules:
     i, r['sub'] = classify(r['category'], r['title'])
     r['ord'] = CAT_ORDER.index(r['category']) * 100 + i
@@ -57,7 +57,7 @@ for l in lines('current.txt'):
 # every passed rule still in force (not superseded, not a duplicate of a Site rule, not a one-time action)
 for r in sorted(rules, key=lambda r: r['year']):
     if r['status'] == 'PASS' and not r['flag']:
-        cur.append(dict(id=len(cur)+1, category=r['category'], year=r['since'] or r['year'], group='', rule=r['title'], notes=r['notes'], source='history', label='suggestions sheet'))
+        cur.append(dict(id=len(cur)+1, category=r['category'], year=r['since'] or r['year'], group='', rule=r['ctitle'] or r['title'], notes=(r['cnote'].replace('-', '') if r['cnote'] else r['notes']), source='history', label='suggestions sheet'))
 # scoring rules are rendered live from Sleeper's scoring settings (view ids are defined in index.html SCORE)
 BIND = {
     'Scoring is Tiered PPR': 'fd', 'Full PPR for 0+': 'ppr', 'QB pick-6': 'pick6', 'Reduce QB sack': 'sack',
