@@ -58,12 +58,39 @@ for l in lines('current.txt'):
 for r in sorted(rules, key=lambda r: r['year']):
     if r['status'] == 'PASS' and not r['flag']:
         cur.append(dict(id=len(cur)+1, category=r['category'], year=r['since'] or r['year'], group='', rule=r['title'], notes=r['notes'], source='history', label='suggestions sheet'))
+# scoring rules are rendered live from Sleeper's scoring settings (view ids are defined in index.html SCORE)
+BIND = {
+    'Scoring is Tiered PPR': 'fd', 'Full PPR for 0+': 'ppr', 'QB pick-6': 'pick6', 'Reduce QB sack': 'sack',
+    'Fumble -0.5': 'fum', 'Decimal scoring for kickers': 'fg', 'Missed XP': 'xpmiss', 'Forced fumble worth': 'ffum',
+    '1 point for a 4th down': 'fds', 'Defensive scoring scaled': 'scaled', 'Points for defensive 3-and-out': 'tao',
+    'Defense returning a 2pt': 'd2pt', '0.2 points for tackle': 'tfl', '25 yards per point on KR/PR': 'kr',
+    '25 yards per point on defensive returns': 'dret',
+}
+for pre, vid in BIND.items():
+    tgt = [c for c in cur if c['category'] == 'SC' and c['rule'].startswith(pre)]
+    assert len(tgt) == 1, ('bind', pre, len(tgt))
+    tgt[0]['bind'] = vid
+
+import re as _re
+def footnote(note):
+    # keep only sentences that add information; the footnote already sits inside the rule that replaced it
+    seen, keep = set(), []
+    for sent in _re.split(r'(?<=[.;])\s+', note.strip()):
+        t = sent.strip().rstrip('.;')
+        if not t or t.lower() in seen:
+            continue
+        seen.add(t.lower())
+        if _re.match(r'(Replaced|Became|Reduced|Now |Raised|Royal Rumble|Not reflected|Probably|Bonus options|Buy-in is now|The 2020-era|Changed to|only blocked|bench since cut)', t):
+            continue
+        keep.append(t)
+    return '. '.join(keep)
+
 # superseded rules become footnotes on the rule that replaced them
 for r in rules:
     if r['by']:
         tgt = [c for c in cur if c['rule'].startswith(r['by'])]
         assert len(tgt) == 1, ('no unique target for', r['title'], r['by'], len(tgt))
-        tgt[0].setdefault('replaces', []).append(dict(year=r['year'], title=r['title'], notes=r['notes']))
+        tgt[0].setdefault('replaces', []).append(dict(year=r['year'], title=r['title'], notes=footnote(r['notes'])))
 for c in cur:
     c.get('replaces', []).sort(key=lambda x: -x['year'])
 for i, r in enumerate(cur):

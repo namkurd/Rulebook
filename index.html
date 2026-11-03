@@ -41,6 +41,7 @@ select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius
 a.tag{text-decoration:none;color:var(--accent2);border-color:var(--accent2)}
 .fn{margin-top:8px;padding-top:7px;border-top:1px dashed var(--line);font-size:12px;color:var(--mute)}
 .fn b{font-weight:600}
+.val{color:var(--c);font-weight:700}
 .subh{margin:12px 0 5px 2px;font-size:12px;color:var(--mute);font-weight:600}
 .rule h3{margin:0 0 5px;font-size:15px;font-weight:600}
 .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}
@@ -186,8 +187,37 @@ function renderOpen(rules){
   $("#oq").addEventListener("input",apply);apply();
 }
 
+/* ---- scoring rules rendered from Sleeper's live scoring settings ---- */
+const num=v=>Math.round(v*10000)/10000;
+const P=v=>`${num(v)} Point${Math.abs(num(v))===1?"":"s"}`;
+const f2=v=>(Math.round(v*100)/100).toString();
+const SCORE={
+ ppr:s=>({label:"Reception (PPR)",value:`${P(s.rec||s.rec_0_4)} per catch`,detail:["Every catch counts the same, 0+ yards."]}),
+ fd:s=>({label:"First Downs",value:`${P(s.bonus_fd_rb)} (RB / WR / TE) · ${P(s.bonus_fd_qb)} (QB)`}),
+ sack:s=>({label:"QB Sacked",value:P(s.pass_sack)}),
+ fum:s=>({label:"Fumbles",value:`${P(s.fum)} · Fumble Lost ${P(s.fum_lost)}`}),
+ pick6:s=>({label:"Pick-Six Thrown",value:`${P(s.pass_int_td)} extra`,detail:[`${P(s.pass_int+s.pass_int_td)} total with the interception`]}),
+ xpmiss:s=>({label:"Missed Extra Point",value:P(s.xpmiss)}),
+ fg:s=>({label:"Field Goals",value:`${P(s.fgm)} + ${P(s.fgm_yds_over_30)} per yard over 30`,detail:[`50-yard FG = ${P(s.fgm+20*s.fgm_yds_over_30)} · Missed FG ${P(s.fgmiss)}`]}),
+ tfl:s=>({label:"Tackle for Loss",value:P(s.tkl_loss)}),
+ tao:s=>({label:"Defensive 3-and-Out",value:P(s.def_3_and_out)}),
+ d2pt:s=>({label:"Defense Returns a 2-Point Conversion",value:P(s.def_2pt)}),
+ fds:s=>({label:"4th Down Stop",value:P(s.def_4_and_stop)}),
+ scaled:s=>{const pb=s.pts_allow_0,yb=s.yds_allow_0_100;return {label:"Scaled Defensive Scoring",value:`${P(s.pts_allow)} per point allowed · ${P(s.yds_allow)} per yard allowed`,
+   detail:[`Points allowed (starts at ${f2(pb)}): `+[0,10,20,30,40].map(x=>`${x} → ${f2(pb+s.pts_allow*x)}`).join(" · "),
+           `Yards allowed (starts at ${f2(yb)}): `+[0,100,200,300,400].map(x=>`${x} → ${f2(yb+s.yds_allow*x)}`).join(" · ")]}},
+ ffum:s=>({label:"D/ST Forced Fumble & Recovery",value:`Forced fumble ${P(s.def_st_ff)} · Fumble recovery ${P(s.def_st_fum_rec)}`,detail:[`Players: forced fumble ${P(s.ff)} · fumble recovery ${P(s.fum_rec)}`]}),
+ kr:s=>({label:"Kick & Punt Return Yards",value:`${P(s.kr_yd)} per yard (1 Point per ${Math.round(1/s.kr_yd)} yards)`}),
+ dret:s=>({label:"Defensive Return Yards",value:`${P(s.int_ret_yd)} per yard (1 Point per ${Math.round(1/s.int_ret_yd)} yards) on interception / fumble returns`,
+   detail:[`Blocked / missed FG returns: ${P(s.fg_ret_yd)} per yard (1 Point per ${Math.round(1/s.fg_ret_yd)} yards)`]})
+};
+function scoreView(r,sc){
+  if(!r.bind||!sc||!SCORE[r.bind])return null;
+  try{const v=SCORE[r.bind](sc);return /NaN|undefined|Infinity/.test(JSON.stringify(v))?null:v}catch(e){return null}
+}
+
 /* ---- current rules ---- */
-function renderCurrent(cur){
+function renderCurrent(cur,sc){
   const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
   const cats=Object.keys(CATS).filter(k=>cur.some(r=>r.category===k));
   $("#current").innerHTML=`<div class="status">Every rule in force: the league site rules plus each rule passed over the years (2019 on) that hasn't been replaced. "Since" is the year it passed on the suggestions sheet. Replaced rules are in Rule history, tagged Superseded.</div>
@@ -206,7 +236,8 @@ function renderCurrent(cur){
     m.forEach(r=>{
       if(r.category!==last){out+=`<div class="sect" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</div>`;last=r.category;lastSub=null}
       if(r.sub!==lastSub){out+=`<div class="subh">${esc(r.sub)}</div>`;lastSub=r.sub}
-      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.rule)}</h3><div class="meta">${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${esc(r.label)}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length?`<div class="fn">${r.replaces.map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
+      const sv=scoreView(r,sc);
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${sv?`${esc(sv.label)}: <span class="val">${esc(sv.value)}</span>`:esc(r.rule)}</h3><div class="meta">${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${esc(r.label)}</span></div>${sv?(sv.detail||[]).map(d=>`<div class="note">${esc(d)}</div>`).join(""):r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length?`<div class="fn">${r.replaces.map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };
@@ -290,7 +321,7 @@ Promise.all([
   getJSON(CONFIG.currentUrl),
   getJSON(CONFIG.rulesUrl),
   getJSON(`${CONFIG.api}/league/${CONFIG.leagueId}`).then(d=>[d,true]).catch(()=>getJSON(CONFIG.snapshotUrl).then(d=>[d,false]))
-]).then(([cur,rules,[L,live]])=>{renderCurrent(cur);renderOpen(rules);renderRules(rules);renderScoring(L,live);renderSetup(L)})
+]).then(([cur,rules,[L,live]])=>{renderCurrent(cur,L.scoring_settings);renderOpen(rules);renderRules(rules);renderScoring(L,live);renderSetup(L)})
  .catch(e=>{$("#rules").innerHTML=`<div class="callout">Failed to load: ${esc(e.message)}. Serve over http (e.g. <code>python3 -m http.server</code>), not file://.</div>`});
 </script>
 </body>

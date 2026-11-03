@@ -41,6 +41,7 @@ select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius
 a.tag{text-decoration:none;color:var(--accent2);border-color:var(--accent2)}
 .fn{margin-top:8px;padding-top:7px;border-top:1px dashed var(--line);font-size:12px;color:var(--mute)}
 .fn b{font-weight:600}
+.val{color:var(--c);font-weight:700}
 .subh{margin:12px 0 5px 2px;font-size:12px;color:var(--mute);font-weight:600}
 .rule h3{margin:0 0 5px;font-size:15px;font-weight:600}
 .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}
@@ -2771,6 +2772,7 @@ const INLINE={rules:[
   "notes": "0.5 first downs passed 2024. Sleeper scores a flat 1.0 per reception via yardage tiers (0+ yds = 1), i.e. full PPR since 2021.",
   "source": "site",
   "label": "league site",
+  "bind": "fd",
   "sub": "Receiving & first downs",
   "ord": 0
  },
@@ -2787,7 +2789,7 @@ const INLINE={rules:[
    {
     "year": 2019,
     "title": "Raise buy-in to $120",
-    "notes": "Raised to $200 in 2025"
+    "notes": ""
    }
   ],
   "sub": "Buy-in",
@@ -2890,12 +2892,12 @@ const INLINE={rules:[
    {
     "year": 2022,
     "title": "Auto-push FAAB trades of $10 or less",
-    "notes": "Replaced by 2024 auto-process of all trades"
+    "notes": ""
    },
    {
     "year": 2022,
     "title": "Reduce trade completion window to 24 hrs",
-    "notes": "Replaced by 2024 auto-process of all trades"
+    "notes": ""
    }
   ],
   "sub": "Trades",
@@ -2986,12 +2988,12 @@ const INLINE={rules:[
    {
     "year": 2022,
     "title": "In Sacko tournament, 7 seed chooses between 9th and 10th seed in 1st round",
-    "notes": "Replaced: Sacko now mirrors playoff seeding among the 6 lowest teams"
+    "notes": ""
    },
    {
     "year": 2020,
     "title": "Sacko bracket with lowest 4 seeds: 10 seed locks Sacko if 9th is 3+ games ahead; 5-6 play 2-week H2H",
-    "notes": "Replaced by the 6-team Sacko tournament"
+    "notes": ""
    }
   ],
   "sub": "Bracket & qualification",
@@ -3066,6 +3068,7 @@ const INLINE={rules:[
   "notes": "Sleeper now: D/ST forced fumble 1, fumble recovery 1; player forced fumble 0.5, player fumble recovery 1.5",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "ffum",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -3114,6 +3117,7 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "pick6",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -3126,6 +3130,7 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "fg",
   "sub": "Kicking",
   "ord": 2
  },
@@ -3142,12 +3147,12 @@ const INLINE={rules:[
    {
     "year": 2022,
     "title": "5 team playoff / 3 team final (1 seed gets bye and is guaranteed finals)",
-    "notes": "Ran for 2 seasons (15-week regular season, 5 teams, 3-team final). Replaced by 14 weeks / 6 teams with the 12-team expansion (2025). Bonus options discussed: homefield bonus, best ball, extra flex"
+    "notes": "Ran for 2 seasons (15-week regular season, 5 teams, 3-team final)"
    },
    {
     "year": 2020,
     "title": "15 week regular season, 4 teams advance, 1-week semis and finals",
-    "notes": "The 2020-era format (15 weeks, 4 teams). Replaced by the 5-team / 3-team final, then by 14 weeks / 6 teams with 12 teams"
+    "notes": ""
    }
   ],
   "sub": "Playoff format & seeding",
@@ -3186,11 +3191,12 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "ppr",
   "replaces": [
    {
     "year": 2020,
     "title": "PPR of some sort: full, 0.5, 0.5 with gradient",
-    "notes": "Became full PPR in 2021. Became full PPR in 2021"
+    "notes": ""
    }
   ],
   "sub": "Receiving & first downs",
@@ -3209,12 +3215,12 @@ const INLINE={rules:[
    {
     "year": 2020,
     "title": "Royal Rumble as tiebreaker",
-    "notes": "Royal Rumble is now the main standings setting (2021)"
+    "notes": ""
    },
    {
     "year": 2019,
     "title": "Tiebreaker stays Point Wins (vote to go back to PF only failed)",
-    "notes": "Royal Rumble standings now decide ties"
+    "notes": ""
    }
   ],
   "sub": "Standings & tiebreakers",
@@ -3281,12 +3287,12 @@ const INLINE={rules:[
    {
     "year": 2021,
     "title": "2nd flex is now WR/TE only",
-    "notes": "Replaced by the 2022 Superflex (2nd flex); Sleeper now has 2 WR/TE flex slots"
+    "notes": "Sleeper now has 2 WR/TE flex slots"
    },
    {
     "year": 2019,
     "title": "2 FLEX, add one roster space",
-    "notes": "Replaced by the 2022 Superflex (2nd flex); bench since cut"
+    "notes": ""
    }
   ],
   "sub": "Lineup slots",
@@ -3301,6 +3307,7 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "fds",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -3313,11 +3320,12 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "scaled",
   "replaces": [
    {
     "year": 2019,
     "title": "New defensive scoring",
-    "notes": "Replaced by 2022 scaled defensive scoring"
+    "notes": ""
    }
   ],
   "sub": "Defense & special teams",
@@ -3344,11 +3352,12 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "sack",
   "replaces": [
    {
     "year": 2020,
     "title": "QB sack -0.5",
-    "notes": "Reduced to -0.25 in 2023. Reduced to -0.25 in 2023"
+    "notes": ""
    }
   ],
   "sub": "Quarterback & turnovers",
@@ -3363,6 +3372,7 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "tao",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -3375,6 +3385,7 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "fum",
   "sub": "Quarterback & turnovers",
   "ord": 1
  },
@@ -3387,6 +3398,7 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "d2pt",
   "sub": "Defense & special teams",
   "ord": 3
  },
@@ -3399,11 +3411,12 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "xpmiss",
   "replaces": [
    {
     "year": 2019,
     "title": "Missed extra points count as -1",
-    "notes": "Changed to -0.33 in 2023. Now -0.33 (2023)"
+    "notes": ""
    }
   ],
   "sub": "Kicking",
@@ -3550,11 +3563,12 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "kr",
   "replaces": [
    {
     "year": 2024,
     "title": "Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)",
-    "notes": "Not reflected in Sleeper as written: player and INT/fumble returns are now 25 yd/pt (2025); only blocked/missed FG returns remain 1 per 100 yd"
+    "notes": ""
    }
   ],
   "sub": "Return yards",
@@ -3569,6 +3583,7 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "dret",
   "sub": "Return yards",
   "ord": 4
  },
@@ -3581,6 +3596,7 @@ const INLINE={rules:[
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "bind": "tfl",
   "sub": "Defense & special teams",
   "ord": 3
  }
@@ -3687,8 +3703,37 @@ function renderOpen(rules){
   $("#oq").addEventListener("input",apply);apply();
 }
 
+/* ---- scoring rules rendered from Sleeper's live scoring settings ---- */
+const num=v=>Math.round(v*10000)/10000;
+const P=v=>`${num(v)} Point${Math.abs(num(v))===1?"":"s"}`;
+const f2=v=>(Math.round(v*100)/100).toString();
+const SCORE={
+ ppr:s=>({label:"Reception (PPR)",value:`${P(s.rec||s.rec_0_4)} per catch`,detail:["Every catch counts the same, 0+ yards."]}),
+ fd:s=>({label:"First Downs",value:`${P(s.bonus_fd_rb)} (RB / WR / TE) · ${P(s.bonus_fd_qb)} (QB)`}),
+ sack:s=>({label:"QB Sacked",value:P(s.pass_sack)}),
+ fum:s=>({label:"Fumbles",value:`${P(s.fum)} · Fumble Lost ${P(s.fum_lost)}`}),
+ pick6:s=>({label:"Pick-Six Thrown",value:`${P(s.pass_int_td)} extra`,detail:[`${P(s.pass_int+s.pass_int_td)} total with the interception`]}),
+ xpmiss:s=>({label:"Missed Extra Point",value:P(s.xpmiss)}),
+ fg:s=>({label:"Field Goals",value:`${P(s.fgm)} + ${P(s.fgm_yds_over_30)} per yard over 30`,detail:[`50-yard FG = ${P(s.fgm+20*s.fgm_yds_over_30)} · Missed FG ${P(s.fgmiss)}`]}),
+ tfl:s=>({label:"Tackle for Loss",value:P(s.tkl_loss)}),
+ tao:s=>({label:"Defensive 3-and-Out",value:P(s.def_3_and_out)}),
+ d2pt:s=>({label:"Defense Returns a 2-Point Conversion",value:P(s.def_2pt)}),
+ fds:s=>({label:"4th Down Stop",value:P(s.def_4_and_stop)}),
+ scaled:s=>{const pb=s.pts_allow_0,yb=s.yds_allow_0_100;return {label:"Scaled Defensive Scoring",value:`${P(s.pts_allow)} per point allowed · ${P(s.yds_allow)} per yard allowed`,
+   detail:[`Points allowed (starts at ${f2(pb)}): `+[0,10,20,30,40].map(x=>`${x} → ${f2(pb+s.pts_allow*x)}`).join(" · "),
+           `Yards allowed (starts at ${f2(yb)}): `+[0,100,200,300,400].map(x=>`${x} → ${f2(yb+s.yds_allow*x)}`).join(" · ")]}},
+ ffum:s=>({label:"D/ST Forced Fumble & Recovery",value:`Forced fumble ${P(s.def_st_ff)} · Fumble recovery ${P(s.def_st_fum_rec)}`,detail:[`Players: forced fumble ${P(s.ff)} · fumble recovery ${P(s.fum_rec)}`]}),
+ kr:s=>({label:"Kick & Punt Return Yards",value:`${P(s.kr_yd)} per yard (1 Point per ${Math.round(1/s.kr_yd)} yards)`}),
+ dret:s=>({label:"Defensive Return Yards",value:`${P(s.int_ret_yd)} per yard (1 Point per ${Math.round(1/s.int_ret_yd)} yards) on interception / fumble returns`,
+   detail:[`Blocked / missed FG returns: ${P(s.fg_ret_yd)} per yard (1 Point per ${Math.round(1/s.fg_ret_yd)} yards)`]})
+};
+function scoreView(r,sc){
+  if(!r.bind||!sc||!SCORE[r.bind])return null;
+  try{const v=SCORE[r.bind](sc);return /NaN|undefined|Infinity/.test(JSON.stringify(v))?null:v}catch(e){return null}
+}
+
 /* ---- current rules ---- */
-function renderCurrent(cur){
+function renderCurrent(cur,sc){
   const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
   const cats=Object.keys(CATS).filter(k=>cur.some(r=>r.category===k));
   $("#current").innerHTML=`<div class="status">Every rule in force: the league site rules plus each rule passed over the years (2019 on) that hasn't been replaced. "Since" is the year it passed on the suggestions sheet. Replaced rules are in Rule history, tagged Superseded.</div>
@@ -3707,7 +3752,8 @@ function renderCurrent(cur){
     m.forEach(r=>{
       if(r.category!==last){out+=`<div class="sect" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</div>`;last=r.category;lastSub=null}
       if(r.sub!==lastSub){out+=`<div class="subh">${esc(r.sub)}</div>`;lastSub=r.sub}
-      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${esc(r.rule)}</h3><div class="meta">${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${esc(r.label)}</span></div>${r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length?`<div class="fn">${r.replaces.map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
+      const sv=scoreView(r,sc);
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><h3>${sv?`${esc(sv.label)}: <span class="val">${esc(sv.value)}</span>`:esc(r.rule)}</h3><div class="meta">${r.year?`<span class="tag">since ${r.year}</span>`:'<span class="tag">year not on sheet</span>'}<span class="tag">${esc(r.label)}</span></div>${sv?(sv.detail||[]).map(d=>`<div class="note">${esc(d)}</div>`).join(""):r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length?`<div class="fn">${r.replaces.map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };
@@ -3791,7 +3837,7 @@ Promise.all([
   Promise.resolve(INLINE.current),
   Promise.resolve(INLINE.rules),
   getJSON(`${CONFIG.api}/league/${CONFIG.leagueId}`).then(d=>[d,true]).catch(()=>Promise.resolve([INLINE.snapshot,false]))
-]).then(([cur,rules,[L,live]])=>{renderCurrent(cur);renderOpen(rules);renderRules(rules);renderScoring(L,live);renderSetup(L)})
+]).then(([cur,rules,[L,live]])=>{renderCurrent(cur,L.scoring_settings);renderOpen(rules);renderRules(rules);renderScoring(L,live);renderSetup(L)})
  .catch(e=>{$("#rules").innerHTML=`<div class="callout">Failed to load: ${esc(e.message)}. Serve over http (e.g. <code>python3 -m http.server</code>), not file://.</div>`});
 </script>
 </body>
