@@ -727,6 +727,12 @@
   "notes": "",
   "source": "history",
   "label": "suggestions sheet",
+  "amended": [
+   {
+    "year": 2025,
+    "text": "exclude any player ruled OUT who didn't play a play in the 2nd half"
+   }
+  ],
   "sub": "Shotgun",
   "ord": 900
  },
@@ -792,18 +798,6 @@
  },
  {
   "id": 58,
-  "category": "FUN",
-  "year": 2025,
-  "group": "",
-  "rule": "Amend shotgun rule to exclude any player ruled OUT who didn't play a play in the 2nd half",
-  "notes": "",
-  "source": "history",
-  "label": "suggestions sheet",
-  "sub": "Shotgun",
-  "ord": 900
- },
- {
-  "id": 59,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -815,7 +809,7 @@
   "ord": 201
  },
  {
-  "id": 60,
+  "id": 59,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -835,7 +829,7 @@
   "ord": 4
  },
  {
-  "id": 61,
+  "id": 60,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -848,7 +842,7 @@
   "ord": 4
  },
  {
-  "id": 62,
+  "id": 61,
   "category": "SC",
   "year": 2025,
   "group": "",

@@ -1,4 +1,4 @@
-# year|cat|status|title|nominator|impact|vote|note|flag   (flag: blank=in force if PASS, dup=covered by a Site rule, once=one-time action, sup=superseded, unv=not reflected in Sleeper scoring)  |since = year it actually took effect, if different  |link = Slack permalink of the #league-suggestions post (book-reacted)  |by = start of the current rule that replaced this one (shown as a footnote on it)
+# year|cat|status|title|nominator|impact|vote|note|flag   (flag: blank=in force if PASS, dup=covered by a Site rule, once=one-time action, sup=superseded, unv=not reflected in Sleeper scoring, amd=amends another rule; shown inside it)  |since = year it actually took effect, if different  |link = Slack permalink of the #league-suggestions post (book-reacted)  |by = start of the current rule that replaced this one (shown as a footnote on it)
 2026|IR|PENDING|Make suspended players IR eligible|Joe|Low||Failed in 2022|||https://dtf-club.slack.com/archives/CCG47441Z/p1788271924979469|
 2026|SC|PENDING|Points for recovering fumble (1 or 0.5)|Aidan|Low|||||https://dtf-club.slack.com/archives/CCG47441Z/p1789482593157049|
 2026|GV|PENDING|Continental Congress: reset everything and revote everything, 2/3 majority needed|Christian|Yuge|||||https://dtf-club.slack.com/archives/CCG47441Z/p1789486327971949|
@@ -29,7 +29,7 @@
 2025|SA|FAIL|Sacko range: only teams within X rumbles of 10th are in Sacko Bowl|Steven|Medium|3|||||
 2025|SA|PASS|Sacko range updated from 36 to X (more teams, longer playoffs, 1 fewer regular season game)|||||dup|||
 2025|PL|FAIL|NIT Bowl / DTF Cup for non-Sacko and eliminated teams|Ben|Low|3|||||
-2025|FUN|PASS|Amend shotgun rule to exclude any player ruled OUT who didn't play a play in the 2nd half|Ben|Low|7|||||
+2025|FUN|PASS|Amend shotgun rule to exclude any player ruled OUT who didn't play a play in the 2nd half|Ben|Low|7||amd|||Shotgun a beverage
 2025|IR|PASS|QB injury rule: if QB1 is ruled out at any point, manager gets all QB points for that team (QB1 + QB2/QB3, not position players taking snaps)|Ben/Joe|Medium|Pass|Injury still a net negative, but more drama rooting for the backup and limits the downside||||
 2025|SC|FAIL|Individual points for picks, pick returns, tackles, sacks (rare two-way players)|Ben|Low|Fail|Failed on exploration||||
 2025|SC|FAIL|More negative points for shorter missed FGs|Steven|Low/Medium|2|Not voted on due to Knicks blowing it||||

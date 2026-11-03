@@ -90,7 +90,10 @@ for r in rules:
     if r['by']:
         tgt = [c for c in cur if c['rule'].startswith(r['by'])]
         assert len(tgt) == 1, ('no unique target for', r['title'], r['by'], len(tgt))
-        tgt[0].setdefault('replaces', []).append(dict(year=r['year'], title=r['title'], notes=footnote(r['notes'])))
+        if r['flag'] == 'amd':
+            tgt[0].setdefault('amended', []).append(dict(year=r['year'], text=_re.sub(r'^Amend \w+ rule to ', '', r['title'])))
+        else:
+            tgt[0].setdefault('replaces', []).append(dict(year=r['year'], title=r['title'], notes=footnote(r['notes'])))
 for c in cur:
     c.get('replaces', []).sort(key=lambda x: -x['year'])
 for i, r in enumerate(cur):

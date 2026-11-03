@@ -33,7 +33,8 @@ select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius
 .layout .body{min-width:0}
 .chips{display:flex;flex-direction:column;gap:6px;position:sticky;top:12px}
 .chips .chipc{text-align:left;width:100%;border-radius:10px;padding:8px 12px}
-@media(max-width:720px){.layout{grid-template-columns:1fr}.chips{flex-direction:row;flex-wrap:wrap;position:static}.chips .chipc{width:auto;border-radius:999px}}
+.chipc .short{display:none}
+@media(max-width:720px){.layout{grid-template-columns:1fr;gap:10px}.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;position:static;margin-bottom:4px}.chips .chipc{width:100%;min-width:0;padding:7px 2px;font-size:12px;line-height:1.1;text-align:center;border-radius:8px;white-space:nowrap}.chipc .full{display:none}.chipc .short{display:inline}}
 .chipc{border:1px solid color-mix(in srgb,var(--c,var(--accent)) 65%,transparent);color:var(--c,var(--accent));background:color-mix(in srgb,var(--c,var(--accent)) 8%,transparent);padding:5px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px}
 .chipc:hover{background:color-mix(in srgb,var(--c,var(--accent)) 20%,transparent)}
 .chipc.on{background:var(--c,var(--accent));color:#0f1115;font-weight:600}
@@ -98,6 +99,7 @@ const CONFIG = {
   snapshotUrl: "data/sleeper_snapshot.json"
 };
 const CATS = {SC:"Scoring",RO:"Roster & lineup",IR:"IR & injuries",TR:"Waivers, FAB & trades",PL:"Playoffs & standings",SA:"Sacko",DR:"Draft & auction",MN:"Money",GV:"Governance & conduct",FUN:"Shotgun & fun"};
+const SHORT={SC:"Scoring",RO:"Roster",IR:"IR",TR:"Trades",PL:"Playoffs",SA:"Sacko",DR:"Draft",MN:"Money",GV:"Gov.",FUN:"Shotgun"};
 const FLAG={sup:"Superseded",dup:"In force (see Current rules)",once:"One-time action"};
 const STATUS = {PASS:"Passed",FAIL:"Failed",PENDING:"Pending",TABLED:"Tabled",EXPLORE:"Exploring",WITHDRAWN:"Withdrawn"};
 const $ = s => document.querySelector(s);
@@ -114,7 +116,7 @@ document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
 function chipBar(host, cats, onChange){
   const sel=new Set();
   host.className="chips";
-  host.innerHTML=`<button class="chipc all on" data-k="">All types</button>`+cats.map(k=>`<button class="chipc" data-k="${k}" style="--c:var(--c-${k})">${esc(CATS[k])}</button>`).join("");
+  host.innerHTML=`<button class="chipc all on" data-k=""><span class="full">All types</span><span class="short">All</span></button>`+cats.map(k=>`<button class="chipc" data-k="${k}" style="--c:var(--c-${k})"><span class="full">${esc(CATS[k])}</span><span class="short">${esc(SHORT[k])}</span></button>`).join("");
   host.onclick=e=>{
     const b=e.target.closest("button");if(!b)return;
     const k=b.dataset.k;
@@ -226,7 +228,7 @@ const SRC={"league site":"Site","suggestions sheet":"Sheet","per commissioner":"
 function renderCurrent(cur,sc){
   const years=[...new Set(cur.map(r=>r.year).filter(Boolean))].sort((a,b)=>b-a);
   const cats=Object.keys(CATS).filter(k=>cur.some(r=>r.category===k));
-  $("#current").innerHTML=`<div class="status">Every rule in force: the league site rules plus each rule passed over the years (2019 on) that hasn't been replaced. The year in each card's top-right corner is when it passed (— = not dated), with its source below it: Site = league site, Sheet = suggestions sheet, Comm. = commissioner. Replaced rules are in Rule history, tagged Superseded.</div>
+  $("#current").innerHTML=`<div class="status">Every rule in force. Top right of each card: year it passed and source (Site / Sheet / Comm.). Replaced rules are footnoted; the full record is in Rule history.</div>
   <div class="layout"><aside id="cchips"></aside><div class="body">
   <div class="filters">
    <label>Search<input type="search" id="cq"></label>
@@ -243,7 +245,7 @@ function renderCurrent(cur,sc){
       if(r.category!==last){out+=`<div class="sect" style="--c:var(--c-${r.category})">${esc(CATS[r.category])}</div>`;last=r.category;lastSub=null}
       if(r.sub!==lastSub){out+=`<div class="subh">${esc(r.sub)}</div>`;lastSub=r.sub}
       const sv=scoreView(r,sc);
-      out+=`<div class="rule" style="--c:var(--c-${r.category})"><div class="rhead"><h3>${sv?`${esc(sv.label)}: <span class="val">${esc(sv.value)}</span>`:esc(r.rule)}</h3><div class="corner"><b>${r.year||"—"}</b><span title="${esc(r.label)}">${esc(SRC[r.label]||r.label)}</span></div></div>${sv?(sv.detail||[]).map(d=>`<div class="note">${esc(d)}</div>`).join(""):r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length?`<div class="fn">${r.replaces.map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
+      out+=`<div class="rule" style="--c:var(--c-${r.category})"><div class="rhead"><h3>${sv?`${esc(sv.label)}: <span class="val">${esc(sv.value)}</span>`:esc(r.rule)}</h3><div class="corner"><b>${r.year||"—"}</b><span title="${esc(r.label)}">${esc(SRC[r.label]||r.label)}</span></div></div>${sv?(sv.detail||[]).map(d=>`<div class="note">${esc(d)}</div>`).join(""):r.notes?`<div class="note">${esc(r.notes)}</div>`:""}${(r.replaces||[]).length||(r.amended||[]).length?`<div class="fn">${(r.amended||[]).map(x=>`<div>↳ <b>Amended</b> (${x.year}): ${esc(x.text)}</div>`).join("")}${(r.replaces||[]).map(x=>`<div>↳ <b>Replaces</b> (${x.year}): ${esc(x.title)}${x.notes?` — <i>${esc(x.notes)}</i>`:""}</div>`).join("")}</div>`:""}</div>`;
     });
     $("#clist").innerHTML=out||'<div class="note">No rules match.</div>';
   };
