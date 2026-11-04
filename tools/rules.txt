@@ -60,7 +60,7 @@
 2024|SC|FAIL|Passing yards 1pt per 15 or 20 (mutually exclusive with other QB changes)|Ankit/Joe|Medium|1|||||||
 2024|SA|FAIL|First round Sacko bracket: bottom 2 scorers advance|||1|||||||
 2023|RO|FAIL|Extra FLEX spot (with or without bench removal)|Ankit|High|3-6|||||||
-2023|IR|PASS|2 IR spots|Joe|Medium|6-3|||||||
+2023|IR|PASS|2 IR spots|Joe|Medium|6-3|Players in IR don't count against roster caps||||||
 2023|TR|FAIL|Built-in Trash Considerations: same-week drop and re-claim FAB goes to previous owner|Ben|Medium|2-7|||||||
 2023|IR|FAIL|One injury sub in playoffs (pre-declared sub per position)|Alex/Aidan/Ben|Medium|2-7|||||||
 2023|PL|FAIL|Schedule based on last season finish|Joe|Low|4-5|||||||
