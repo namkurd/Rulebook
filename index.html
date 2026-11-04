@@ -360,5 +360,6 @@ Promise.all([
 ]).then(([cur,rules,[L,live]])=>{renderCurrent(cur,L.scoring_settings);renderOpen(rules);renderRules(rules);renderScoring(L,live);renderSetup(L)})
  .catch(e=>{$("#rules").innerHTML=`<div class="callout">Failed to load: ${esc(e.message)}. Serve over http (e.g. <code>python3 -m http.server</code>), not file://.</div>`});
 </script>
+<script src="/shell/nav.js" defer></script>
 </body>
 </html>
