@@ -8,13 +8,14 @@
 :root{--bg:#0f1115;--card:#171a21;--ink:#e8eaf0;--mute:#9aa1b0;--line:#262b36;--accent:#ff8a3d;--accent2:#4d9fff;--hi:#3a2f0f;--hi-ink:#ffd27a;
 --pass:#35c26b;--fail:#e5484d;--pend:#eab308;
 --c-SC:#ff8a3d;--c-RO:#4d9fff;--c-IR:#e5484d;--c-TR:#14b8a6;--c-PL:#a855f7;--c-SA:#eab308;--c-DR:#35c26b;--c-MN:#d6399e;--c-GV:#9aa1b0;--c-FUN:#22d3ee}
-@media(prefers-color-scheme:light){:root{--bg:#f5f6f9;--card:#fff;--ink:#1a1d24;--mute:#666e7e;--line:#e2e5ec;--accent:#e26a1f;--accent2:#2f6fd6;--hi:#fff4d6;--hi-ink:#7a5200;
+@media not all{/* dark only */:root{--bg:#f5f6f9;--card:#fff;--ink:#1a1d24;--mute:#666e7e;--line:#e2e5ec;--accent:#e26a1f;--accent2:#2f6fd6;--hi:#fff4d6;--hi-ink:#7a5200;
 --pass:#1f9d52;--fail:#d43b40;--pend:#a16207;
 --c-SC:#e26a1f;--c-RO:#2f6fd6;--c-IR:#d43b40;--c-TR:#0d9488;--c-PL:#9333ea;--c-SA:#a16207;--c-DR:#1f9d52;--c-MN:#c23b8a;--c-GV:#666e7e;--c-FUN:#0891b2}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 header{padding:calc(env(safe-area-inset-top,0px) + 20px) 16px 8px;max-width:1000px;margin:auto}
 @media(max-width:720px){header{padding-top:calc(env(safe-area-inset-top,0px) + 56px)}}
+body.dtf-has-nav header{padding-top:10px}   /* the hub bar already clears the status bar, so no extra gap above the title */
 h1{margin:0;font-size:24px}.sub{color:var(--mute);font-size:13px}
 main{max-width:1000px;margin:auto;padding:0 16px 48px}
 nav{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
@@ -35,13 +36,18 @@ select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius
 .yrc{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:5px 0;border-radius:8px;cursor:pointer;font:inherit;font-size:13px;text-align:center;font-variant-numeric:tabular-nums}
 .yrc:hover{border-color:var(--accent)}
 .yrc.on{background:var(--accent);border-color:var(--accent);color:#0f1115;font-weight:600}
-.layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:18px;align-items:start}
+.layout{display:grid;grid-template-columns:210px minmax(0,1fr) 210px;gap:18px;align-items:start}
+.fside{position:sticky;top:calc(12px + var(--dtf-top-h,0px));min-width:0}
+.fside .filters{grid-template-columns:1fr;margin-bottom:8px}
+.fside input[type=search],.fside select{padding:6px 8px;font-size:13px}
+.fside .yrs{grid-template-columns:repeat(4,1fr)}
 .layout .body{min-width:0}
-.chips{display:flex;flex-direction:column;gap:6px;position:sticky;top:12px}
+.chips{display:flex;flex-direction:column;gap:6px;position:sticky;top:calc(12px + var(--dtf-top-h,0px))}
 .chips .chipc{text-align:left;width:100%;border-radius:10px;padding:8px 12px}
 .chipc .short{display:none}
 @media(max-width:720px){.yrs{grid-template-columns:repeat(auto-fit,minmax(36px,1fr));gap:4px}.yrc{font-size:11.5px;padding:5px 0;border-radius:7px}}
-@media(max-width:720px){.layout{grid-template-columns:1fr;gap:10px}.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;position:static;margin-bottom:4px}.chips .chipc{width:100%;min-width:0;padding:7px 2px;font-size:12px;line-height:1.1;text-align:center;border-radius:8px;white-space:nowrap}.chipc .full{display:none}.chipc .short{display:inline}}
+@media(max-width:1000px){.layout{grid-template-columns:190px minmax(0,1fr)}.fside{grid-column:1/-1;grid-row:1;position:static}.layout>aside:first-child{grid-row:2}.layout .body{grid-row:2}.fside .filters{grid-template-columns:minmax(150px,300px) minmax(150px,220px)}.fside .yrs{grid-template-columns:repeat(auto-fill,minmax(52px,1fr))}}
+@media(max-width:720px){.layout{grid-template-columns:1fr;gap:10px}.layout>aside:first-child,.layout .body,.fside{grid-row:auto;grid-column:auto}.fside{order:1}.layout>aside:first-child{order:0}.layout .body{order:2}.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;position:static;margin-bottom:4px}.chips .chipc{width:100%;min-width:0;padding:7px 2px;font-size:12px;line-height:1.1;text-align:center;border-radius:8px;white-space:nowrap}.chipc .full{display:none}.chipc .short{display:inline}}
 .chipc{border:1px solid color-mix(in srgb,var(--c,var(--accent)) 65%,transparent);color:var(--c,var(--accent));background:color-mix(in srgb,var(--c,var(--accent)) 8%,transparent);padding:5px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px}
 .chipc:hover{background:color-mix(in srgb,var(--c,var(--accent)) 20%,transparent)}
 .chipc.on{background:var(--c,var(--accent));color:#0f1115;font-weight:600}
@@ -3966,12 +3972,12 @@ function renderRules(rules){
   const opt=o=>Object.entries(o).map(([k,v])=>`<option value="${k}"${k==="PASS"?" selected":""}>${esc(v)}</option>`).join("");
   $("#rules").innerHTML=`
   <div class="layout"><aside id="fchips"></aside><div class="body">
-  <div class="filters">
-    <label>Search<input type="search" id="fq" placeholder="e.g. kicker, IR, sacko"></label>
+  <div class="count" id="cnt"></div><div id="list"></div></div>
+  <aside class="fside"><div class="filters">
+    <label>Search<input type="search" id="fq" placeholder="kicker, IR, sacko"></label>
     <label>Status<select id="fs"><option value="">Every proposal</option>${opt(STATUS)}</select></label>
   </div>
-  <div class="ylab">Year</div><div id="fyears"></div>
-  <div class="count" id="cnt"></div><div id="list"></div></div></div>`;
+  <div class="ylab">Year</div><div id="fyears"></div></aside></div>`;
   const cats=()=>sel();
   const sel=chipBar($("#fchips"),Object.keys(CATS),()=>apply());
   const ysel=yearBar($("#fyears"),years.slice().reverse(),()=>apply(),false);
@@ -4066,11 +4072,11 @@ function renderCurrent(cur,sc){
   const cats=Object.keys(CATS).filter(k=>cur.some(r=>r.category===k));
   $("#current").innerHTML=`<div class="status">Every rule in force. Top right of each card: year it passed and source (Site / Sheet / Comm.). Replaced rules are footnoted; the full record is in Rule history.</div>
   <div class="layout"><aside id="cchips"></aside><div class="body">
-  <div class="filters">
-   <label>Search<input type="search" id="cq"></label>
+  <div class="count" id="ccnt"></div><div id="clist"></div></div>
+  <aside class="fside"><div class="filters">
+   <label>Search<input type="search" id="cq" placeholder="kicker, IR, sacko"></label>
   </div>
-  <div class="ylab">Year</div><div id="cyears"></div>
-  <div class="count" id="ccnt"></div><div id="clist"></div></div></div>`;
+  <div class="ylab">Year</div><div id="cyears"></div></aside></div>`;
   const sel=chipBar($("#cchips"),cats,()=>apply());
   const ysel=yearBar($("#cyears"),years.slice().reverse(),()=>apply(),true);
   const apply=()=>{
@@ -4170,5 +4176,7 @@ Promise.all([
 ]).then(([cur,rules,[L,live]])=>{renderCurrent(cur,L.scoring_settings);renderOpen(rules);renderRules(rules);renderScoring(L,live);renderSetup(L)})
  .catch(e=>{$("#rules").innerHTML=`<div class="callout">Failed to load: ${esc(e.message)}. Serve over http (e.g. <code>python3 -m http.server</code>), not file://.</div>`});
 </script>
+<script>window.DTF_VIEWS = {"hide": "#tabs", "items": [{"label": "Current rules", "sel": "#tabs [data-t=current]"}, {"label": "Open suggestions", "sel": "#tabs [data-t=open]"}, {"label": "Rule history", "sel": "#tabs [data-t=rules]"}, {"label": "Scoring", "sel": "#tabs [data-t=scoring]"}, {"label": "League setup", "sel": "#tabs [data-t=setup]"}]};</script>
+<script src="/shell/nav.js" defer></script>
 </body>
 </html>
