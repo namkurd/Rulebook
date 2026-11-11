@@ -38,6 +38,18 @@
  },
  {
   "id": 4,
+  "category": "SC",
+  "year": null,
+  "group": "Format",
+  "rule": "Standings are ranked by Rumbles: 10 for a head-to-head win, plus 1 for each additional team you outscore that week (up to 20 a week in a 12-team league).",
+  "notes": "Live standings in Rumble Central.",
+  "source": "site",
+  "label": "league site",
+  "sub": "Return yards",
+  "ord": 4
+ },
+ {
+  "id": 5,
   "category": "MN",
   "year": 2025,
   "group": "Buy-in",
@@ -56,7 +68,7 @@
   "ord": 700
  },
  {
-  "id": 5,
+  "id": 6,
   "category": "MN",
   "year": null,
   "group": "Payout structure",
@@ -68,7 +80,7 @@
   "ord": 701
  },
  {
-  "id": 6,
+  "id": 7,
   "category": "MN",
   "year": null,
   "group": "Payout structure",
@@ -80,7 +92,7 @@
   "ord": 701
  },
  {
-  "id": 7,
+  "id": 8,
   "category": "MN",
   "year": null,
   "group": "Payout structure",
@@ -92,7 +104,7 @@
   "ord": 701
  },
  {
-  "id": 8,
+  "id": 9,
   "category": "MN",
   "year": null,
   "group": "Payout structure",
@@ -104,7 +116,7 @@
   "ord": 701
  },
  {
-  "id": 9,
+  "id": 10,
   "category": "RO",
   "year": null,
   "group": "Valid rosters",
@@ -116,7 +128,7 @@
   "ord": 102
  },
  {
-  "id": 10,
+  "id": 11,
   "category": "RO",
   "year": 2020,
   "group": "Valid rosters",
@@ -128,7 +140,7 @@
   "ord": 102
  },
  {
-  "id": 11,
+  "id": 12,
   "category": "TR",
   "year": 2022,
   "group": "Valid rosters",
@@ -140,7 +152,7 @@
   "ord": 300
  },
  {
-  "id": 12,
+  "id": 13,
   "category": "TR",
   "year": 2024,
   "group": "Trading",
@@ -164,7 +176,7 @@
   "ord": 301
  },
  {
-  "id": 13,
+  "id": 14,
   "category": "TR",
   "year": null,
   "group": "Trading",
@@ -176,7 +188,7 @@
   "ord": 301
  },
  {
-  "id": 14,
+  "id": 15,
   "category": "TR",
   "year": null,
   "group": "Trading",
@@ -188,7 +200,7 @@
   "ord": 301
  },
  {
-  "id": 15,
+  "id": 16,
   "category": "TR",
   "year": null,
   "group": "Trading",
@@ -200,7 +212,7 @@
   "ord": 301
  },
  {
-  "id": 16,
+  "id": 17,
   "category": "PL",
   "year": 2025,
   "group": "Playoff seeding",
@@ -212,7 +224,7 @@
   "ord": 402
  },
  {
-  "id": 17,
+  "id": 18,
   "category": "PL",
   "year": null,
   "group": "Playoff seeding",
@@ -224,7 +236,7 @@
   "ord": 402
  },
  {
-  "id": 18,
+  "id": 19,
   "category": "PL",
   "year": null,
   "group": "Playoff seeding",
@@ -236,7 +248,7 @@
   "ord": 402
  },
  {
-  "id": 19,
+  "id": 20,
   "category": "PL",
   "year": null,
   "group": "Playoff seeding",
@@ -248,7 +260,7 @@
   "ord": 402
  },
  {
-  "id": 20,
+  "id": 21,
   "category": "SA",
   "year": null,
   "group": "Sacko",
@@ -272,7 +284,7 @@
   "ord": 500
  },
  {
-  "id": 21,
+  "id": 22,
   "category": "SA",
   "year": null,
   "group": "Sacko",
@@ -284,7 +296,7 @@
   "ord": 500
  },
  {
-  "id": 22,
+  "id": 23,
   "category": "SA",
   "year": 2025,
   "group": "Sacko",
@@ -296,7 +308,7 @@
   "ord": 500
  },
  {
-  "id": 23,
+  "id": 24,
   "category": "GV",
   "year": null,
   "group": "League rule changes",
@@ -308,7 +320,7 @@
   "ord": 801
  },
  {
-  "id": 24,
+  "id": 25,
   "category": "GV",
   "year": 2019,
   "group": "League rule changes",
@@ -320,7 +332,7 @@
   "ord": 801
  },
  {
-  "id": 25,
+  "id": 26,
   "category": "GV",
   "year": null,
   "group": "League rule changes",
@@ -332,7 +344,7 @@
   "ord": 801
  },
  {
-  "id": 26,
+  "id": 27,
   "category": "GV",
   "year": 2019,
   "group": "",
@@ -344,7 +356,7 @@
   "ord": 801
  },
  {
-  "id": 27,
+  "id": 28,
   "category": "SC",
   "year": 2019,
   "group": "",
@@ -357,7 +369,7 @@
   "ord": 3
  },
  {
-  "id": 28,
+  "id": 29,
   "category": "RO",
   "year": 2019,
   "group": "",
@@ -369,7 +381,7 @@
   "ord": 101
  },
  {
-  "id": 29,
+  "id": 30,
   "category": "GV",
   "year": 2020,
   "group": "",
@@ -381,7 +393,7 @@
   "ord": 800
  },
  {
-  "id": 30,
+  "id": 31,
   "category": "TR",
   "year": 2020,
   "group": "",
@@ -393,7 +405,7 @@
   "ord": 300
  },
  {
-  "id": 31,
+  "id": 32,
   "category": "SC",
   "year": 2020,
   "group": "",
@@ -406,7 +418,7 @@
   "ord": 1
  },
  {
-  "id": 32,
+  "id": 33,
   "category": "SC",
   "year": 2020,
   "group": "",
@@ -419,7 +431,7 @@
   "ord": 2
  },
  {
-  "id": 33,
+  "id": 34,
   "category": "PL",
   "year": 2025,
   "group": "",
@@ -431,7 +443,7 @@
   "ord": 402
  },
  {
-  "id": 34,
+  "id": 35,
   "category": "RO",
   "year": 2020,
   "group": "",
@@ -443,7 +455,7 @@
   "ord": 101
  },
  {
-  "id": 35,
+  "id": 36,
   "category": "IR",
   "year": 2020,
   "group": "",
@@ -455,7 +467,7 @@
   "ord": 200
  },
  {
-  "id": 36,
+  "id": 37,
   "category": "SC",
   "year": 2021,
   "group": "",
@@ -475,7 +487,7 @@
   "ord": 0
  },
  {
-  "id": 37,
+  "id": 38,
   "category": "PL",
   "year": 2021,
   "group": "",
@@ -499,7 +511,7 @@
   "ord": 401
  },
  {
-  "id": 38,
+  "id": 39,
   "category": "SA",
   "year": 2021,
   "group": "",
@@ -511,7 +523,7 @@
   "ord": 501
  },
  {
-  "id": 39,
+  "id": 40,
   "category": "SA",
   "year": 2022,
   "group": "",
@@ -523,7 +535,7 @@
   "ord": 501
  },
  {
-  "id": 40,
+  "id": 41,
   "category": "GV",
   "year": 2022,
   "group": "",
@@ -535,7 +547,7 @@
   "ord": 802
  },
  {
-  "id": 41,
+  "id": 42,
   "category": "TR",
   "year": 2022,
   "group": "",
@@ -547,7 +559,7 @@
   "ord": 300
  },
  {
-  "id": 42,
+  "id": 43,
   "category": "RO",
   "year": 2022,
   "group": "",
@@ -571,7 +583,7 @@
   "ord": 100
  },
  {
-  "id": 43,
+  "id": 44,
   "category": "SC",
   "year": 2022,
   "group": "",
@@ -584,7 +596,7 @@
   "ord": 3
  },
  {
-  "id": 44,
+  "id": 45,
   "category": "SC",
   "year": 2022,
   "group": "",
@@ -604,7 +616,7 @@
   "ord": 3
  },
  {
-  "id": 45,
+  "id": 46,
   "category": "IR",
   "year": 2023,
   "group": "",
@@ -616,7 +628,7 @@
   "ord": 200
  },
  {
-  "id": 46,
+  "id": 47,
   "category": "SC",
   "year": 2023,
   "group": "",
@@ -636,7 +648,7 @@
   "ord": 1
  },
  {
-  "id": 47,
+  "id": 48,
   "category": "SC",
   "year": 2023,
   "group": "",
@@ -649,7 +661,7 @@
   "ord": 3
  },
  {
-  "id": 48,
+  "id": 49,
   "category": "SC",
   "year": 2023,
   "group": "",
@@ -662,7 +674,7 @@
   "ord": 1
  },
  {
-  "id": 49,
+  "id": 50,
   "category": "SC",
   "year": 2023,
   "group": "",
@@ -675,7 +687,7 @@
   "ord": 3
  },
  {
-  "id": 50,
+  "id": 51,
   "category": "SC",
   "year": 2023,
   "group": "",
@@ -695,7 +707,7 @@
   "ord": 2
  },
  {
-  "id": 51,
+  "id": 52,
   "category": "IR",
   "year": 2023,
   "group": "",
@@ -707,7 +719,7 @@
   "ord": 201
  },
  {
-  "id": 52,
+  "id": 53,
   "category": "PL",
   "year": 2024,
   "group": "",
@@ -719,7 +731,7 @@
   "ord": 400
  },
  {
-  "id": 53,
+  "id": 54,
   "category": "RO",
   "year": 2024,
   "group": "",
@@ -731,7 +743,7 @@
   "ord": 100
  },
  {
-  "id": 54,
+  "id": 55,
   "category": "FUN",
   "year": 2024,
   "group": "",
@@ -749,7 +761,7 @@
   "ord": 900
  },
  {
-  "id": 55,
+  "id": 56,
   "category": "DR",
   "year": 2025,
   "group": "",
@@ -761,7 +773,7 @@
   "ord": 600
  },
  {
-  "id": 56,
+  "id": 57,
   "category": "DR",
   "year": 2025,
   "group": "",
@@ -773,7 +785,7 @@
   "ord": 600
  },
  {
-  "id": 57,
+  "id": 58,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -785,7 +797,7 @@
   "ord": 200
  },
  {
-  "id": 58,
+  "id": 59,
   "category": "RO",
   "year": 2025,
   "group": "",
@@ -797,7 +809,7 @@
   "ord": 101
  },
  {
-  "id": 59,
+  "id": 60,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -809,7 +821,7 @@
   "ord": 200
  },
  {
-  "id": 60,
+  "id": 61,
   "category": "IR",
   "year": 2025,
   "group": "",
@@ -821,7 +833,7 @@
   "ord": 201
  },
  {
-  "id": 61,
+  "id": 62,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -841,7 +853,7 @@
   "ord": 4
  },
  {
-  "id": 62,
+  "id": 63,
   "category": "SC",
   "year": 2025,
   "group": "",
@@ -854,7 +866,7 @@
   "ord": 4
  },
  {
-  "id": 63,
+  "id": 64,
   "category": "SC",
   "year": 2025,
   "group": "",
