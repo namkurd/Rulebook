@@ -49,7 +49,7 @@
 2024|SC|PASS|0.5 per first down for WR/RB/TE, 0.2 for QB first down|Ben|Medium|6||dup|||||
 2024|SC|PASS|Player: 1pt per 50 return yards (KR/PR); DST: 1pt per 100 return yards (INT/fumble/FG block/miss returns)|Ben|Low/Medium|7|Not reflected in Sleeper as written: player and INT/fumble returns are now 25 yd/pt (2025); only blocked/missed FG returns remain 1 per 100 yd|unv|||25 yards per point on KR/PR||
 2024|SC|PASS|Offense playing D: 0.5 per tackle, 1 per forced fumble|Ben|Low|7|Not reflected in Sleeper: no tackle scoring exists and player forced fumble is 0.5, not 1|unv|||||
-2024|FUN|PASS|Shotgun a beverage of your choice for a 0 or less from a non-DST|||6|||||||
+2024|FUN|PASS|Shotgun a beverage of your choice for a score of exactly 0.0 from a non-DST|||6|||||||
 2024|TR|FAIL|FAB for rumble trade or cash out|Ankit|High|0|||||||
 2024|TR|FAIL|Built-in Trash Considerations v2: FAB winning bid for a same-week re-claimed drop goes to previous owner|Ben|Medium|0|||||||
 2024|IR|FAIL|Require owning a player over a roster lock for IR eligibility|Ben|Low|4|Not Sleeperable; passed in 2025 as manual rule||||||
